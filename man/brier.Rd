@@ -1,0 +1,63 @@
+% *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
+% ** Copyright UCAR (c) 1992 - 2004 
+% ** University Corporation for Atmospheric Research(UCAR) 
+% ** National Center for Atmospheric Research(NCAR) 
+% ** Research Applications Program(RAP) 
+% ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
+% ** 2004/1/7 11:31:8 
+% *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
+\name{brier}
+       \alias{brier}
+       \title{Brier Score}
+       \description{Calculates verification statistics for
+	 probabilistic forecasts of binary events.}
+       \usage{
+    brier(obs, pred, baseline, thresholds = seq(0,1,0.1), \dots )
+       }
+      \arguments{
+	\item{obs}{Vector of binary observations }
+	\item{pred}{Vector of probablistic predictions [0,1] }
+	\item{baseline}{Vector of climatological (no - skill) forecasts. If
+	  this is null, a sample climatology will be calculated.}
+	\item{thresholds}{Values used to bin the forecasts.  By default the
+	  bins are \{[0,0.1), [0.1, 0.2), ....\} .}
+	\item{\dots}{Optional arguments}
+       }
+       \value{
+	 \item{baseline.tf}{Logical indicator of whether climatology was
+	   provided.}
+	 \item{bs}{Brier score}
+	 \item{bs.baseline}{Brier Score for climatology}
+	 \item{ss}{Skill score}
+	 \item{bs.reliability}{Reliability portion of Brier score.}
+	 \item{bs.resolution}{Resolution component of Brier score.}
+	 \item{bs.uncert}{Uncertainty component of Brier score.}
+	 \item{y.i}{Forecast bins -- described as the center value of
+	   the bins.}
+	 \item{obar.i}{Observation bins -- described as the center value
+	 of the bins.}
+	 \item{prob.y}{Proportion of time using each forecast}
+	 \item{obar}{Forecast based on climatology or average sample
+	   observations.}
+	 
+       }
+       \note{This function is used within \code{verify}.}
+	 \examples{
+
+#  probabilistic/ binary example
+
+pred<- runif(100)
+obs<- round(runif(100))
+
+brier(obs, pred)
+
+}
+
+
+\references{
+  Wilks, D. S. (1995) \emph{Statistical Methods in the Atmospheric Sciences }
+  Chapter 7, San Diego: Academic Press.
+}
+\author{Matt Pocernich <pocernic@rap.ucar.edu>}
+
+       \keyword{file}
