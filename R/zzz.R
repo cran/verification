@@ -9,7 +9,9 @@
 .First.lib <- function(lib, pkg) {
 require(waveslim)
 require(fields)
+#require(boot)
+
 cat("\n",
-"Package verify:", "\n")
+"Package verification:", "\n")
 cat( "Please send comments or suggestions to pocernic@(Remove this)ucar.edu", "\n")
 } # end of '.First.lib' fcn

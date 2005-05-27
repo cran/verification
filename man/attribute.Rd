@@ -22,8 +22,8 @@
        1:1 line.  The
        relative frequency for each forecast value is displayed in parenthesis. }
       \usage{
-\method{attribute}{default}(x, obar.i,  prob.y, obar = NULL, titl =
-NULL, \dots)
+\method{attribute}{default}(x, obar.i,  prob.y = NULL, obar = NULL, class =
+"none", main = NULL, CI = FALSE, n.boot = 100, alpha = 0.05, tck = 0.01, \dots)
 \method{attribute}{prob.bin}(x, \dots)
        }
 \arguments{
@@ -33,7 +33,17 @@ NULL, \dots)
          \item{prob.y}{Relative frequency of forecasts of forecast bins. }
          \item{obar}{Climatological or sample mean of observed
 	   events.}
-         \item{titl}{Plot title. }
+	 \item{class}{Class of object.  If prob.bin, the function will
+	   use the data to estimate confidence intervals.}
+         \item{main}{Plot title.}
+	 \item{CI}{Confidence Intervals. This is only an option if the
+	   data is accessible by using the verify command first. Calculated by bootstrapping
+	   the observations and prediction, then calculating PODy and
+	   PODn values.  }
+	\item{n.boot}{Number of bootstrap samples.}
+	\item{alpha}{Confidence interval.  By default = 0.05}
+	\item{tck}{Tick width on confidence interval whiskers.}
+      
 	 \item{\dots}{Graphical parameters} 
        }
 	 \examples{
@@ -53,8 +63,12 @@ obs<- round(runif(100))
 pred<- runif(100)
 
 A<- verify(obs, pred, frcst.type = "prob", obs.type = "binary")
+attribute(A, main = "Alternative plot", xlab = "Alternate x label" )
+## Same with confidence intervals
 
-attribute(A, titl = "Alternative plot", xlab = "Alternate x label" )
+attribute(A, main = "Alternative plot", xlab = "Alternate x label", CI =
+TRUE)
+
 
 }
 

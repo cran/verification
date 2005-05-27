@@ -14,15 +14,14 @@
        Additionally, it creates a verify  class object that can be
        further analyzed.}
        \usage{
-    verify(obs, pred,  tseries= NULL, baseline = NULL, % sample.baseline = FALSE,
-           frcst.type = "prob", obs.type = "binary",  thresholds = seq(0,1,0.1) )
+    verify(obs, pred, baseline = NULL, % sample.baseline = FALSE,
+           frcst.type = "prob", obs.type = "binary",  thresholds =
+seq(0,1,0.1), show = TRUE )
        }
        \arguments{
 	 \item{obs}{The value with which the verifications are verified.}
 	 \item{pred}{Prediction of event.  The prediction may be in the form of the a point
 	   prediction or the probability of a forecast.}
-	 \item{tseries}{Optional time series vector.  This allows
-	   certain types of plots to be made.}
 	 \item{baseline}{In meteorology, climatology is the baseline
 	   that represents the
 	   no-skill forecast.  In other fields this field would
@@ -31,33 +30,44 @@
 	   sample climatology.}
 %	 \item{sample.baseline}{Logical indicating whether the data
 %	   provided is sample baselinetology or not.}
-	 \item{frcst.type}{Forecast type.  Either "prob", "binary", or
-	   "cont".  Defaults to "prob"}
-	 \item{obs.type}{Observation type.  Either  "binary", or
+	 \item{frcst.type}{Forecast type.  Either "prob", "binary",
+	   "norm.dist", "cat" or "cont".  Defaults to "prob".
+	   "norm.dist" is used when the forecast is in the form of a
+	   normal distribution.  See crps for more details. }
+	 \item{obs.type}{Observation type.  Either  "binary", "cat" or
 	   "cont".  Defaults to "binary"}
 	 \item{thresholds}{Thresholds to be considered for point
 	   forecasts of continuous events.}
+	 \item{show}{Logical; if TRUE (the default), print warning message}
        }
+       \note{ For the categorical forecast and verification, the Gerrity
+	 score only makes sense for forecast that have order, or are
+	 basically ordinal. It is assumed that the forecasts are listed
+	 in order.  For example, low, medium and high would get
+	 translated into 1,2 and 3.}  
        \value{
 	 An object of the verify class.  Depending on the type of
 	  data used, the following information may be returned.  The
 	  following notation is used to describe which values are
 	  produced for which type of forecast/observations. (BB =
-	  binary/binary, PB = probablistic/binary, CC = continuous/continuous.)   
+	  binary/binary, PB = probablistic/binary, CC =
+	  continuous/continuous, CTCT = categorical/categorical)   
 
 	  \item{BS}{Brier Score (PB)}
            \item{BSS}{Brier Skill Score(PB)}
 	  \item{SS}{Skill Score (BB)}
-	  \item{hit.rate}{Hit rate, aka PODy, $h$ (PB)}
+	  \item{hit.rate}{Hit rate, aka PODy, $h$ (PB, CTCT)}
 	  \item{false.alarm.rate}{False alarm rate, PODn,
-	    $f$ (PB)}
-	  \item{TS}{Threat Score or Critical Success Index (CSI)(BB) }
-          \item{ETS}{Equitable Threat Score (BB)}
-	  \item{BIAS}{Bias (BB) }
-	  \item{PC}{Percent correct or hit rate (BB)}
+	    $f$ (PB, CTCT)}
+	  \item{TS}{Threat Score or Critical Success Index (CSI)(BB, CTCT) }
+          \item{ETS}{Equitable Threat Score (BB, CTCT)}
+	  \item{BIAS}{Bias (BB, CTCT) }
+	  \item{PC}{Percent correct or hit rate (BB, CTCT)}
 	  \item{Cont.Table}{Contingency Table (BB)}
-          \item{HSS}{Heidke Skill Score(BB) }
+          \item{HSS}{Heidke Skill Score(BB, CTCT) }
 	  \item{KSS}{Kuniper Skill Score (BB)}
+	  \item{PSS}{Pierce Skill Score (CTCT) }
+	  \item{GS}{Gerrity Score (CTCT) }
 	  \item{ME}{Mean error (CC) }
 	  \item{MSE}{Mean-squared error (CC)}
 	  \item{MAE}{Mean absolute error (CC)}
@@ -72,10 +82,6 @@
   WMO Joint WWRP/WGNE Working Group on Verification Website
   
   \url{http://www.bom.gov.au/bmrc/wefor/staff/eee/verif/verif_web_page.html}
-
-World Meteorological Organization Verification Website
-  
-  \url{http://www.wmo.ch/web/aom/pwsp/Verification.html}
 }
 	 \examples{
 # binary/binary example
@@ -84,6 +90,15 @@ pred<- round(runif(100))
 
 A<- verify(obs, pred, frcst.type = "binary", obs.type = "binary")
 summary(A)
+
+# categorical/categorical example
+
+obs <- round(runif(100, 1,5) )
+pred <- round(runif(100, 1,5) )
+
+A<- verify(obs, pred, frcst.type = "cat", obs.type = "cat" )
+summary(A)
+
 #  probabilistic/ binary example
 pred<- runif(100)
 A<- verify(obs, pred, frcst.type = "prob", obs.type = "binary")

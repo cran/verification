@@ -7,16 +7,16 @@
 # ** 2004/1/7 11:29:42 
 # *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
 
-"roc.plot.default" <- function(x, pred, thresholds = NULL, binormal = FALSE,  leg = NULL,  
-          plot = "emp", plot.thres = seq(0.1, 0.9, 0.1),
-               main = "ROC Curve",  xlab = "False Alarm Rate", ylab = "Hit Rate",  ...){
+"roc.plot.default" <- function(x, pred, thresholds = NULL, binormal = FALSE,  legend = FALSE, leg.text = NULL,  
+    plot = "emp", CI = FALSE, n.boot = 1000, alpha = 0.05, tck = 0.01,
+        plot.thres = seq(0.1, 0.9, 0.1), show.thres = TRUE, main = "ROC Curve",  xlab = "False Alarm Rate", ylab = "Hit Rate", extra = FALSE, ...){
 #
-
 #  old.par <- par(no.readonly = TRUE) # all par settings which
 #  on.exit(par(old.par) )
 if(( plot=="binorm"| plot == "both")  & binormal == FALSE){
   stop("binormal must be TRUE in order to create a binormal plot")}
-  
+
+## 
 pred<- as.matrix(pred)
 n.forc<- dim(pred)[2] ## number of forecasts
 
@@ -30,54 +30,50 @@ if(length(thresholds) == 1){
 t          <- seq(0, 1, 1/n.thres.bins)
   thresholds <-quantile(pred, t) # pred needs to be all preds
 }
+####################################################### internal pod function for bootstrapping
+######### for each level of plot.thres, create boxes
 
-####################################################### internal roc function
 
-roc <- function(x, pred, thres){ # internal function that returns plot points
-pody     <- numeric()
-podn     <- numeric()
-n        <- length(x)
-n.thres  <- length(thres)  # number of unique thresholds, thres =  
-lng      <- length(x)            # 
+orig<- as.data.frame( roc(x, pred, thres = plot.thres, binormal) )
 
-a         <- x > 0 #
-a.sum     <- sum(a)
-a.not.sum <- sum(!a)
-
-for(i in 1:(n.thres) ){
+if(CI) {
   
-  b      <- pred >= thres[i]
-  pody[i]<- sum(  b * a  )/ a.sum ## hit rate
-  podn[i]<- sum(  (!b)  * (!a)  )/ a.not.sum  ## FAR
- 
-} ## close for loop 1:n.thres
+D<- cbind(x, pred) ## bootstrap data.
+A<- matrix(NA, ncol = 3)
 
+for( i in 1:n.boot){
+  nr   <- nrow(D)
+  ind  <- sample( 1:nr, size = nr,  replace = TRUE)
+  sub  <- D[ind,] ## bootstrap.data
 
-thres[n.thres +1 ]<- 1 # plot 0,0 point
-pody[n.thres  + 1] <- 0
-podn[n.thres  + 1] <- 1 
+  
+for (j in 1:length(plot.thres) ) {
 
-    if(binormal){
-       zH <- c(NA ,qnorm( pody[-c(1, n.thres + 1)] ),  NA )  # NA are for top and bottom value
-       zF <- c(NA ,qnorm(1 - podn[-c(1, n.thres + 1) ]), NA )# NA are for top and bottom value
-       } else {
-         zH <- rep(NA, n.thres + 1)
-         zF <- rep(NA, n.thres + 1)
-       } ## close if binormal
-    return(cbind(thres, pody, podn, zH, zF))
-       }    # closs roc function
+  
+A<- rbind(A, roc(sub[,1], sub[,2], plot.thres[j], binormal = binormal )[1,1:3] )
 
-##############################################################
+} ## close j loop
+} ## close n.boot loop
+BOOT<- as.data.frame(A[-1,])
+
+xleft  <- aggregate(BOOT$F,   by = list(BOOT$thres), quantile, alpha)$x
+ybot   <- aggregate(BOOT$H,   by = list(BOOT$thres), quantile, alpha)$x
+xright <- aggregate(BOOT$F,   by = list(BOOT$thres), quantile, 1 - alpha)$x 
+ytop   <- aggregate(BOOT$H,   by = list(BOOT$thres), quantile, 1 - alpha)$x
+
+box.corners<- cbind(xleft, ybot, xright, ytop)
+row.names(box.corners) <- plot.thres
+} ## close if CI
+
 
 ### roc.area function
-
 
 DAT  <- array(NA, dim = c(length(thresholds) + 1, 5, n.forc))  ## adj to 5 cols to cal area under.
 VOLS <- matrix(nrow = n.forc, ncol = 5)
 binormal.pltpts<- list()
 
 for(j in 1:n.forc){  ## n.forc = number of forecasts = number of columns
-DAT[, , j] <- roc(x, pred[, j], thresholds)
+DAT[, , j] <- roc(x, pred[, j], thresholds, binormal = binormal)
 #############################
 
 if(binormal){
@@ -114,7 +110,7 @@ r<- structure(list( plot.data = DAT, roc.vol = VOLS, binormal.ptlpts = binormal.
 if(!is.null(plot) ){  ## if plot is not false, then make frame.
  par(mar = c(4,4,4,1))
 
-plot( 1 - DAT[,3 ,], DAT[,2,], type = 'n', xlim = c(0,1), ylim = c(0,1),
+plot( DAT[,3 ,], DAT[,2,], type = 'n', xlim = c(0,1), ylim = c(0,1),
      main = main,  xlab = xlab, ylab = ylab, ... ) # points don't matter, plot is type 'n'
 
 abline(h=seq(0,1,by=.1),v=seq(0,1,by=.1),lty=3, lwd = 0.5, col = "grey")
@@ -126,17 +122,20 @@ if(length(thresholds)< 16){L <- "b" }else{L<-"l"} # if less than 12 point show p
 
 if(plot == "emp" | plot == "both" ){ 
  for(i in 1:n.forc){
-    points(1  - DAT[,3,i], DAT[ ,2,i] , col = i, lty = i, type = "l", lwd = 2)
-
+    points(DAT[,3,i], DAT[ ,2,i] , col = i, lty = i, type = "l", lwd = 2)
+    
 ## plot threshold points on graph   
-if(!is.null(plot.thres)){  ## does this need an else statement ?  ## by default, these match
 
-    ind <- match(round(plot.thres,2),  round( DAT[,1,i], 2) )
-    points(1 - DAT[ind,3, i], DAT[ind,  2, i], col = 1, pch = 19)
-    text(1 - DAT[ind,3, i], DAT[ind,  2, i], plot.thres, pos = 4, offset = 1 )
-} # close plot thres
+ if(!is.null(plot.thres)){  ## does this need an else statement ?  ## by default, these match
+
+# won't work for muliple forcasts    
+if(show.thres){
+   points(orig$F, orig$H, col = 1, pch = 19)
+text(orig$F, orig$H, c(plot.thres,1), pos = 4, offset = 2 ) } # close show.thres
+
+}  ## close plot thres
  } ## close 1:n.thres
- 
+
 ### general info
 
 } ## close empirical
@@ -151,11 +150,11 @@ for(i in 1:n.forc){
 }## close binorm plot 
 
 #### text
+if(extra){
 if(plot == "both"){
  text(0.6, 0.1, "Black lines are the empirical ROC")  
-text(0.6, 0.07, "Red lines and symbols are the bi-normal ROC")
+ text(0.6, 0.07, "Red lines and symbols are the bi-normal ROC")
  text(0.6, 0.04, "The area under the binormal curve is in parathesis.")
-
 }
 
 if(plot == "emp"){
@@ -166,27 +165,52 @@ if(plot == "binorm"){
 text(0.6, 0.1, "Red lines  are the bi-normal ROC")
 }
 
+}
+## if CI, plot boxes
+
+if(CI){
+# originally, we made boxes.
+#for(i in 1:nrow(box.corners) ){
+#  rect(box.corners[i,1], box.corners[i,2], box.corners[i,3], box.corners[i,4] )
+#}
+
+for(i in 1:nrow(box.corners) ){
+  lines(box.corners[i,c(1,3)], rep(orig$H[i],2), lwd = 1 )## xlines
+      lines(rep(box.corners[i,1],2) , c(orig$H[i] - tck,orig$H[i] + tck), lwd = 1 )## left tick
+      lines(rep(box.corners[i,3],2) , c(orig$H[i] - tck,orig$H[i] + tck), lwd = 1 )## right tick
+  
+  lines(rep(orig$F[i],2), box.corners[i,c(2,4)], lwd = 1 )  ## ylines
+      lines( c(orig$F[i] - tck,orig$F[i] + tck), rep(box.corners[i,2],2), lwd = 1 )## top tick
+        lines( c(orig$F[i] - tck,orig$F[i] + tck), rep(box.corners[i,4],2), lwd = 1 )## bottom tick
+
+
+}
+
+
+} ## close if CI
+
 ########
 ## make legend text
-if(is.null(leg)){
-leg.txt<- paste ("Model ", LETTERS[seq(1, n.forc)]) } else {(leg.txt <- leg)}
+if(legend){
+if(is.null(leg.text)){leg.text<- paste ("Model ", LETTERS[seq(1, n.forc)]) } 
 
 if(plot == "emp"){
-leg.txt<- paste (leg.txt, "  ",formatC(VOLS$Area.adj, digits = 3) ) }
+leg.text<- paste (leg.text, "  ",formatC(VOLS$Area.adj, digits = 3) ) }
 
 if(plot =="binorm"){ 
-leg.txt<- paste (leg.txt, "  ", formatC(VOLS$binorm.area, digits = 3)  )}
+leg.text<- paste (leg.text, "  ", formatC(VOLS$binorm.area, digits = 3)  )}
 
 if(plot == "both"){
-leg.txt<- paste (leg.txt, "  ",formatC(VOLS$Area.adj, digits = 3), " (",
+leg.text<- paste (leg.text, "  ",formatC(VOLS$Area.adj, digits = 3), " (",
 formatC(VOLS$binorm.area, digits = 3) ,")" ) }
 
-  
-#if(leg != FALSE){  
-legend(list(x=0.6, y=0.4), legend = leg.txt, bg = "white", cex = 0.6,
+
+
+legend(list(x=0.6, y=0.4), legend = leg.text, bg = "white", cex = 0.6,
          lty = seq(1,n.forc), col = c("black", "red","blue"), merge=TRUE) #}
-# invisible()
- invisible(r)
+} ## close if legend
+
+invisible(r)
  # end function
 }
                 

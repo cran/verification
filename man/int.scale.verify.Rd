@@ -67,6 +67,6 @@ B.Casati, D.B. Stephenson, G. Ross. \emph{A new intensity-scale
   approach for the verification of spatial precipitation forecasts}.
 Meteorological Application (RMS), in press. }
 
-\author{Barabara Casati <b.casati@reading.ac.uk>}
+\author{Barabara Casati <barbara.casati  (at) ec.gc.ca>}
 
        \keyword{file}

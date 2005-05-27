@@ -11,22 +11,24 @@ table.stats<- function(obs, pred){
 ## used with a binary forecast and a binary outcome.
   
   tab.out <- table(obs, pred)
+  
+  a <-tab.out["1","1"]
+  b <-tab.out["0","1"]
+  c <-tab.out["1","0"]
+  d <-tab.out["0","0"]
+#  print(tab.out)
+#  print(c(a,b,c,d, a+c, a + b) )
 
-  a<-tab.out["0","0"]
-  b<-tab.out["0","1"]
-  c<-tab.out["1","0"]
-  d<-tab.out["1","1"]
-
-    
-TS<- a/(a+b+c)
-POD<- a/(a+c)
+TS  <- a/(a+b+c)
+POD <- a/(a+c)
+  
 FAR <- b/(a+b)
-HSS <- 2*(a*d - b*c)/ ((a+c)*(c+d) + (a+b)*(b+d))  
+HSS <- 2*(a*d - b*c)/ (1.0*(a+c)*(c+d) + 1.0*(a+b)*(b+d))  
 KSS <- (a*d - b*c)/((a+c)*(b + d))
 PC <- (a+d)/(a+b+c+d)
 BIAS <- (a+b)/(a+c)
 
-HITSrandom <- (a+c)*(a+b)/(a+b+c+d)
+HITSrandom <- 1.0* (a+c)*(a+b)/(a+b+c+d)
 ETS <- (a-HITSrandom)/(a+b+c-HITSrandom)
 
 return(list(tab = tab.out, TS = TS,

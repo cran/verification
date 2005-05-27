@@ -12,8 +12,8 @@
        \description{Skill score that incorporates measurement error.
 	 This function allows the user to incorporate measurement error
 	 in an observation in a skill score.}
-       \usage{measurement.error( obs, frcs = NULL, theta = 0.5, t = 1, u
-= 0, h = NULL, \dots)
+       \usage{measurement.error( obs, frcs = NULL, theta = 0.5, CI =
+          FALSE, t = 1, u = 0, h = NULL, \dots)
        }
        \arguments{
 	 \item{obs}{Information about a forecast and observation can be
@@ -29,6 +29,7 @@
 	   column is a vector of probablistic forecasts.}
 	 \item{theta}{Loss value (cost) of making a incorrect forecast
 	   by a non-event. Defaults to 0.5.}
+	 \item{CI}{Calculate confidence intervals for skill score.}
 	 \item{t}{Probability of forecasting an event, when an event
 	   occurs.  A perfect value is 1.}
 	 \item{u}{Probability of forecasting that no event will occur,
@@ -39,16 +40,21 @@
 	 \item{\dots}{Optional arguments.}
        }
        \value{
+	 \item{z}{Error code}
+	 \item{k}{Skill score}
 	 \item{G}{Likelihood ratio statistic}
 	 \item{p}{p-value for the null hypothesis that the forecast
 	   contains skill.}
-	 \item{K}{Skill score.}
-       }
+	 \item{theta}{Loss value.  Loss associated with an incorrect
+	   forecast of a non-event.}
+	 \item{ciLO}{Lower confidence interval}
+         \item{ciHI}{Upper confidence interval}
+	        }
        \examples{
 DAT<- data.frame( obs = round(runif(50)), frcs = runif(50))
 
- measurement.error(DAT$obs, DAT$frcs)
-
+A<-   measurement.error(DAT$obs, DAT$frcs, CI = TRUE)
+A
 ### Finley Data
 
 measurement.error(c(28, 23, 72, 2680)) ## assuming perfect observation,
@@ -63,7 +69,7 @@ Technical Report, wm-briggs.com/public/skillocst.pdf.
 W.M. Briggs and D. Ruppert, 2004. \emph{ Assessing the skill
   of yes/no forecasts. Submitting to Biometrics}.
 
-J.P. Finley, 1884. Tornado forecasts. {\emph Amer. Meteor. J.}
+J.P. Finley, 1884. Tornado forecasts. \emph{ Amer. Meteor. J.}
 85-88. (Tornado data used in example.)
 }
 

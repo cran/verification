@@ -43,7 +43,7 @@ curve is 0.5 i.e. the forecast has no skill.
  \references{Mason, S.J. and N.E. Graham. (2002) ``Areas beneath the
    relative operating characteristics (ROC) and relative operating
    levels (ROL) curves: Statistical significance and interpretation, ''
-   \emph{Q. J. R. Meteorol. Soc.} \textbf{30} (1982) 291-303.}
+   \emph{Q. J. R. Meteorol. Soc.} \bold{30} (1982) 291-303.}
  
 	   \examples{# Data used from Mason and Graham (2002).
 a<- c(1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990,

@@ -50,7 +50,7 @@ long-range forecasts.'' \emph{J. Climate}, \bold{9}, pp. 34-54.
  obs <- rnorm(100, mean = 1, sd = sqrt(50))
  pred<-  rnorm(100, mean = 10, sd = sqrt(500))
 
- leps(obs, pred) 
+ leps(obs, pred, main = "Sample Plot") 
 
  }
 \author{Matt Pocernich <pocernic@rap.ucar.edu>}

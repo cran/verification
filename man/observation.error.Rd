@@ -11,9 +11,7 @@
         \title{Observation Error}
        \description{Quantifies observation error through use of a ``Gold
        Standard'' of observations.}
-     \usage{
-observation.error(obs, gold.standard = NULL, \dots)
-       }
+     \usage{observation.error(obs, gold.standard = NULL, \dots) }
        \arguments{
 	 \item{obs}{Observation made by method to be quantified.   This
 	   information can be entered two ways.  If obs is a vector of
@@ -42,7 +40,7 @@ observation.error(obs, gold)
 
 observation.error(c(43,10,17,4) )
 }
- \seealso{\code{measurement.error}}
+ \seealso{\code{\link{measurement.error}}}
 \author{Matt Pocernich <pocernic@rap.ucar.edu>}
 
        \keyword{file}

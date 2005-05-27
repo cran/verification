@@ -20,8 +20,9 @@
        would indicate a random forecast. }
        \usage{
     \method{roc.plot}{default}(x, pred, thresholds = NULL, binormal =
-FALSE,   leg = NULL, plot = "emp", plot.thres = seq(0.1,
-0.9, 0.1), main = "ROC Curve", xlab = "False Alarm Rate", ylab = "Hit Rate", \dots)
+FALSE,   legend = FALSE, leg.text = NULL,  plot = "emp", CI = FALSE,
+n.boot = 1000, alpha = 0.05, tck = 0.01, plot.thres = seq(0.1,
+0.9, 0.1), show.thres = TRUE, main = "ROC Curve", xlab = "False Alarm Rate", ylab = "Hit Rate", extra = FALSE,  \dots)
 \method{roc.plot}{prob.bin}(x, \dots) }
 \arguments{
         \item{x}{A binary observation (coded \{0, 1 \} ) or a verification
@@ -41,31 +42,38 @@ FALSE,   leg = NULL, plot = "emp", plot.thres = seq(0.1,
 	\item{binormal}{ If TRUE, in addition to the empirical ROC curve, the
   binormal ROC curve will be calculated.  To get a plot draw, plot must
   be either ``binorm'' or ``both''.  }
-\item{leg}{Character vector for legend.  If NULL, models are
-  labeled  ``Model A", ``Model B",...}
-
-%	\item{n.thres.bins}{Alternatively, the number of bins may be
-%	  specified.  Thresholds will then be calculated using the
-%	  specified numbers of quantiles.}
-
-
-	 
+          \item{legend}{Binomial.  Defaults to FALSE indicating whether a legend
+            should be displayed.}
+          \item{leg.text}{Character vector for legend.  If NULL, models are
+          labeled  ``Model A", ``Model B",...}
 	 \item{plot}{Either ``emp'' (default), ``binorm'' or ``both'' to
 	   determine which plot is shown.  If set to NULL, a plot is not
 	   created}
+	 \item{CI}{Confidence Intervals.  Calculated by bootstrapping
+	   the observations and prediction, then calculating PODy and
+	   PODn values.  }
+	\item{n.boot} {Number of bootstrap samples.}
+	\item{alpha}{ Confidence interval.  By default = 0.05}
+	\item{tck} {Tick width on confidence interval whiskers.}
         \item{plot.thres}{By default, displays the threshold levels on
 	  the ROC diagrams.  To surpress these values, set it equal to
-	  NULL.}
-\item{main}{Title for plot.}
-	\item{xlab, ylab}{Plot axes labels.  Defaults to ``Hit Rate''
+	  NULL.  If confidence intervals (CI) is set to TRUE, levels
+	  specified here will determine where confidence interval boxes
+	  are placed. }
+	\item{show.thres}{ Show thresholds for points indicated by
+	  plot.thres.  Defaults to TRUE.}
+	\item{main}{Title for plot.}
+        \item{xlab, ylab}{Plot axes labels.  Defaults to ``Hit Rate''
 	  and ``False Alarm Rate'', for the y and x axes respectively.} 
-	 \item{\dots}{Additional plotting options.}
+        \item{extra}{ Extra text describing binormal and empirical lines. }
+	\item{\dots}{Additional plotting options.}
        }
        \value{
 	 If assigned to an object, the following values are reported.
 	 \item{plot.data}{The data used to generate the ROC plots.  This
-	   is a array. Column headers are thresholds, PODy, PODn.  Each
-	   model is depicted on a separate sheet.}
+	   is a array. Column headers are thresholds, empirical hit and
+	   false alarm rates, and binormal hit and false alarm rates.  Each
+	   model is depicted on an array indexed by the third dimension.}
 	 \item{roc.vol}{The areas under the ROC curves.  By default,this
 	   is printed on the plots.  Areas and p-values are
 	   calculated with and without adjustments for ties along with
@@ -73,7 +81,10 @@ FALSE,   leg = NULL, plot = "emp", plot.thres = seq(0.1,
 	   values are calculated using \code{\link{roc.area}}.  The
 	   fifth column contains the area under the binormal curve, if
 	   binormal is selected.}
-	 }
+       }
+       \note{There is not a minimum size required to create confidence
+	 limits or show thresholds.  When there are few data points, it
+	 is possilbe to make some pretty unattractive graphs. }
 
        \references{
 Mason, I. (1982) ``A model for assessment of weather forecasts,''
@@ -111,7 +122,7 @@ roc.plot(A$event, A$p2, binormal = TRUE)
 
 data(prob.frcs.dat)
 A <- verify(prob.frcs.dat$obs, prob.frcs.dat$frcst/100)
-plot(A, titl = "AWG Forecast")
+roc.plot(A, main = "AWG Forecast")
 
 
 # plotting a ``prob.bin'' class object.
@@ -120,7 +131,11 @@ pred<- runif(100)
 
 A<- verify(obs, pred, frcst.type = "prob", obs.type = "binary")
 
-roc.plot(A, main = "Test 1", binormal = TRUE)
+roc.plot(A, main = "Test 1", binormal = TRUE, plot = "both")
+
+## show confidence intervals.  MAY BE SLOW
+roc.plot(A, threshold = seq(0.1,0.9, 0.1), main = "Test 1", CI = TRUE,
+alpha = 0.1)
 }
 \author{Matt Pocernich <pocernic@rap.ucar.edu>}
 

@@ -50,7 +50,7 @@ crps(x, frcs)
   \emph{Calibrated Probabilistic Forecasting Using Ensemble Model Output
     Statistics and Minimum CRPS Estimation.} Technical Report no. 449,
   Department of Statistics, University of Washington. [ Available online
-  at http://www.stat.washington.edu/www/research/reports/ ]}
+  at \url{http://www.stat.washington.edu/www/research/reports/} ]}
 \author{Matt Pocernich <pocernic@rap.ucar.edu>}
 
        \keyword{file}

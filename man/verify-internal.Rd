@@ -12,12 +12,14 @@
 \alias{summary.bin.bin}
 \alias{summary.cont.cont}
 \alias{summary.norm.dist.cont}
+\alias{summary.cat.cat}
 \alias{ranked.hist}
 \alias{plot.prob.bin}
 \alias{plot.cont.cont}
+\alias{roc}
 \alias{zzz}
 \title{
-  Verify internal and secondary functions
+  Verification internal and secondary functions
 }
 \description{
  Listed below are either internal functions or secondary functions.
@@ -28,9 +30,11 @@
  summary.bin.bin(object, \dots)
  summary.cont.cont(object, \dots)
  summary.norm.dist.cont(object, \dots)
+ summary.cat.cat(object, \dots)
  ranked.hist(frcst, nbins = 10, titl = NULL) 
  plot.prob.bin(x, \dots)
  plot.cont.cont(x, \dots)
+ roc(x, pred, thres, binormal, \dots)
  zzz
 }
 \keyword{internal}

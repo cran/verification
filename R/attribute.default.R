@@ -6,7 +6,8 @@
 # ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
 # ** 2004/1/7 11:29:42 
 # *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
- attribute.default<- function(x, obar.i,  prob.y=NULL, obar = NULL, titl = NULL, ...){
+ attribute.default<- function(x, obar.i,  prob.y=NULL, obar = NULL, class = "none", main = NULL,  CI = FALSE,  n.boot = 100, alpha = 0.05,  tck = 0.01,
+                              ...){
 ## attribute plot as displayed in Wilks, p 264.
 ## If the first object is a prob.bin class, information derived from that.
 
@@ -14,6 +15,11 @@
                                       # could be changed.
    on.exit(par(old.par))
 
+########################################
+## if x is an verification object, bootstapping is possible.
+   if(CI & class != "prob.bin" )  stop("x must be an 'prob.bin' object create by verify to create confidence intervals" )
+
+########################################   
 
 plot(x, obar.i,  col = 2, lwd = 2, type = "n",
      xlim = c(0,1), ylim = c(0,1),
@@ -21,14 +27,13 @@ plot(x, obar.i,  col = 2, lwd = 2, type = "n",
      ylab = expression( paste("Observed relative frequency, ", bar(o)[1] ))
      )
 
-
 ###################  need to put down shading before anything else.
 
 if(!is.null(obar)){
-a <- (1-obar)/2 + obar
-b <- obar / 2
-x.p<- c(obar, obar, 1, 1, 0, 0)
-y.p<- c(0, 1, 1, a, b, 0)
+a   <- (1-obar)/2 + obar
+b   <- obar / 2
+x.p <- c(obar, obar, 1, 1, 0, 0)
+y.p <- c(0, 1, 1, a, b, 0)
 
 polygon(x.p, y.p, col = "gray")
 
@@ -39,18 +44,40 @@ text(0.6, obar + (a-b)*(0.6 - obar), "No skill", pos = 1,
 
 
 ###########
-
 points(x, obar.i, type = "b", col = 2, lwd = 2)
 
+####### bootstrap CI's
+if(CI){   
+n    <- length(pred)
+OBAR <- matrix(NA, nrow = length(obar.i), ncol = n.boot)
 
+for(i in 1:n.boot){
+  ind     <- sample(1:n, replace = TRUE)
+ OBAR[,i] <- verify(obs[ind], pred[ind], show = FALSE)$obar.i    
+} ## close 1:nboot
+a<- apply(OBAR,1, quantile, alpha)
+b<- apply(OBAR,1, quantile, 1-alpha)
+
+for(i in 1:length(a) ){
+ lines(rep(x[i], 2), c(a[i], b[i] ), lwd = 1)
+ lines( c(x[i] - tck, x[i] + tck), rep(a[i],2),lwd = 1 )
+ lines( c(x[i] - tck, x[i] + tck), rep(b[i],2), lwd = 1 )
+}
+
+rm(OBAR, a,b)
+
+} ## close if CI
+
+   
+   
 ## plot relative frequency of each forecast
 ind<- x< 0.5
 text(x[ind], obar.i[ind], formatC(prob.y[ind], format = "f", digits = 3),
           pos = 3, offset = 2, srt = 90)
 text(x[!ind], obar.i[!ind], formatC(prob.y[!ind], format = "f", digits = 3),
           pos = 1, offset = 2, srt = 90)
-if(is.null(titl)){title("Attribute Diagram")}else
-{title(titl)}
+if(is.null(main)){title("Attribute Diagram")}else
+{title(main)}
 
 abline(0,1)
 

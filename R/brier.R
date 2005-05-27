@@ -27,17 +27,27 @@ bs.baseline <- mean( (obar - obs)^2)
 N0    <- sum(pred == 0)
 N1    <- sum(pred == 1)
 bins  <- thresholds  ### this will only work if an internal function.
+## add something to ensure empty bins counted 
 
-pred.bins<- cut(pred, breaks = bins, labels = FALSE, include.lowest = TRUE )
+pred.bins<- cut(c(pred, bins[-1]), breaks = bins, labels = FALSE, include.lowest = TRUE )
 
-N<-  aggregate(pred.bins, by = list(pred.bins), length)$x # number of preds in each bin
-obar.1<- aggregate(obs, by = list(pred.bins), sum)$x # number of preds in each bin
+N <-  aggregate(pred.bins, by = list(pred.bins), length)$x # number of preds in each bin
+
+
+N <- N - 1
+#obar.1<- aggregate(obs, by = list(pred.bins), sum)$x # number of preds in each bin
+obar.1<- aggregate(c(obs, rep(0, length(bins) - 1 ) ), by = list(pred.bins), sum)$x # number of preds in each bin
+
+## remove tail from pred.bins
+pred.bins <- pred.bins[1:length(pred)]
 
 obar.i<- obar.1/N
+obar.i[!is.finite(obar.i) ] <- 0
 
 y.i <- bins[-length(bins)] + diff(bins)/2 # mid point of each bin
   
 n<- length(obs)
+
 
 ss <- 1 - bs/bs.baseline
 
@@ -48,6 +58,7 @@ bs.uncert<- obar*(1- obar)
 check <- bs.rel - bs.res + bs.uncert 
 
 prob.y <- N/n
+
 
 bs.discrete <-  mean( ( obs - y.i[pred.bins])^2 )## for comparison, a bs score based on binned categories.
 

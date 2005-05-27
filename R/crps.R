@@ -20,7 +20,7 @@ crps <- function(obs, pred, ...)
   ign <-  0.5*log(2*pi*sigma^2) + (obs - mu)^2/(2*sigma^2)
   pit <- pnorm(obs, mu,sigma )
 
-return(crps = crps, CRPS = mean(crps), ign = ign, IGN = mean(ign), pit = pit )
+return(list(crps = crps, CRPS = mean(crps), ign = ign, IGN = mean(ign), pit = pit) )
 
 }
 

@@ -12,7 +12,9 @@
        \description{This function creates a plot of overlayed
 	 histograms.   In the context of verification, this is often
 	 used to compare the distribution of event and no-event forecasts.}
-       \usage{discrimination.plot(obs, pred, breaks = 11, main = "Comparison of Distributions", xlim = c(0,1), median = TRUE, \dots }
+       \usage{discrimination.plot(obs, pred, breaks = 11, main =
+"Comparison of Distributions", xlim = c(0,1), leg.txt = c("Model A",
+"Model B"), median = TRUE, \dots )}
 }
 
 \arguments{
@@ -21,6 +23,7 @@
 	 \item{breaks}{Number of breaks in the x-axis of the histogram.}
 	 \item{main}{Title for plot.}
 	 \item{xlim}{Range of histogram - x axis.}
+	 \item{leg.txt}{Legend text.}
 	 \item{median}{If TRUE, the median values for the event and the
 	   no-event will be vertically plotted.  This is intended as a
 	   non-paramtric indicator of the forecast's ability to
@@ -39,7 +42,7 @@
  dat<- rbind(A,B); dat<- as.data.frame(dat)
  names(dat)<- c("obs", "pred")
 
- discrimination.plot(dat$obs, dat$pred)
+ discrimination.plot(dat$obs, dat$pred, main = "Sample Plot")
  }
 
 \author{Matt Pocernich <pocernic@rap.ucar.edu>}

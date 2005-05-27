@@ -13,6 +13,10 @@ assign("obar.i", x$obar.i)
 assign("prob.y", x$prob.y)
 assign("obar", x$obar) 
 assign("x", x$y.i)
-do.call("attribute.default", list(x, obar.i, prob.y, obar,...) )
+assign("class", "prob.bin")
+assign("obs", x$obs)
+assign("pred", x$pred)
+
+do.call("attribute.default", list(x, obar.i, prob.y, obar, class, obs = obs, pred = pred, ...) )
 
 }
