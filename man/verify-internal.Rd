@@ -16,6 +16,17 @@
 \alias{ranked.hist}
 \alias{plot.prob.bin}
 \alias{plot.cont.cont}
+
+\alias{calc.ES.VM.comp1}
+\alias{angle.dist}
+\alias{ES.VM.comp1}
+\alias{ES.VM.comp1.array}
+\alias{approx.comp2}
+\alias{dvm2}
+\alias{ES.VM.comp2}
+\alias{ES.VM.comp2.array}
+
+  
 \alias{roc}
 \alias{zzz}
 \title{
@@ -25,7 +36,7 @@
  Listed below are either internal functions or secondary functions.
  }
  \usage{
- table.stats(obs, pred)
+ table.stats(obs, pred = NULL)
  summary.prob.bin(object, \dots)
  summary.bin.bin(object, \dots)
  summary.cont.cont(object, \dots)
@@ -36,6 +47,19 @@
  plot.cont.cont(x, \dots)
  roc(x, pred, thres, binormal, \dots)
  zzz
+% tilmans internal functions
+angle.dist(a, b)
+calc.ES.VM.comp1(kappa, mc.size)
+% build.lookup(kappa.array, mc.size, save.progress=FALSE, graph.lookup=TRUE)
+ES.VM.comp1(kappa)
+ES.VM.comp1.array(kappa)
+
+%%
+approx.comp2(x, mu, kappa)
+dvm2(theta, mu, kappa)
+ES.VM.comp2(x, mu, k, ...)
+ES.VM.comp2.array(x, mu, k, ...)
+
 }
 \keyword{internal}
 % docclass is function

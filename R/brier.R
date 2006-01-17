@@ -6,16 +6,24 @@
 # ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
 # ** 2004/1/7 11:29:42 
 # *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
-brier<- function(obs, pred, baseline = NULL, thresholds  = seq(0,1,0.1), ... ){
-## internal function used in verify
+brier<- function(obs, pred, baseline = NULL,
+                 thresholds  = seq(0,1,0.1), bins = TRUE, ... ){
+################
+#pred <- runif(100) 
+#pred <- pred[pred>0.5 | pred < 0.4]
+
+#obs<- round(runif(length(pred) ))
+#baseline <- NULL
+#thresholds  <-  seq(0,1,0.1)
+#bins <-  TRUE
+  
+  ## internal function used in verify
 ## used with a probablistic forecast with a binary outcome.
   
-  
+##   thresholds <- seq(0,1,1/n.members ) if ensembles allowed
 if(max(pred)>1 | min(pred)<0) {
 
 cat("Predictions outside [0,1] range.  \n Are you certain this is a probability forecast? \n")}
-
-bs<- mean( (pred - obs)^2)
 
 ## baseline ave if not provided.
 
@@ -24,46 +32,46 @@ if(is.null(baseline)){obar <- mean(obs); baseline.tf <- FALSE}else
 
 bs.baseline <- mean( (obar - obs)^2)
 
-N0    <- sum(pred == 0)
-N1    <- sum(pred == 1)
-bins  <- thresholds  ### this will only work if an internal function.
-## add something to ensure empty bins counted 
+### if bins = TRUE, thresholds define bins in which predictions are
+### sorted and assigned the centered value.  If false, it is assumed
+### that thresholds specifiy the exact levels of probability.
 
-pred.bins<- cut(c(pred, bins[-1]), breaks = bins, labels = FALSE, include.lowest = TRUE )
-
-N <-  aggregate(pred.bins, by = list(pred.bins), length)$x # number of preds in each bin
-
-
-N <- N - 1
-#obar.1<- aggregate(obs, by = list(pred.bins), sum)$x # number of preds in each bin
-obar.1<- aggregate(c(obs, rep(0, length(bins) - 1 ) ), by = list(pred.bins), sum)$x # number of preds in each bin
-
-## remove tail from pred.bins
-pred.bins <- pred.bins[1:length(pred)]
-
-obar.i<- obar.1/N
-obar.i[!is.finite(obar.i) ] <- 0
-
-y.i <- bins[-length(bins)] + diff(bins)/2 # mid point of each bin
-  
-n<- length(obs)
+if(bins){XX <- probcont2disc(pred, bins = thresholds)
+       pred <- XX$new
+       new.mids <- XX$mids} else{
+## count number of discrete probabilities.  If greater than 20, issue warning.
+         if( length(unique(pred)> 20)){
+    warning("More than 20 unique probabilities. This could take awhile.")}
+} ## close else
 
 
-ss <- 1 - bs/bs.baseline
+N.pred <- aggregate(pred, by = list(pred), length) ## number of
+                                        # times each prediction used.
 
 
-bs.rel <- (sum(N*(y.i -obar.i)^2)) /n   ## reliability
-bs.res <- (sum(N*(obar.i -obar)^2)) /n  ## resolution
-bs.uncert<- obar*(1- obar)
-check <- bs.rel - bs.res + bs.uncert 
+N.obs <- aggregate(obs, by = list(pred), sum) ## number of
+                                        # times each prediction used.
 
-prob.y <- N/n
+if(bins){XX<- data.frame(Group.1 = new.mids)  ## make certain all bins are represented.
+N.pred <- merge(XX, N.pred, all.x = TRUE)
+N.obs <- merge(XX, N.obs, all.x = TRUE)}
+       
+obar.i <- N.obs$x/N.pred$x  # change int to numerics
 
+y.i  <- as.numeric(as.character(N.obs$Group.1)) 
 
-bs.discrete <-  mean( ( obs - y.i[pred.bins])^2 )## for comparison, a bs score based on binned categories.
+bs <- mean( (pred - obs)^2)
 
-return(list(baseline.tf = baseline.tf, bs = bs, bs.baseline = bs.baseline, ss = ss,
-            bs.reliability = bs.rel, bs.resol = bs.res, bs.uncert = bs.uncert,
-            y.i = y.i, obar.i = obar.i, prob.y = prob.y, obar = obar) )
-  
+    n <- length(obs)
+    ss <- 1 - bs/bs.baseline
+    bs.rel <- sum(N.pred$x *(y.i - obar.i)^2, na.rm = TRUE)/n
+    bs.res <- sum(N.pred$x * (obar.i - obar)^2, na.rm = TRUE)/n
+    bs.uncert <- obar * (1 - obar)
+    check <- bs.rel - bs.res + bs.uncert
+    prob.y <- N.pred$x/n
+
+ return(list(baseline.tf = baseline.tf, bs = bs, bs.baseline = bs.baseline, 
+        ss = ss, bs.reliability = bs.rel, bs.resol = bs.res, 
+        bs.uncert = bs.uncert, y.i = y.i, obar.i = obar.i, prob.y = prob.y, 
+        obar = obar, check = check))
 }

@@ -6,31 +6,24 @@
 # ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
 # ** 2004/1/7 11:29:42 
 # *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
-leps.default <- function(x, pred,  plot = TRUE, ...){
+leps <- function(x, pred,  plot = TRUE, ...){
 ## leps function
-# x<- rnorm(100, mean = 1, sd = sqrt(50))
-# pred<- rnorm(100, mean = 10, sd = sqrt(500)) 
-
-old.par <- par(no.readonly = TRUE) # all par settings which
+## Corrections made to errors pointed out by Marin Mittermaier.
+## 1/9/06  
+  old.par <- par(no.readonly = TRUE) # all par settings which
                                       # could be changed.
-on.exit(par(old.par) )
+ on.exit(par(old.par) )
 
-emp.prob <- rank(x)/( length(x)+ 1)
-# add points to emp.prob to make it a full ecdf 0, min(c(pred, x)  ) and
-# 1, max( c(pred, x) )
-obs.a<- c(obs, min(c(pred, x)) , max(c(pred, x) ) )
-emp.prob.a<- c(emp.prob, 0, 1 )
+Fn <- ecdf(x) ## empirical cdf
+ 
+leps.0 <- mean(abs( Fn(pred) - Fn(x) ) )
 
-ecdf.obs <- approxfun(obs.a, emp.prob.a) ## function returns ecdf of obs
-
-leps.0 <- mean(abs( ecdf.obs(pred) - ecdf.obs(x) ) )
-
-leps.1 <- 2 - 3*(leps.0 + mean(ecdf.obs(pred)*(1-ecdf.obs(pred) ) )
-                        + mean(ecdf.obs(x)* (1-ecdf.obs(x)  ) ) )
-
+leps.1 <- 2 - 3*(leps.0 + mean(Fn(pred)*(1-Fn(pred) ) )
+                        + mean(Fn(x)* (1-Fn(x)  ) ) )
+ 
 if(plot){
 #  if(is.null(titl)){titl<- "LEPS plot"} 
-plot(x, ecdf.obs(x), ylim = c(0,1),
+plot(x, Fn(x), ylim = c(0,1),
      ylab = expression(paste("Empirical CDF ", F[o](o)) ),
          xlab = "Observation", ... )
 }

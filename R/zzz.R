@@ -9,7 +9,9 @@
 .First.lib <- function(lib, pkg) {
 require(waveslim)
 require(fields)
-#require(boot)
+# library(CircStats, lib.loc  = "/d1/pocernic/rlibs/") ## just for me
+require(CircStats)
+require(boot)
 
 cat("\n",
 "Package verification:", "\n")

@@ -11,18 +11,17 @@ roc.area <- function(obs, pred){
   A<- data.frame(obs, pred)
   names(A)<- c("obs", "pred")
 
-
 ####
 
-e<- sum(A$obs == 1)
+e   <- sum(A$obs == 1)
 e.p <- sum(A$obs == 0)
-n<- length(A$obs)
+n   <- length(A$obs)
 
 ####
 
-  o2 <- order(A$pred, A$obs, decreasing = TRUE) # order for f
-  DAT<- A[o2,]
-  DAT$ind<- seq(1,n)
+  o2      <- order(A$pred, A$obs, decreasing = TRUE) # order for f
+  DAT     <- A[o2,]
+  DAT$ind <- seq(1,n)
   ind.2<- DAT$ind[DAT$obs == 1]
 
 f<- 0 # no ties. 
@@ -44,24 +43,9 @@ for(i in 1:e){
   f.tilda <-  f.tilda  +  d
 }
 
-
 A.tilda<- 1 - 1/(e*e.p)*f - 1/(2*e*e.p)*(f.tilda - f)
-
-U<- e*e.p*(1-A.tilda)
-
-
-### normal approximation (no ties)
-
-p<- pnorm(U, mean = e*e.p/2, sd = sqrt(e*e.p*(n+1)/12 ) )
-
-### normal approximation (ties) adjusting for ties
-
-tau <- aggregate(A$pred, by = list(A$pred), length)
-
-V<- e*e.p*(n+1)/12 - e*e.p/(12*n*(n -1))*sum(tau$x*(tau$x - 1)*(tau$x +1))
-
-
-p.adj<- pnorm(U, mean = e*e.p/2, sd = sqrt(V) )
-
-return(list(A.tilda = A.tilda, n.total = n, n.events = e, n.noevents = e.p,  U = U, p = p, p.adj = p.adj) )
+### create alternative p-value using wilcox.test
+stats <- wilcox.test(pred[obs==1], pred[obs==0], alternative = "great")  
+  
+return(list(A = A.tilda, n.total = n, n.events = e, n.noevents = e.p,   p.value = stats$p.value) )
      }  # close function

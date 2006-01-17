@@ -52,9 +52,9 @@ n.boot = 1000, alpha = 0.05, tck = 0.01, plot.thres = seq(0.1,
 	 \item{CI}{Confidence Intervals.  Calculated by bootstrapping
 	   the observations and prediction, then calculating PODy and
 	   PODn values.  }
-	\item{n.boot} {Number of bootstrap samples.}
+	\item{n.boot}{Number of bootstrap samples.}
 	\item{alpha}{ Confidence interval.  By default = 0.05}
-	\item{tck} {Tick width on confidence interval whiskers.}
+	\item{tck}{Tick width on confidence interval whiskers.}
         \item{plot.thres}{By default, displays the threshold levels on
 	  the ROC diagrams.  To surpress these values, set it equal to
 	  NULL.  If confidence intervals (CI) is set to TRUE, levels

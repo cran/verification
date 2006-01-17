@@ -7,7 +7,7 @@
 # ** 2004/1/7 11:29:42 
 # *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
 plot.cont.cont <- function(x, ...){
-assign("frcst", x$pred )
+assign("pred", x$pred )
 assign("obs", x$obs )
 do.call("conditional.quantile", list(pred, obs, ...) )
 

@@ -53,10 +53,13 @@ OBAR <- matrix(NA, nrow = length(obar.i), ncol = n.boot)
 
 for(i in 1:n.boot){
   ind     <- sample(1:n, replace = TRUE)
- OBAR[,i] <- verify(obs[ind], pred[ind], show = FALSE)$obar.i    
+  OBAR[,i] <- verify(obs[ind], pred[ind], show = FALSE)$obar.i    
+
+  
 } ## close 1:nboot
-a<- apply(OBAR,1, quantile, alpha)
-b<- apply(OBAR,1, quantile, 1-alpha)
+
+a<- apply(OBAR,1, quantile, alpha, na.rm = TRUE)
+b<- apply(OBAR,1, quantile, 1-alpha, na.rm = TRUE)
 
 for(i in 1:length(a) ){
  lines(rep(x[i], 2), c(a[i], b[i] ), lwd = 1)

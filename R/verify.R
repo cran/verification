@@ -10,6 +10,12 @@ verify<- function(obs, pred,
                   baseline = NULL, # sample.baseline = FALSE, ? 
                   frcst.type = "prob", obs.type = "binary", 
                   thresholds = seq(0,1,0.1), show = TRUE ){
+
+if(frcst.type == "binary" & obs.type == "binary" & is.null(pred) ){
+
+  A <- table.stats(obs)
+class(A)<- c("verify", "bin.bin")
+} else
 if(frcst.type == "binary" & obs.type == "binary"){
 if(length(unique(obs))>2 | length(unique(pred))>2 ) {warning("Prediction or observation may not be binary \n")}
 A <- table.stats(obs, pred)

@@ -34,7 +34,7 @@
 Gerrity, J.P. Jr (1992).  A  note on Gandin and Murphy's equitable skill 
 score. \emph{Mon. Weather Rev.}, \bold{120}, 2707-2712.
 	 
-	 Joliffe, I.T. and D.B. Stephenson (2003). Forecast verification: a 
+	 Jolliffe, I.T. and D.B. Stephenson (2003). Forecast verification: a 
 practitioner's guide in atmospheric science. John Wiley and Sons.  See
 chapter 4 concerning categorical events, written by R. E. Livezey.
        }
@@ -43,13 +43,13 @@ chapter 4 concerning categorical events, written by R. E. Livezey.
 DAT<- matrix(c(7,4,4,14,9,8,14,16,24), nrow = 3) # from p. 80 - Jolliffe
 multi.cont(DAT)
 
-DAT<- matrix(c(3,8,7,8,13,14,4,18,25), ncol = 3) ## jolliffe JJA
+DAT<- matrix(c(3,8,7,8,13,14,4,18,25), ncol = 3) ## Jolliffe JJA
 multi.cont(DAT)
 
-DAT<- matrix(c(50,47,54,91,2364,205,71,170,3288), ncol = 3) # wilks p. 245
+DAT<- matrix(c(50,47,54,91,2364,205,71,170,3288), ncol = 3) # Wilks p. 245
 multi.cont(DAT)
 
-DAT<- matrix(c(28, 23, 72, 2680 ), ncol = 2) ## finley
+DAT<- matrix(c(28, 23, 72, 2680 ), ncol = 2) ## Finley
 multi.cont(DAT)
 
  }

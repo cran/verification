@@ -10,7 +10,6 @@
 \alias{attribute}
 \alias{attribute.default}
 \alias{attribute.prob.bin}
-
        \title{Attribute plot}
        \description{An attribute plot  illustrates
        the reliability, resolution and uncertainty of a forecast with
@@ -68,8 +67,6 @@ attribute(A, main = "Alternative plot", xlab = "Alternate x label" )
 
 attribute(A, main = "Alternative plot", xlab = "Alternate x label", CI =
 TRUE)
-
-
 }
 
 \references{

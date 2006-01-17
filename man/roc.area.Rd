@@ -12,10 +12,8 @@
        \description{This function calculates the area underneath a ROC
 	 curve following the process outlined in Mason and Graham (2002).  The
 	 p-value produced is related to the Mann-Whitney U statistics.
-	 The p-value is based on the normal approximation of this
-	 criteria.  This is applicable for ``\emph{large}'' amounts of
-	 data.  The article suggests that more than 40 cases with at
-	 least 10 cases for each outcome.
+	 The p-value is calculated using the wilcox.test function which
+	 automatically handles ties and makes approximations for large values.
 
 The p-value addresses the null hypothesis $H_o:$ The area under the ROC
 curve is 0.5 i.e. the forecast has no skill. 
@@ -28,18 +26,17 @@ curve is 0.5 i.e. the forecast has no skill.
        }
 
        \value{
-	 \item{A.tilda}{Area under ROC curve, adjusted for ties in
+	 \item{A}{Area under ROC curve, adjusted for ties in
 	   forecasts, if present}
 	 \item{n.total}{Total number of records}
 	 \item{n.events}{Number of events}
 	 \item{n.noevents}{Number of non-events}
-	 \item{U}{U statistic for Mann-Whitney Test}
-	 \item{p}{Unadjusted p-value}
-	 \item{p.adj}{p-value adjusted for ties}
-	 }
+	 \item{p.value}{Unadjusted p-value}
+	 	 }
  \note{This function is used internally in the \code{roc.plot} command
    to calculate areas.}
- \seealso{\code{\link{roc.plot}}, \code{\link{verify}} }
+ \seealso{\code{\link{roc.plot}}, \code{\link{verify}},
+   \code{\link{wilcox.test} } }
  \references{Mason, S.J. and N.E. Graham. (2002) ``Areas beneath the
    relative operating characteristics (ROC) and relative operating
    levels (ROL) curves: Statistical significance and interpretation, ''

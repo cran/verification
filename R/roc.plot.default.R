@@ -32,8 +32,7 @@ t          <- seq(0, 1, 1/n.thres.bins)
 }
 ####################################################### internal pod function for bootstrapping
 ######### for each level of plot.thres, create boxes
-
-
+                                   
 orig<- as.data.frame( roc(x, pred, thres = plot.thres, binormal) )
 
 if(CI) {
@@ -69,7 +68,7 @@ row.names(box.corners) <- plot.thres
 ### roc.area function
 
 DAT  <- array(NA, dim = c(length(thresholds) + 1, 5, n.forc))  ## adj to 5 cols to cal area under.
-VOLS <- matrix(nrow = n.forc, ncol = 5)
+VOLS <- matrix(nrow = n.forc, ncol = 3)
 binormal.pltpts<- list()
 
 for(j in 1:n.forc){  ## n.forc = number of forecasts = number of columns
@@ -91,15 +90,13 @@ binormal.area  <- sum(0.005*pnorm(B) , na.rm = TRUE) } else {binormal.area <- NA
 #############################
 ## vol calcs
 v <- roc.area(x, pred[,j])
-VOLS[j,1]<- v$A.tilda
-VOLS[j,2]<- v$p.adj
-VOLS[j,3]<- v$A
-VOLS[j,4]<- v$p
-VOLS[j,5]<- binormal.area
+VOLS[j,1]<- v$A
+VOLS[j,2]<- v$p.value
+VOLS[j,3]<- binormal.area
 } ## close for j in 1:n.forc
 
 VOLS<- data.frame(paste("Model ", seq(1, n.forc) ), VOLS )  
-names(VOLS)<- c("Model", "Area.adj", "p.adj", "Area", "p-value", "binorm.area")
+names(VOLS)<- c("Model", "Area", "p.value",  "binorm.area")
   
 ## stuff to return
 r<- structure(list( plot.data = DAT, roc.vol = VOLS, binormal.ptlpts = binormal.pltpts), class = "roc.data")
@@ -183,9 +180,7 @@ for(i in 1:nrow(box.corners) ){
       lines( c(orig$F[i] - tck,orig$F[i] + tck), rep(box.corners[i,2],2), lwd = 1 )## top tick
         lines( c(orig$F[i] - tck,orig$F[i] + tck), rep(box.corners[i,4],2), lwd = 1 )## bottom tick
 
-
 }
-
 
 } ## close if CI
 
@@ -195,13 +190,13 @@ if(legend){
 if(is.null(leg.text)){leg.text<- paste ("Model ", LETTERS[seq(1, n.forc)]) } 
 
 if(plot == "emp"){
-leg.text<- paste (leg.text, "  ",formatC(VOLS$Area.adj, digits = 3) ) }
+leg.text<- paste (leg.text, "  ",formatC(VOLS$Area, digits = 3) ) }
 
 if(plot =="binorm"){ 
 leg.text<- paste (leg.text, "  ", formatC(VOLS$binorm.area, digits = 3)  )}
 
 if(plot == "both"){
-leg.text<- paste (leg.text, "  ",formatC(VOLS$Area.adj, digits = 3), " (",
+leg.text<- paste (leg.text, "  ",formatC(VOLS$Area, digits = 3), " (",
 formatC(VOLS$binorm.area, digits = 3) ,")" ) }
 
 
