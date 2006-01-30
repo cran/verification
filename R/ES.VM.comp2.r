@@ -39,8 +39,8 @@ approx.comp2 <- function(x, mu, kappa)
 # E alpha(X,x) where X is an independent draw from a VonMises distribution with concentration parameter
 # k and mean mu.
 
-ES.VM.comp2 <- function(x, mu, k,...)
-{
+ES.VM.comp2 <- function(x, mu, k)
+{ES.VM.Comp2.Max.Kappa = 1500
 	if(is.array(x) || is.vector(x))
 	{
 		return(ES.VM.comp2.array(x, mu, k))
@@ -63,8 +63,8 @@ ES.VM.comp2 <- function(x, mu, k,...)
 	return( res$value ) 
 }
 
-ES.VM.comp2.array <- function(x, mu, k, ...)
-{
+ES.VM.comp2.array <- function(x, mu, k )
+{ES.VM.Comp2.Max.Kappa = 1500
 	mu <- mu %% (2*pi)
 	x <- x %% (2*pi)
 

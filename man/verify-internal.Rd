@@ -57,8 +57,8 @@ ES.VM.comp1.array(kappa)
 %%
 approx.comp2(x, mu, kappa)
 dvm2(theta, mu, kappa)
-ES.VM.comp2(x, mu, k, ...)
-ES.VM.comp2.array(x, mu, k, ...)
+ES.VM.comp2(x, mu, k)
+ES.VM.comp2.array(x, mu, k)
 
 }
 \keyword{internal}
