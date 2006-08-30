@@ -7,7 +7,9 @@
 % ** 2004/9/1 14:13:29 
 % *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
 \name{prob.frcs.dat}
+\docType{data}
 \alias{prob.frcs.dat}
+\usage{data(prob.frcs.dat) }
 \title{ Probablisitic  Forecast Dataset. }
 \description{
 This data set is used as an example of data used by the \code{roc.plot}

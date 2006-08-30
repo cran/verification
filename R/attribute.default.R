@@ -13,7 +13,7 @@
 
    old.par <- par(no.readonly = TRUE) # all par settings which
                                       # could be changed.
-   on.exit(par(old.par))
+   # on.exit(par(old.par))
 
 ########################################
 ## if x is an verification object, bootstapping is possible.

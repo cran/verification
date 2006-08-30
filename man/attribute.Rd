@@ -26,26 +26,26 @@
 \method{attribute}{prob.bin}(x, \dots)
        }
 \arguments{
-	 \item{x}{A vector of forecast probabilities or a ``prob.bin''
-	   class object produced by the \code{verify} function. }
-	 \item{obar.i}{A vector of observed relative frequency of forecast bins.} 
+     \item{x}{A vector of forecast probabilities or a ``prob.bin''
+       class object produced by the \code{verify} function. }
+     \item{obar.i}{A vector of observed relative frequency of forecast bins.} 
          \item{prob.y}{Relative frequency of forecasts of forecast bins. }
          \item{obar}{Climatological or sample mean of observed
-	   events.}
-	 \item{class}{Class of object.  If prob.bin, the function will
-	   use the data to estimate confidence intervals.}
+       events.}
+     \item{class}{Class of object.  If prob.bin, the function will
+       use the data to estimate confidence intervals.}
          \item{main}{Plot title.}
-	 \item{CI}{Confidence Intervals. This is only an option if the
-	   data is accessible by using the verify command first. Calculated by bootstrapping
-	   the observations and prediction, then calculating PODy and
-	   PODn values.  }
-	\item{n.boot}{Number of bootstrap samples.}
-	\item{alpha}{Confidence interval.  By default = 0.05}
-	\item{tck}{Tick width on confidence interval whiskers.}
+     \item{CI}{Confidence Intervals. This is only an option if the
+       data is accessible by using the verify command first. Calculated by bootstrapping
+       the observations and prediction, then calculating PODy and
+       PODn values.  }
+    \item{n.boot}{Number of bootstrap samples.}
+    \item{alpha}{Confidence interval.  By default = 0.05}
+    \item{tck}{Tick width on confidence interval whiskers.}
       
-	 \item{\dots}{Graphical parameters} 
+     \item{\dots}{Graphical parameters} 
        }
-	 \examples{
+     \examples{
 ## Data from Wilks, table 7.3 page 246.
  y.i   <- c(0,0.05, seq(0.1, 1, 0.1))
  obar.i <- c(0.006, 0.019, 0.059, 0.15, 0.277, 0.377, 0.511, 
@@ -54,7 +54,7 @@
             0.0303,  0.0275, 0.245, 0.022, 0.017, 0.203) 
  obar<- 0.162
  
-attribute(y.i, obar.i, prob.y, obar, titl = "Sample Attribute Plot")  
+attribute(y.i, obar.i, prob.y, obar, main = "Sample Attribute Plot")  
 
 ## Function will work with a ``prob.bin'' class objects as well.
 ## Note this is a random forecast.

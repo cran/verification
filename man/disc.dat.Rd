@@ -6,16 +6,15 @@
 % ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
 % ** 2004/9/1 14:13:29 
 % *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
-\name{analysis.dat}
-\alias{analysis.dat}
-\title{
-Spatial Observation Dataset.
-}
+\name{disc.dat}
+\alias{disc.dat}
+\title{ Discrimination plot dataset.}
+\usage{data(disc.dat)}
+\docType{data}
 \description{
-This spatial data set is used by the \code{\link{int.scale.verify}}
-function.  This consists of the outcome of the weather forecast presented
-in \code{\link{forecast.dat}}. This data was provided by Barabara Casati and is
-from the Met Office.
+This dataset is used to illustrate the \code{\link{discrimination.plot}}
+function.
+
 }
 \keyword{datasets}
 % docclass is data

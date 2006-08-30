@@ -9,8 +9,16 @@
 verify<- function(obs, pred,
                   baseline = NULL, # sample.baseline = FALSE, ? 
                   frcst.type = "prob", obs.type = "binary", 
-                  thresholds = seq(0,1,0.1), show = TRUE ){
+                  thresholds = seq(0,1,0.1), show = TRUE, bins = TRUE,... ){
 
+###
+
+if(length(obs)>4) {   ## assume if length = 4, a cont. table is entered.
+id <- is.finite(obs) &  is.finite(pred) 
+obs <- obs[id]
+pred <- pred[id]
+}
+###
 if(frcst.type == "binary" & obs.type == "binary" & is.null(pred) ){
 
   A <- table.stats(obs)
@@ -27,7 +35,7 @@ if(frcst.type == "prob" & obs.type == "binary"){
 if(show){
 cat("If baseline is not included, baseline values  will be calculated from the  sample obs. \n") }
 
-A<- brier(obs, pred, baseline, thresholds )
+A<- brier(obs, pred, baseline, thresholds, bins = bins )
 class(A)<- c("verify", "prob.bin")
 } else
 

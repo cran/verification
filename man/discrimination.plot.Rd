@@ -9,40 +9,52 @@
 \name{discrimination.plot}
 \alias{discrimination.plot}
 \title{Discrimination  plot}
-       \description{This function creates a plot of overlayed
-	 histograms.   In the context of verification, this is often
-	 used to compare the distribution of event and no-event forecasts.}
-       \usage{discrimination.plot(obs, pred, breaks = 11, main =
-"Comparison of Distributions", xlim = c(0,1), leg.txt = c("Model A",
-"Model B"), median = TRUE, \dots )}
+       \description{This function creates a plot of discrimination plots
+     (overlay histograms).   In the context of verification, this is often
+     used to compare the distribution of event and no-event
+     forecasts.  This may be useful in comparing any set of
+     observations. By default, boxplots of groups appear as upper
+     marginal plots.  These may be surpressed. }
+       \usage{discrimination.plot(group.id, value, breaks = 11, main =
+"Discrimination Plot", xlim = NULL, ylim = NULL,  legend =
+FALSE, leg.txt = paste("Model", unique(group.id) ),   marginal = TRUE, cols =
+seq(2, length(unique(group.id)) + 1), xlab = "Forecast",  \dots )}
 }
 
 \arguments{
-          \item{obs}{A binary observation (coded \{0, 1 \} ).}
-	 \item{pred}{A vector of predictions.}
-	 \item{breaks}{Number of breaks in the x-axis of the histogram.}
-	 \item{main}{Title for plot.}
-	 \item{xlim}{Range of histogram - x axis.}
-	 \item{leg.txt}{Legend text.}
-	 \item{median}{If TRUE, the median values for the event and the
-	   no-event will be vertically plotted.  This is intended as a
-	   non-paramtric indicator of the forecast's ability to
-	   discriminate.  If FALSE, these vertical lines
-	   will be surpressed.}
-	 \item{\dots}{Additional plotting options.}
+         \item{group.id}{A vector identifying groups.  A histogram is
+       created for each unique value.}
+     \item{value}{A vector of values corresponding to the group.id
+       vector used to create the histograms}
+     \item{breaks}{Number of breaks in the x-axis of the histogram.
+     The range of values is taken to be the range of prediction values.}
+     \item{main}{Title for plot.}
+     \item{xlim}{Range of histogram - x axis - main plot coordinates.}
+     \item{ylim}{Range of histogram - y axis - main plot coordinates.}
+     \item{legend}{Should there be a legend? Default = FALSE}
+     \item{leg.txt}{Legend text.  If FALSE or if a marginal plot is
+       created, no legend is added.}
+     \item{cols}{A vector showing the colors to be used in the
+       histograms and in the marginal boxplots}
+     \item{marginal}{Should a boxplots be placed in the top margin?
+       Defaults to TRUE}
+     \item{xlab}{ Label of the x-axis on the main plot.}
+     \item{\dots}{Additional plotting options.}
        }
 
         \examples{
  #  A sample forecast.  
 
- a<- rnorm(100, mean = -1); b<- rnorm(100, mean = 1)
+data(disc.dat)
+discrimination.plot(disc.dat$group.id, disc.dat$frcst, main = "Default
+Plot")
 
- A<- cbind(rep(0,100), pnorm(a)); B<- cbind(rep(1,100), pnorm(b)) 
+discrimination.plot(disc.dat$group.id, disc.dat$frcst,
+main = "New Labels", cex = 1.2, leg.txt = c("Low", "Med", "High" ) )
 
- dat<- rbind(A,B); dat<- as.data.frame(dat)
- names(dat)<- c("obs", "pred")
+discrimination.plot(disc.dat$group.id, disc.dat$frcst, main = "Without Marginal Plots ", marginal = FALSE)
 
- discrimination.plot(dat$obs, dat$pred, main = "Sample Plot")
+
  }
 
 \author{Matt Pocernich <pocernic@rap.ucar.edu>}

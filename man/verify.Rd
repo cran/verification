@@ -16,7 +16,7 @@
        \usage{
     verify(obs, pred, baseline = NULL, % sample.baseline = FALSE,
            frcst.type = "prob", obs.type = "binary",  thresholds =
-seq(0,1,0.1), show = TRUE )
+seq(0,1,0.1), show = TRUE, bins = TRUE, \dots )
        }
        \arguments{
      \item{obs}{The values with which the verifications are
@@ -44,7 +44,11 @@ seq(0,1,0.1), show = TRUE )
        "cont".  Defaults to "binary"}
      \item{thresholds}{Thresholds to be considered for point
        forecasts of continuous events.}
-     \item{show}{Logical; if TRUE (the default), print warning message}
+     \item{show}{Binary; if TRUE (the default), print warning message}
+     \item{bins}{Binary; if TRUE (default), the probabilistic forecasts
+       are placed in bins defined by the sequence defined in threshold
+       and assigned the midpoint value.}
+     \item{\dots}{Additional options.}
        }
        \note{ For the categorical forecast and verification, the Gerrity
      score only makes sense for forecast that have order, or are

@@ -9,20 +9,18 @@
 brier<- function(obs, pred, baseline = NULL,
                  thresholds  = seq(0,1,0.1), bins = TRUE, ... ){
 ################
-#pred <- runif(100) 
-#pred <- pred[pred>0.5 | pred < 0.4]
+id <- is.finite(obs) & is.finite(pred)
+obs <- obs[id]
+pred <- pred[id]
 
-#obs<- round(runif(length(pred) ))
-#baseline <- NULL
-#thresholds  <-  seq(0,1,0.1)
-#bins <-  TRUE
-  
-  ## internal function used in verify
+
+## internal function used in verify
 ## used with a probablistic forecast with a binary outcome.
-  
+
+  pred <- round(pred, 8)
 ##   thresholds <- seq(0,1,1/n.members ) if ensembles allowed
 if(max(pred)>1 | min(pred)<0) {
-
+ 
 cat("Predictions outside [0,1] range.  \n Are you certain this is a probability forecast? \n")}
 
 ## baseline ave if not provided.
@@ -39,8 +37,9 @@ bs.baseline <- mean( (obar - obs)^2)
 if(bins){XX <- probcont2disc(pred, bins = thresholds)
        pred <- XX$new
        new.mids <- XX$mids} else{
+         
 ## count number of discrete probabilities.  If greater than 20, issue warning.
-         if( length(unique(pred)> 20)){
+         if( length(unique(pred)) > 20 ){
     warning("More than 20 unique probabilities. This could take awhile.")}
 } ## close else
 
@@ -48,14 +47,14 @@ if(bins){XX <- probcont2disc(pred, bins = thresholds)
 N.pred <- aggregate(pred, by = list(pred), length) ## number of
                                         # times each prediction used.
 
-
 N.obs <- aggregate(obs, by = list(pred), sum) ## number of
                                         # times each prediction used.
 
 if(bins){XX<- data.frame(Group.1 = new.mids)  ## make certain all bins are represented.
 N.pred <- merge(XX, N.pred, all.x = TRUE)
-N.obs <- merge(XX, N.obs, all.x = TRUE)}
-       
+N.obs <- merge(XX, N.obs, all.x = TRUE)} ## close bins
+
+
 obar.i <- N.obs$x/N.pred$x  # change int to numerics
 
 y.i  <- as.numeric(as.character(N.obs$Group.1)) 

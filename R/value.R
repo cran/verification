@@ -1,17 +1,27 @@
 value<- function(obs, pred = NULL, baseline = NULL,
                  cl = seq(0.05, 0.95, 0.05), plot = TRUE, all = FALSE,
-                 thresholds = seq(0.05, 0.95, 0.05), ylim = c(-0.1,
-                 0.5), xlim = c(0,1), ...){
+                 thresholds = seq(0.05, 0.95, 0.05), ylim = c(-0.05,
+                 1), xlim = c(0,1), ...){
+####
+# obs
+# pred = NULL
+# baseline = NULL
+# cl = seq(0.05, 0.95, 0.05)
+# plot = TRUE
+# all = FALSE
+#                 thresholds = seq(0.05, 0.95, 0.05), ylim = c(-0.05,
+#                 1), xlim = c(0,1
+####
+  
+if(!is.null(pred) ){
+id   <- is.finite(obs) & is.finite(pred)
+obs  <- obs[id]
+pred <- pred[id] }else{
+obs<- obs[is.finite(obs)]
+}
 
-                                        # let s = baseline
 
-#if(prod( unique(obs)%in%c(0,1) ) != 1 & length(obs) != 4 ){ # prediction are a vector binary
-#stop("Observations must be binary -  0,1.") 
-#}
-
-### if the following, binary forecast - entered in table form.
-#####################################################
-#####################################################
+### 2 by 2 contingency table
 
 if(is.null(pred) & length(obs) ==4 ){
   print(" Assume data entered as c(n11, n01, n10, n00) Obs*Forecast")
@@ -73,6 +83,7 @@ V[,1]<- VV
 Vmax[1]     <- H[1] - F[1] #
 positive <- c(c/(c+d), a/(a+b) ) ## range of positive skill score
 }else {## close binary vector, open probabilistic forecast
+
 ## check?
 if(max(pred)>1 | min(pred)<0 ) { ## predictions are a vector of
   # probabilities
@@ -89,18 +100,25 @@ cl <- sort(c(cl, s) )## always add s to list of cl
     PRED[,i] <- pred > thresholds[i]
   } 
 
-F <- numeric()
-H <- numeric()
+F    <- numeric()
+H    <- numeric()
 Vmax <- numeric()
-V <- matrix(nrow = length(cl), ncol = ncol(PRED) )
-n <- length(pred)
-for(i in 1:ncol(PRED)){
+V    <- matrix(nrow = length(cl), ncol = ncol(PRED) )
+n    <- length(pred)
 
-A <- table(data.frame(obs, PRED[,i]) )
-a <- A[2,2]
-b <- A[1,2]
-c <- A[2,1]
-d <- A[1,1]
+for(i in 1:ncol(PRED)){
+## try inserted for when table is 2X2
+A    <- table(data.frame(obs, PRED[,i]) )
+a    <- try(A[2,2], silent = TRUE )
+b    <- try(A[1,2], silent = TRUE)
+c    <- try(A[2,1], silent = TRUE)
+d    <- try(A[1,1], silent = TRUE)
+
+
+if(class(a) == "try-error") a<- NA
+if(class(b) == "try-error") b<- NA
+if(class(c) == "try-error") c<- NA
+if(class(d) == "try-error") d<- NA
 
 F[i] <- b/(b+d) ## FALSE ALARM RATE
 H[i] <- a/(a+c) ## HIT RATE

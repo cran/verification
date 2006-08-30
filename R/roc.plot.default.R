@@ -9,16 +9,20 @@
 
 "roc.plot.default" <- function(x, pred, thresholds = NULL, binormal = FALSE,  legend = FALSE, leg.text = NULL,  
     plot = "emp", CI = FALSE, n.boot = 1000, alpha = 0.05, tck = 0.01,
-        plot.thres = seq(0.1, 0.9, 0.1), show.thres = TRUE, main = "ROC Curve",  xlab = "False Alarm Rate", ylab = "Hit Rate", extra = FALSE, ...){
+        plot.thres = seq(0, 1, 0.1), show.thres = TRUE, main = "ROC Curve",  xlab = "False Alarm Rate", ylab = "Hit Rate", extra = FALSE, ...){
 #
 #  old.par <- par(no.readonly = TRUE) # all par settings which
+id <- is.finite(x) & is.finite(pred)
+x <- x[id]
+pred <- pred[id]
+
 #  on.exit(par(old.par) )
 if(( plot=="binorm"| plot == "both")  & binormal == FALSE){
   stop("binormal must be TRUE in order to create a binormal plot")}
 
 ## 
-pred<- as.matrix(pred)
-n.forc<- dim(pred)[2] ## number of forecasts
+pred   <- as.matrix(pred)
+n.forc <- dim(pred)[2] ## number of forecasts
 
 ########### threshold vector
 
@@ -32,27 +36,27 @@ t          <- seq(0, 1, 1/n.thres.bins)
 }
 ####################################################### internal pod function for bootstrapping
 ######### for each level of plot.thres, create boxes
-                                   
-orig<- as.data.frame( roc(x, pred, thres = plot.thres, binormal) )
+######
+
+orig <- as.data.frame( roc.int(x, pred, thres = plot.thres, binormal) )
 
 if(CI) {
   
-D<- cbind(x, pred) ## bootstrap data.
-A<- matrix(NA, ncol = 3)
+D <- cbind(x, pred) ## bootstrap data.
+A <- matrix(NA, ncol = 3)
 
 for( i in 1:n.boot){
   nr   <- nrow(D)
   ind  <- sample( 1:nr, size = nr,  replace = TRUE)
   sub  <- D[ind,] ## bootstrap.data
-
   
 for (j in 1:length(plot.thres) ) {
 
-  
-A<- rbind(A, roc(sub[,1], sub[,2], plot.thres[j], binormal = binormal )[1,1:3] )
+A<- rbind(A, roc.int(sub[,1], sub[,2], plot.thres[j], binormal = binormal )[2,1:3] )
 
 } ## close j loop
 } ## close n.boot loop
+  
 BOOT<- as.data.frame(A[-1,])
 
 xleft  <- aggregate(BOOT$F,   by = list(BOOT$thres), quantile, alpha)$x
@@ -67,12 +71,13 @@ row.names(box.corners) <- plot.thres
 
 ### roc.area function
 
-DAT  <- array(NA, dim = c(length(thresholds) + 1, 5, n.forc))  ## adj to 5 cols to cal area under.
+DAT  <- array(NA, dim = c(length(thresholds) + 1, 5, n.forc))
+     ## adj to 5 cols to cal area under.
 VOLS <- matrix(nrow = n.forc, ncol = 3)
 binormal.pltpts<- list()
 
 for(j in 1:n.forc){  ## n.forc = number of forecasts = number of columns
-DAT[, , j] <- roc(x, pred[, j], thresholds, binormal = binormal)
+DAT[, , j] <- roc.int(x, pred[, j], thresholds, binormal = binormal)
 #############################
 
 if(binormal){
@@ -118,17 +123,26 @@ if(length(thresholds)< 16){L <- "b" }else{L<-"l"} # if less than 12 point show p
 ### if empirical or both
 
 if(plot == "emp" | plot == "both" ){ 
- for(i in 1:n.forc){
+## plot line
+  for(i in 1:n.forc){
     points(DAT[,3,i], DAT[ ,2,i] , col = i, lty = i, type = "l", lwd = 2)
     
 ## plot threshold points on graph   
 
- if(!is.null(plot.thres)){  ## does this need an else statement ?  ## by default, these match
+ if(!is.null(plot.thres)){  ## does this need an else statement ?
+                            ## by default, these match
 
 # won't work for muliple forcasts    
 if(show.thres){
-   points(orig$F, orig$H, col = 1, pch = 19)
-text(orig$F, orig$H, c(plot.thres,1), pos = 4, offset = 2 ) } # close show.thres
+  
+  # points(orig$F, orig$H, col = 1, pch = 19)
+  
+  points(DAT[,3,1], DAT[,2,1],  col = 1, pch = 19)
+  text(DAT[,3,i], DAT[,2,i], c(0,plot.thres,1), pos = 4, offset = 2 ) } # close show.thres  
+
+# text(orig$F, orig$H, c(plot.thres,1), pos = 4, offset = 2 ) } # close
+# show.thres
+
 
 }  ## close plot thres
  } ## close 1:n.thres
@@ -172,13 +186,14 @@ if(CI){
 #}
 
 for(i in 1:nrow(box.corners) ){
-  lines(box.corners[i,c(1,3)], rep(orig$H[i],2), lwd = 1 )## xlines
-      lines(rep(box.corners[i,1],2) , c(orig$H[i] - tck,orig$H[i] + tck), lwd = 1 )## left tick
-      lines(rep(box.corners[i,3],2) , c(orig$H[i] - tck,orig$H[i] + tck), lwd = 1 )## right tick
+ 
+  lines(box.corners[i,c(1,3)], rep(orig$H[i+1],2), lwd = 1 )## xlines
+      lines(rep(box.corners[i,1],2) , c(orig$H[i+1] - tck,orig$H[i+1] + tck), lwd = 1 )## left tick
+      lines(rep(box.corners[i,3],2) , c(orig$H[i+1] - tck,orig$H[i+1] + tck), lwd = 1 )## right tick
   
-  lines(rep(orig$F[i],2), box.corners[i,c(2,4)], lwd = 1 )  ## ylines
-      lines( c(orig$F[i] - tck,orig$F[i] + tck), rep(box.corners[i,2],2), lwd = 1 )## top tick
-        lines( c(orig$F[i] - tck,orig$F[i] + tck), rep(box.corners[i,4],2), lwd = 1 )## bottom tick
+  lines(rep(orig$F[i+1],2), box.corners[i,c(2,4)], lwd = 1 )  ## ylines
+      lines( c(orig$F[i+1] - tck,orig$F[i+1] + tck), rep(box.corners[i,2],2), lwd = 1 )## top tick
+        lines( c(orig$F[i+1] - tck,orig$F[i+1] + tck), rep(box.corners[i,4],2), lwd = 1 )## bottom tick
 
 }
 

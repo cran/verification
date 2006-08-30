@@ -32,7 +32,6 @@ dat <- c(obs,pred); min.d <- min(dat); max.d <- max(dat)
   
 ## plot ranges
 
-#lo<- min(pred, obs); hi<- max(pred, obs)
   lo<- min(bins); hi<- max(bins)
   
 ## if selected, the quasi-continuous data is subsetted into larger
@@ -57,20 +56,19 @@ lng<- aggregate(obs.cut, by = list(frcst.cut),length)
 med<- aggregate(obs.cut, by = list(frcst.cut),median)
 
 q1 <- aggregate(obs.cut, by = list(frcst.cut),quantile, 0.25)
-
-q2<- aggregate(obs.cut, by = list(frcst.cut),quantile, 0.75)
+q2 <- aggregate(obs.cut, by = list(frcst.cut),quantile, 0.75)
 
 q1$x[lng$x <= thrs[1]] <- NA
 q2$x[lng$x <= thrs[1]] <- NA
 
 q3 <- aggregate(obs.cut, by = list(frcst.cut),quantile, 0.1)
-q4<- aggregate(obs.cut, by = list(frcst.cut),quantile, 0.9)
+q4 <- aggregate(obs.cut, by = list(frcst.cut),quantile, 0.9)
 
 q3$x[lng$x <= thrs[2]] <- NA
 q4$x[lng$x <= thrs[2]] <- NA
 
 par( mar = c(5,5,5,5) )
-
+  
 plot(frcst.cut, obs.cut, xlim = c(lo,hi), ylim = c(lo, hi), main = main,
      type = 'n', ylab = "Observed Value", xlab = "Forecast Value", ... )
 mtext("Sample Size", side = 4, adj = -1)
@@ -83,15 +81,16 @@ legend(min(pred) + 0.55*diff(range(pred)),
        lty = c(1,2,3), lwd = 3, cex = 0.7 )
 
 abline(0,1)
-
-lines(labs[labs%in%med$Group.1], med$x, col = 2, lwd = 3)
-lines(labs[labs%in%q1$Group.1], q1$x,
+X <- as.numeric(as.character(med$Group.1))
+  
+lines(X, med$x, col = 2, lwd = 3)
+lines(X, q1$x,
       col = 3, lty = 2, lwd = 3)
-lines(labs[labs%in%q2$Group.1], q2$x,
+lines(X, q2$x,
       col = 3, lty = 2, lwd = 3)
-lines(labs[labs%in%q3$Group.1], q3$x,
+lines(X, q3$x,
       col = 4, lty = 3, lwd = 3)
-lines(labs[labs%in%q4$Group.1], q4$x,
+lines(X, q4$x,
       col = 4, lty = 3, lwd = 3)
 
 

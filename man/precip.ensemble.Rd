@@ -6,16 +6,15 @@
 % ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
 % ** 2004/9/1 14:13:29 
 % *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
-\name{analysis.dat}
-\alias{analysis.dat}
+\name{precip.ensemble}
+\alias{precip.ensemble}
 \title{
-Spatial Observation Dataset.
+An ensemble of precipitation forecasts 
 }
 \description{
-This spatial data set is used by the \code{\link{int.scale.verify}}
-function.  This consists of the outcome of the weather forecast presented
-in \code{\link{forecast.dat}}. This data was provided by Barabara Casati and is
-from the Met Office.
+  This is an example of an ensemble of precipitation forecasts.  The
+  data set contains forecast for 517 days (3 monsoon seasons) at lead
+  times of 1 to 10 days.  Observations and forecasts are in millimeters.
 }
 \keyword{datasets}
 % docclass is data

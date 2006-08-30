@@ -27,7 +27,7 @@
 \alias{ES.VM.comp2.array}
 
   
-\alias{roc}
+\alias{roc.int}
 \alias{zzz}
 \title{
   Verification internal and secondary functions
@@ -45,7 +45,7 @@
  ranked.hist(frcst, nbins = 10, titl = NULL) 
  plot.prob.bin(x, \dots)
  plot.cont.cont(x, \dots)
- roc(x, pred, thres, binormal, \dots)
+ roc.int(x, pred, thres, binormal)
  zzz
 % tilmans internal functions
 angle.dist(a, b)

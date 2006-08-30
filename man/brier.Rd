@@ -54,7 +54,6 @@
 
 pred<- runif(100)
 obs<- round(runif(100))
-
 brier(obs, pred)
 
 }
