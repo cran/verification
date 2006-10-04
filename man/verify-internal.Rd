@@ -25,10 +25,8 @@
 \alias{dvm2}
 \alias{ES.VM.comp2}
 \alias{ES.VM.comp2.array}
-
-  
 \alias{roc.int}
-\alias{zzz}
+
 \title{
   Verification internal and secondary functions
 }
@@ -37,16 +35,15 @@
  }
  \usage{
  table.stats(obs, pred = NULL)
- summary.prob.bin(object, \dots)
- summary.bin.bin(object, \dots)
- summary.cont.cont(object, \dots)
- summary.norm.dist.cont(object, \dots)
- summary.cat.cat(object, \dots)
+ \method{summary}{prob.bin}(object, \dots)
+ \method{summary}{bin.bin}(object, \dots)
+ \method{summary}{cont.cont}(object, \dots)
+ \method{summary}{norm.dist.cont}(object, \dots)
+ \method{summary}{cat.cat}(object, \dots)
  ranked.hist(frcst, nbins = 10, titl = NULL) 
- plot.prob.bin(x, \dots)
- plot.cont.cont(x, \dots)
+ \method{plot}{prob.bin}(x, \dots)
+ \method{plot}{cont.cont}(x, \dots)
  roc.int(x, pred, thres, binormal)
- zzz
 % tilmans internal functions
 angle.dist(a, b)
 calc.ES.VM.comp1(kappa, mc.size)

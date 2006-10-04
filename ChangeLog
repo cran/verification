@@ -1,7 +1,9 @@
 Change log
 
-Version 1.12
-
+Version 1.14
+Hopefully temporarily removed int.scale fucntion, documentation and
+	data until the waveslim package is updated.
+	
 Enhanced discrimination plot function.  This allows marginal boxplots
 to be displayed on the top plot.
 
