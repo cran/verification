@@ -72,5 +72,5 @@ bs <- mean( (pred - obs)^2)
  return(list(baseline.tf = baseline.tf, bs = bs, bs.baseline = bs.baseline, 
         ss = ss, bs.reliability = bs.rel, bs.resol = bs.res, 
         bs.uncert = bs.uncert, y.i = y.i, obar.i = obar.i, prob.y = prob.y, 
-        obar = obar, check = check))
+        obar = obar, thres = thresholds, check = check))
 }

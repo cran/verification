@@ -76,7 +76,7 @@ ts <- p.diag/(1 - d)
 hss <- (sum(p.diag) - sum (p.obs*p.forc)  ) / (1 - sum (p.obs*p.forc)  )
 pss <- (sum(p.diag) - sum (p.obs*p.forc)  ) / (1 - sum (p.obs*p.obs)  )
 
-return(list(PC = PC, BIAS = bias, hit.rate = pod, false.alarm.rate = far, TS = ts,
+return(list(PC = PC, BIAS = bias, hit.rate = pod, false.alarm.ratio = far, TS = ts,
             HSS = hss, PSS = pss, GS = GS))
 }
 

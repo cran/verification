@@ -1,9 +1,41 @@
+Version 1.20
+
+Correct skill score for continuous/ continuous  forecasts.
+
+Added warning notes to attribute diagram.
+
+Change ROC plot to return estimated values of area under the ROC
+curve as illustrated by Simon Mason's example.
+
+*****
+
 Change log
+Allowed rps to take a vector of single forecasts.  Corrected
+    documentation.
+
+
+Corrected FAR notation in mulit.cont.
+
+Corrected plotting errors in roc.plot
+
+Added lines.roc and lines.attrib to add lines to either roc or attribute diagrams.
+
+Changed pop example data.
+
+rps needs to be fixed.
+
+Version 1.15 - 1.17
+Added lineADD to add lines to reliability and attribute diagrams
+using prob.bin objects from verify.
+
+Added IS function submitted by B. Cassati
+
+Returned int.scale functions since waveslim has been updated.
 
 Version 1.14
 Hopefully temporarily removed int.scale fucntion, documentation and
-	data until the waveslim package is updated.
-	
+    data until the waveslim package is updated.
+
 Enhanced discrimination plot function.  This allows marginal boxplots
 to be displayed on the top plot.
 
@@ -15,3 +47,9 @@ Changed internal variables within the table.stat command from integers to numeri
 to avoid overflow errors.
 
 Added ChangeLog file
+12/6/06
+
+Fixed discrimination plot.  If group id was not in order, density plot
+    can be incorrect.
+
+    M

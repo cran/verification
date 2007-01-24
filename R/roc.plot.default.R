@@ -12,15 +12,15 @@
         plot.thres = seq(0, 1, 0.1), show.thres = TRUE, main = "ROC Curve",  xlab = "False Alarm Rate", ylab = "Hit Rate", extra = FALSE, ...){
 #
 #  old.par <- par(no.readonly = TRUE) # all par settings which
-id <- is.finite(x) & is.finite(pred)
-x <- x[id]
+id   <- is.finite(x) & is.finite(pred)
+x    <- x[id]
 pred <- pred[id]
 
 #  on.exit(par(old.par) )
-if(( plot=="binorm"| plot == "both")  & binormal == FALSE){
+if(( plot=="binorm" | plot == "both")  & binormal == FALSE){
   stop("binormal must be TRUE in order to create a binormal plot")}
 
-## 
+###  make pred a matrix 
 pred   <- as.matrix(pred)
 n.forc <- dim(pred)[2] ## number of forecasts
 
@@ -39,9 +39,9 @@ t          <- seq(0, 1, 1/n.thres.bins)
 ######
 
 orig <- as.data.frame( roc.int(x, pred, thres = plot.thres, binormal) )
-
+A.boot <- NULL
 if(CI) {
-  
+A.boot <- numeric()  
 D <- cbind(x, pred) ## bootstrap data.
 A <- matrix(NA, ncol = 3)
 
@@ -49,7 +49,8 @@ for( i in 1:n.boot){
   nr   <- nrow(D)
   ind  <- sample( 1:nr, size = nr,  replace = TRUE)
   sub  <- D[ind,] ## bootstrap.data
-  
+  A.boot[i] <- roc.area(D[ind,1], D[ind,2])$A
+
 for (j in 1:length(plot.thres) ) {
 
 A<- rbind(A, roc.int(sub[,1], sub[,2], plot.thres[j], binormal = binormal )[2,1:3] )
@@ -104,7 +105,7 @@ VOLS<- data.frame(paste("Model ", seq(1, n.forc) ), VOLS )
 names(VOLS)<- c("Model", "Area", "p.value",  "binorm.area")
   
 ## stuff to return
-r<- structure(list( plot.data = DAT, roc.vol = VOLS, binormal.ptlpts = binormal.pltpts), class = "roc.data")
+r<- structure(list( plot.data = DAT, roc.vol = VOLS, binormal.ptlpts = binormal.pltpts, A.boot = A.boot), class = "roc.data")
 
 ####################################################  
 ###### plot if required  
@@ -134,15 +135,24 @@ if(plot == "emp" | plot == "both" ){
 
 # won't work for muliple forcasts    
 if(show.thres){
-  
-  # points(orig$F, orig$H, col = 1, pch = 19)
-  
-  points(DAT[,3,1], DAT[,2,1],  col = 1, pch = 19)
-  text(DAT[,3,i], DAT[,2,i], c(0,plot.thres,1), pos = 4, offset = 2 ) } # close show.thres  
+## only print threshold if there are values near each threshold.
+## this is an issue if empirical plots are made and the thresholds are
+## odd numbers.
 
-# text(orig$F, orig$H, c(plot.thres,1), pos = 4, offset = 2 ) } # close
-# show.thres
+a1<- DAT[,1,1]
+b1 <- plot.thres
+a <- matrix(a1, ncol = length(b1), nrow = length(a1) )
 
+X<- abs(scale(a, center = b1, scale = FALSE) )
+## make certain point is close to value
+X[X> 0.5 * max(diff(b1))] <- NA
+id <- as.numeric(apply(X, 2, which.min) )
+id2 <- is.finite(id)  ## which plot thres values have corresp values
+id <- id[id2]
+
+rm(a1, b1, a)
+  points(DAT[id,3,1], DAT[id,2,1],  col = 1, pch = 19)
+  text(DAT[id,3,i], DAT[id,2,i], plot.thres[id2], pos = 4, offset = 2 ) } # close show.thres  
 
 }  ## close plot thres
  } ## close 1:n.thres
@@ -214,8 +224,6 @@ if(plot == "both"){
 leg.text<- paste (leg.text, "  ",formatC(VOLS$Area, digits = 3), " (",
 formatC(VOLS$binorm.area, digits = 3) ,")" ) }
 
-
-
 legend(list(x=0.6, y=0.4), legend = leg.text, bg = "white", cex = 0.6,
          lty = seq(1,n.forc), col = c("black", "red","blue"), merge=TRUE) #}
 } ## close if legend
@@ -224,8 +232,3 @@ invisible(r)
  # end function
 }
                 
-
-
-
-
-

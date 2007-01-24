@@ -6,12 +6,11 @@
 % ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
 % ** 2004/9/1 14:13:29 
 % *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
-\name{pop.heavy}
+\name{pop}
 \docType{data}
-\alias{pop.heavy}
-% \alias{pop.light}
+\alias{pop}
 \title{ Probability of precipitation (pop) data. }
-\usage{data(pop.heavy)}
+\usage{data(pop)}
 \description{
 These datasets are used to illustrate several functions including
 \code{\link{value}} and \code{\link{roc.plot}}.

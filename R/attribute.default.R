@@ -6,7 +6,7 @@
 # ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
 # ** 2004/1/7 11:29:42 
 # *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
- attribute.default<- function(x, obar.i,  prob.y=NULL, obar = NULL, class = "none", main = NULL,  CI = FALSE,  n.boot = 100, alpha = 0.05,  tck = 0.01,
+ attribute.default<- function(x, obar.i,  prob.y=NULL, obar = NULL, class = "none", main = NULL,  CI = FALSE,  n.boot = 100, alpha = 0.05,  tck = 0.01, freq = TRUE,
                               ...){
 ## attribute plot as displayed in Wilks, p 264.
 ## If the first object is a prob.bin class, information derived from that.
@@ -74,11 +74,13 @@ rm(OBAR, a,b)
    
    
 ## plot relative frequency of each forecast
+if(freq){
 ind<- x< 0.5
 text(x[ind], obar.i[ind], formatC(prob.y[ind], format = "f", digits = 3),
           pos = 3, offset = 2, srt = 90)
 text(x[!ind], obar.i[!ind], formatC(prob.y[!ind], format = "f", digits = 3),
           pos = 1, offset = 2, srt = 90)
+}
 if(is.null(main)){title("Attribute Diagram")}else
 {title(main)}
 

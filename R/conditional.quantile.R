@@ -26,19 +26,16 @@ if( min(bins)> min (pred) | max(bins)< max(pred) ){warning("Forecasts outside of
 dat <- c(obs,pred); min.d <- min(dat); max.d <- max(dat)
   bins<- seq(floor(min.d), ceiling(max.d), length = 11)
 
-}
+}   ## close bin check  
 
-  ## close bin check
-  
 ## plot ranges
-
   lo<- min(bins); hi<- max(bins)
   
 ## if selected, the quasi-continuous data is subsetted into larger
 ## bins so that quantile statistics might be calculated.
 
   b<- bins[- length(bins)]
-labs<- b + 0.5*diff(bins)
+  labs<- b + 0.5*diff(bins)
 
 obs.cut<- cut(obs, breaks = bins, include.lowest = TRUE, labels = labs)
 obs.cut[is.na(obs.cut)]<- labs[1] # place anything below the limit into first bin. 
@@ -52,17 +49,17 @@ frcst.cut<- as.numeric(as.character(frcst.cut))
 
 n<- length(labs)
 
-lng<- aggregate(obs.cut, by = list(frcst.cut),length)
-med<- aggregate(obs.cut, by = list(frcst.cut),median)
+lng<- aggregate(obs, by = list(frcst.cut),length)
+med<- aggregate(obs, by = list(frcst.cut),median)
 
-q1 <- aggregate(obs.cut, by = list(frcst.cut),quantile, 0.25)
-q2 <- aggregate(obs.cut, by = list(frcst.cut),quantile, 0.75)
+q1 <- aggregate(obs, by = list(frcst.cut),quantile, 0.25)
+q2 <- aggregate(obs, by = list(frcst.cut),quantile, 0.75)
 
 q1$x[lng$x <= thrs[1]] <- NA
 q2$x[lng$x <= thrs[1]] <- NA
 
-q3 <- aggregate(obs.cut, by = list(frcst.cut),quantile, 0.1)
-q4 <- aggregate(obs.cut, by = list(frcst.cut),quantile, 0.9)
+q3 <- aggregate(obs, by = list(frcst.cut),quantile, 0.1)
+q4 <- aggregate(obs, by = list(frcst.cut),quantile, 0.9)
 
 q3$x[lng$x <= thrs[2]] <- NA
 q4$x[lng$x <= thrs[2]] <- NA
@@ -93,7 +90,6 @@ lines(X, q3$x,
 lines(X, q4$x,
       col = 4, lty = 3, lwd = 3)
 
-
 pp<- par("plt")
 
 par("plt" = c(pp[1], pp[2], pp[3], 0.2))
@@ -105,6 +101,5 @@ hist(frcst.cut, breaks = bins, col = "blue",
      xlab = " " , ylab = " ")
 axis(4, line = 0)
 # mtext("Sample Size", side = 4, line = 1)
-
 
 }

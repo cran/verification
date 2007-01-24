@@ -16,17 +16,17 @@
          \item{obs}{A vector of binary observations or a contingency
        table summary of values in the form c(n11, n01, n10, n00)
        where in  nab a = obs, b = forecast.} 
-     \item{pred}{A vector of probablistic predictions.}  
-     \item{baseline}{Baseline  or naive forecast.  Typically climotology.}
+     \item{pred}{A vector of probabilistic predictions.}  
+     \item{baseline}{Baseline  or naive forecast.  Typically climatology.}
      \item{cl}{Cost loss ratio.  The relative value of being
        unprepared and taking a loss to that of un-necessarily
        preparing.  For example,  cl = 0.1 indicates it
        would cost \$ 1 to prevent a \$10 loss.  This defaults to the
        sequence 0.05 to 0.95  by 0.05.  }
      \item{plot}{ Should a plot be created? Default is TRUE}
-     \item{all}{In the case of probablistic forecasts, should value
+     \item{all}{In the case of probabilistic forecasts, should value
        curves for each thresholds be displayed.}
-     \item{thresholds}{Thresholds considered for a probalistic
+     \item{thresholds}{Thresholds considered for a probabilistic
        forecast.}
      \item{ylim, xlim}{ Plotting options.}
      \item{\dots}{Options to be passed into the plotting function.}
@@ -48,20 +48,24 @@ Jolliffe, Ian and David B. Stephensen (2003) \emph{Forecast
 }
        
 \examples{
-## value as a contigency table
+## value as a contingency table
 ## Finley tornado data
-\dontrun{
 obs<- c(28, 72, 23, 2680) 
 value(obs)
 aa <- value(obs)
 aa$Vmax # max value
-}
-## probablistic forecast example
+
+## probabilistic forecast example
  obs  <- round(runif(100) )
  pred <-  runif(100)
 
 value(obs, pred, main = "Sample Plot",
              thresholds = seq(0.02, 0.98, 0.02) ) 
+##########
+data(pop)
+pop.convert()
+
+value(obs = d$obs_rain, pred = d$p24_rain, all = TRUE)
 
  }
 \author{Matt Pocernich <pocernic@rap.ucar.edu>}

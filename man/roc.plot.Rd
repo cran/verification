@@ -81,6 +81,7 @@ n.boot = 1000, alpha = 0.05, tck = 0.01, plot.thres = seq(0,
        values are calculated using \code{\link{roc.area}}.  The
        fifth column contains the area under the binormal curve, if
        binormal is selected.}
+       \item{A.boot}{If confidence intervals are calculated, the area under the ROC curve are returned. }
        }
        \note{There is not a minimum size required to create confidence
      limits or show thresholds.  When there are few data points, it
@@ -136,7 +137,22 @@ roc.plot(A, main = "Test 1", binormal = TRUE, plot = "both")
 ## show confidence intervals.  MAY BE SLOW
 roc.plot(A, threshold = seq(0.1,0.9, 0.1), main = "Test 1", CI = TRUE,
 alpha = 0.1)
+
+###   example from forecast verification website. 
+data(pop)
+pop.convert() ## internal function used to make binary observations for the pop figure.
+### note the use of bins = FALSE !!
+ mod24 <- verify(d$obs_norain, d$p24_norain, bins = FALSE)
+
+ mod48 <- verify(d$obs_norain, d$p48_norain, bins = FALSE)
+
+roc.plot(mod24, plot.thres = NULL)
+lines.roc(mod48, col = 2, lwd = 2)
+leg.txt <- c("24 hour forecast", "48 hour forecast")
+legend( 0.6, 0.4, leg.txt, col = c(1,2), lwd = 2)
+
 }
+\seealso{\code{\link{pop} }  and \code{\link{lines.roc} }}
 \author{Matt Pocernich <pocernic@rap.ucar.edu>}
 
        \keyword{file}

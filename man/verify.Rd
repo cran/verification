@@ -35,7 +35,7 @@ seq(0,1,0.1), show = TRUE, bins = TRUE, \dots )
        scores.  If left NULL, these statistics are calculated using
        sample climatology.}
 %    \item{sample.baseline}{Logical indicating whether the data
-%      provided is sample baselinetology or not.}
+%      provided is a representative sample of the baseline climatology or not.}
      \item{frcst.type}{Forecast type.  Either "prob", "binary",
        "norm.dist", "cat" or "cont".  Defaults to "prob".
        "norm.dist" is used when the forecast is in the form of a

@@ -11,7 +11,7 @@
 leg.txt = paste("Model", unique(group.id) ),  marginal =
 TRUE, cols = seq(2, length(unique(group.id)) + 1 ), xlab = "Forecast", ... ){
 dat <- data.frame(group.id = group.id, value = value)
-  groups <- unique(group.id)  
+  groups <- sort(unique(group.id))  
 n.group <- length(groups )
 
 # test data  
@@ -72,7 +72,7 @@ if(legend){par( mar = c(4,4,0,9))} else
 
 
 plot(XX$mids, apply(OUT, 1, max) , type = "n", xlab = xlab, ylab
-     = "Density", ylim = c(0, mx.2), xlim = c(mn.1, mx.1 ), ...  )
+     = "Relative Frequency", ylim = c(0, mx.2), xlim = c(mn.1, mx.1 ), ...  )
 
 for(i in 1:n.group){
 points(XX$mids, OUT[,i], type = "b", col = cols[i], pch = 14+i )

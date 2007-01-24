@@ -55,7 +55,7 @@ A$ME        <- mean( (pred - obs) )
 A$MSE.baseline <- mean( (mean(baseline) - obs)^2)
 # mse persistance only valid if data is presented in chronological order.
 A$MSE.pers  <- mean( (obs[-length(obs)]- obs[-1])^2)
-A$SS.baseline  <- 1 - (A$MSE - A$MSE.baseline)
+A$SS.baseline  <- 1 - (A$MSE/A$MSE.baseline)
 
 class(A)<- c("verify", "cont.cont")
 

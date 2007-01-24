@@ -10,7 +10,7 @@
        \alias{multi.cont}
        \title{Multiple Contingency Table Statistics }
        \description{Provides a variety of statistics for a data
-	 summarized in a contingency table.  This will work for a 2 by 2
+     summarized in a contingency table.  This will work for a 2 by 2
        table, but is more useful for tables of greater dimensions.}
        \usage{multi.cont(DAT)}
 \arguments{
@@ -23,23 +23,23 @@
   \item{pc}{Percent correct - events along the diagonal.}
   \item{bias}{Bias}
   \item{pod}{Probability of detecting an event.}
-  \item{far}{False Alarm Rate}
+  \item{far}{False Alarm Ratio}
   \item{ts}{Threat score a.k.a. Critical success index (CSI) }
   \item{hss}{Heidke Skill Score}
-  \item{pss}{Pierce Skill Score}
+  \item{pss}{Peirce Skill Score}
   \item{gs}{Gerrity Score}
-	 }
+     }
 
        \references{
 Gerrity, J.P. Jr (1992).  A  note on Gandin and Murphy's equitable skill 
 score. \emph{Mon. Weather Rev.}, \bold{120}, 2707-2712.
-	 
-	 Jolliffe, I.T. and D.B. Stephenson (2003). Forecast verification: a 
+     
+     Jolliffe, I.T. and D.B. Stephenson (2003). Forecast verification: a 
 practitioner's guide in atmospheric science. John Wiley and Sons.  See
 chapter 4 concerning categorical events, written by R. E. Livezey.
        }
        
- 	\examples{
+    \examples{
 DAT<- matrix(c(7,4,4,14,9,8,14,16,24), nrow = 3) # from p. 80 - Jolliffe
 multi.cont(DAT)
 
@@ -51,7 +51,9 @@ multi.cont(DAT)
 
 DAT<- matrix(c(28, 23, 72, 2680 ), ncol = 2) ## Finley
 multi.cont(DAT)
-
+## Finnish clouds
+DAT<- matrix(c(65, 10, 21, 29,17,48, 18, 10, 128), nrow = 3, ncol = 3, byrow = TRUE)
+multi.cont(DAT)  
  }
 \author{Matt Pocernich <pocernic@rap.ucar.edu>}
 

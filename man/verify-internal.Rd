@@ -26,6 +26,7 @@
 \alias{ES.VM.comp2}
 \alias{ES.VM.comp2.array}
 \alias{roc.int}
+\alias{pop.convert}
 
 \title{
   Verification internal and secondary functions
@@ -34,6 +35,7 @@
  Listed below are either internal functions or secondary functions.
  }
  \usage{
+pop.convert()
  table.stats(obs, pred = NULL)
  \method{summary}{prob.bin}(object, \dots)
  \method{summary}{bin.bin}(object, \dots)

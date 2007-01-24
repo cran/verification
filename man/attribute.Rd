@@ -22,7 +22,7 @@
        relative frequency for each forecast value is displayed in parenthesis. }
       \usage{
 \method{attribute}{default}(x, obar.i,  prob.y = NULL, obar = NULL, class =
-"none", main = NULL, CI = FALSE, n.boot = 100, alpha = 0.05, tck = 0.01, \dots)
+"none", main = NULL, CI = FALSE, n.boot = 100, alpha = 0.05, tck = 0.01, freq = TRUE, \dots)
 \method{attribute}{prob.bin}(x, \dots)
        }
 \arguments{
@@ -42,9 +42,10 @@
     \item{n.boot}{Number of bootstrap samples.}
     \item{alpha}{Confidence interval.  By default = 0.05}
     \item{tck}{Tick width on confidence interval whiskers.}
-      
+    \item{freq}{Should the frequecies be plotted. Default = TRUE}     
      \item{\dots}{Graphical parameters} 
        }
+       
      \examples{
 ## Data from Wilks, table 7.3 page 246.
  y.i   <- c(0,0.05, seq(0.1, 1, 0.1))
@@ -63,10 +64,29 @@ pred<- runif(100)
 
 A<- verify(obs, pred, frcst.type = "prob", obs.type = "binary")
 attribute(A, main = "Alternative plot", xlab = "Alternate x label" )
-## Same with confidence intervals
+## to add a line from another model
+obs<- round(runif(100))
+pred<- runif(100)
 
+B<- verify(obs, pred, frcst.type = "prob", obs.type = "binary")
+lines.attrib(B, col = "green")
+
+
+## Same with confidence intervals
 attribute(A, main = "Alternative plot", xlab = "Alternate x label", CI =
 TRUE)
+
+#### add lines to plot
+data(pop)
+pop.convert() ## internal function used to make binary observations for the pop figure.
+### note the use of bins = FALSE
+ mod24 <- verify(d$obs_rain, d$p24_rain, bins = FALSE)
+
+ mod48 <- verify(d$obs_rain, d$p48_rain, bins = FALSE)
+plot(mod24, freq = FALSE)
+
+lines.attrib(mod48, col = "green", lwd = 2, type = "b")
+
 }
 
 \references{
@@ -74,7 +94,7 @@ TRUE)
   geometrical framework for assessing the quality of probability
   forecasts.  \emph{Int. J. Forecasting} \bold{2}, 285-293.
   
-  Wilks, D. S. (1995) \emph{Statistical Methods in the Atmospheric Sciences }
+  Wilks, D. S. (2005) \emph{Statistical Methods in the Atmospheric Sciences }
   Chapter 7, San Diego: Academic Press.
 }
 \author{Matt Pocernich <pocernic@rap.ucar.edu>}
