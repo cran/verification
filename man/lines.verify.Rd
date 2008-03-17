@@ -11,8 +11,9 @@
        \alias{lines.attrib}
        \title{Add lines to ROC or attribute diagrams}
        \description{Add lines to attribute and verification diagrams from verify.prob.bin objects.}
-       \usage{lines.roc(x,binormal = FALSE, ...)
-              lines.attrib(x,...)
+       \usage{
+       \method{lines}{roc}(x,binormal = FALSE, ...)
+        \method{lines}{attrib}(x,...)
        }     
        
        \arguments{

@@ -6,7 +6,7 @@
 # ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
 # ** 2004/1/7 11:29:42 
 # *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
- attribute.default<- function(x, obar.i,  prob.y=NULL, obar = NULL, class = "none", main = NULL,  CI = FALSE,  n.boot = 100, alpha = 0.05,  tck = 0.01, freq = TRUE,
+ attribute.default<- function(x, obar.i,  prob.y=NULL, obar = NULL, class = "none", main = NULL,  CI = FALSE,  n.boot = 100, alpha = 0.05,  tck = 0.01, freq = TRUE, pred = NULL, obs = NULL,
                               ...){
 ## attribute plot as displayed in Wilks, p 264.
 ## If the first object is a prob.bin class, information derived from that.
@@ -47,6 +47,7 @@ text(0.6, obar + (a-b)*(0.6 - obar), "No skill", pos = 1,
 points(x, obar.i, type = "b", col = 2, lwd = 2)
 
 ####### bootstrap CI's
+####### this causes a binding error since pred and obs is not introduced.
 if(CI){   
 n    <- length(pred)
 OBAR <- matrix(NA, nrow = length(obar.i), ncol = n.boot)

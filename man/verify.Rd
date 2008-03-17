@@ -83,7 +83,7 @@ seq(0,1,0.1), show = TRUE, bins = TRUE, \dots )
       \item{MAE}{Mean absolute error (CC)}
      
     }
-      }
+      
       \references{
     
   Wilks, D. S. (1995) \emph{Statistical Methods in the Atmospheric Sciences }

@@ -19,7 +19,6 @@
 "Discrimination Plot", xlim = NULL, ylim = NULL,  legend =
 FALSE, leg.txt = paste("Model", unique(group.id) ),   marginal = TRUE, cols =
 seq(2, length(unique(group.id)) + 1), xlab = "Forecast",  \dots )}
-}
 
 \arguments{
          \item{group.id}{A vector identifying groups.  A histogram is

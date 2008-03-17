@@ -22,7 +22,7 @@
        relative frequency for each forecast value is displayed in parenthesis. }
       \usage{
 \method{attribute}{default}(x, obar.i,  prob.y = NULL, obar = NULL, class =
-"none", main = NULL, CI = FALSE, n.boot = 100, alpha = 0.05, tck = 0.01, freq = TRUE, \dots)
+"none", main = NULL, CI = FALSE, n.boot = 100, alpha = 0.05, tck = 0.01, freq = TRUE, pred = NULL, obs = NULL, \dots)
 \method{attribute}{prob.bin}(x, \dots)
        }
 \arguments{
@@ -42,7 +42,9 @@
     \item{n.boot}{Number of bootstrap samples.}
     \item{alpha}{Confidence interval.  By default = 0.05}
     \item{tck}{Tick width on confidence interval whiskers.}
-    \item{freq}{Should the frequecies be plotted. Default = TRUE}     
+    \item{freq}{Should the frequecies be plotted. Default = TRUE} 
+    \item{pred}{Required to create confidence intervals}
+    \item{obs}{Required to create confidence intervals}    
      \item{\dots}{Graphical parameters} 
        }
        

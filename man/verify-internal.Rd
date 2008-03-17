@@ -16,7 +16,6 @@
 \alias{ranked.hist}
 \alias{plot.prob.bin}
 \alias{plot.cont.cont}
-
 \alias{calc.ES.VM.comp1}
 \alias{angle.dist}
 \alias{ES.VM.comp1}
@@ -27,7 +26,6 @@
 \alias{ES.VM.comp2.array}
 \alias{roc.int}
 \alias{pop.convert}
-
 \title{
   Verification internal and secondary functions
 }
@@ -58,8 +56,8 @@ approx.comp2(x, mu, kappa)
 dvm2(theta, mu, kappa)
 ES.VM.comp2(x, mu, k)
 ES.VM.comp2.array(x, mu, k)
-
 }
+
 \keyword{internal}
 % docclass is function
 % Converted by Sd2Rd version 1.21.

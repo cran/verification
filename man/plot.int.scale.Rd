@@ -13,7 +13,7 @@
 	 \code{\link{int.scale.verify}}  using the \code{image} function
 	 from the base package and \code{image.plot} from the fields package..}
        \usage{
-    plot.int.scale(x, y = NULL, plot.mse = FALSE, main = NULL, \dots)
+     \method{plot}{int.scale}(x, y = NULL, plot.mse = FALSE, main = NULL, \dots)
        }
       \arguments{
 	\item{x}{A object from the \code{int.scale.verify} function that

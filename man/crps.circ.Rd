@@ -12,15 +12,14 @@
        \description{Computes the circular CRPS when the verifying
 	 direction is 'x'    and the probabilistic forecast is a von
 	 Mises distribution on the circle with mean 'mu' and
-	 concentration parameter 'kappa'. 
-       }
+	 concentration parameter 'kappa'. }
        \usage{crps.circ(x, mu, kappa )}
 \arguments{
   \item{x}{A single direction in angles (0 <= x < 2 pi) }
   \item{mu}{A single direction in angles (0 <= mu < 2 pi) }
   \item{kappa}{A single positive number (kappa >= 0) }
   }
-}
+
 \value{
   \item{crps.circ}{Circular crps}
  }
