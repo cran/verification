@@ -6,8 +6,7 @@
 # ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
 # ** 2004/1/7 11:29:42 
 # *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
- attribute.default<- function(x, obar.i,  prob.y=NULL, obar = NULL, class = "none", main = NULL,  CI = FALSE,  n.boot = 100, alpha = 0.05,  tck = 0.01, freq = TRUE, pred = NULL, obs = NULL,
-                              ...){
+ attribute.default<- function(x, obar.i,  prob.y=NULL, obar = NULL, class = "none", main = NULL,  CI = FALSE,  n.boot = 100, alpha = 0.05,  tck = 0.01, freq = TRUE, pred = NULL, obs = NULL, thres = thres, ...){
 ## attribute plot as displayed in Wilks, p 264.
 ## If the first object is a prob.bin class, information derived from that.
 
@@ -42,9 +41,10 @@ text(0.6, obar + (a-b)*(0.6 - obar), "No skill", pos = 1,
 
 }
 
-
 ###########
-points(x, obar.i, type = "b", col = 2, lwd = 2)
+
+ii <- is.finite(obar.i)
+points(x[ii], obar.i[ii], type = "b", col = 2, lwd = 2)
 
 ####### bootstrap CI's
 ####### this causes a binding error since pred and obs is not introduced.
@@ -54,7 +54,7 @@ OBAR <- matrix(NA, nrow = length(obar.i), ncol = n.boot)
 
 for(i in 1:n.boot){
   ind     <- sample(1:n, replace = TRUE)
-  OBAR[,i] <- verify(obs[ind], pred[ind], show = FALSE)$obar.i    
+  OBAR[,i] <- verify(obs[ind], pred[ind], show = FALSE, thres = thres)$obar.i    
 
   
 } ## close 1:nboot

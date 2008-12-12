@@ -1,6 +1,6 @@
 Package: verification
-Version: 1.26
-Date:  2008-03-17
+Version: 1.29
+Date:  2008-12-12
 Title: Forecast verification utilities.
 Author: NCAR - Research Application Program
 Maintainer: Matt Pocernich <pocernic@ucar.edu>
@@ -9,4 +9,4 @@ Description: This package contains utilities for verification of discrete,contin
 License: GPL (>=2)
 LazyLoad: yes
 LazyData: yes
-Packaged: Wed Mar 12 21:43:28 2008; Owner
+Packaged: Sun Jan  4 11:20:23 2009; joan_schunck

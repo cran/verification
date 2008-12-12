@@ -85,7 +85,10 @@ n.boot = 1000, alpha = 0.05, tck = 0.01, plot.thres = seq(0,
        }
        \note{There is not a minimum size required to create confidence
      limits or show thresholds.  When there are few data points, it
-     is possilbe to make some pretty unattractive graphs. }
+     is possilbe to make some pretty unattractive graphs. 
+     
+     The roc.plot method can be used to summarize a "verify, prob.bin" class object created with the verify command.  It is appropriate to use the roc plot for forecast which are not probabilities, but rather forecasts made on a continuous scale.  The roc plot function can be used to summarize such forecasts but it is not possible to use the verify function to summarize such forecasts.  An example is shown below.
+     }
 
        \references{
 Mason, I. (1982) ``A model for assessment of weather forecasts,''

@@ -6,14 +6,17 @@
 # ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
 # ** 2004/1/7 11:29:42 
 # *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
-verify<- function(obs, pred,
+verify<- function(obs, pred = NULL,
                   baseline = NULL, # sample.baseline = FALSE, ? 
                   frcst.type = "prob", obs.type = "binary", 
                   thresholds = seq(0,1,0.1), show = TRUE, bins = TRUE,... ){
 
-###
+##### insert checks
+    if(min(diff(thresholds))<0){stop("Thresholds must be listed in ascending order")}
 
-if(length(obs)>4) {   ## assume if length = 4, a cont. table is entered.
+
+###
+if(length(obs)>4 & !is.matrix(obs) ) {   ## assume if length = 4, a cont. table is entered.
 id <- is.finite(obs) &  is.finite(pred) 
 obs <- obs[id]
 pred <- pred[id]
@@ -62,13 +65,20 @@ class(A)<- c("verify", "cont.cont")
 }else
 
 if(frcst.type == "cat" & obs.type == "cat"){
-a<- sort(unique(c(obs, pred) ) )
-obs.a <- c(a, obs)
-pred.a <- c(a, pred)
+	#### forecast summary can be listed as a contingency table.
+	
+	if(is.matrix(obs) & is.null(pred)) {
+		print("Assuming data is summarized in a contingency table./n  ")
+		print("Columns summarize observed values.  Rows summarize predicted values /n" )
+		DAT <- obs
+		}else{
+a        <- sort(unique(c(obs, pred) ) )
+obs.a    <- c(a, obs)
+pred.a   <- c(a, pred)
 
-DAT<- table(pred.a, obs.a) 
+DAT      <- table(pred.a, obs.a) 
 diag(DAT)<- diag(DAT) - 1
-
+}## close else
 A <- multi.cont(DAT)
 
 

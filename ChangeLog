@@ -1,3 +1,11 @@
+Version 1.29 -  Correct summary function of for multiple contingency tables.  Error reported by Ian Jollife.
+	     permit multi.cont function to accept table as input and to accept vector for forecast probabilities.
+	-  Change method for calculating area under curve.
+	-  Require threshold intervals be provided for forecasts with more than 1000 unique predictions.
+	- minor changes to attribute diagram to not fail with empty bins.
+	- renamed output from multi.cont.
+	
+	
 Version 1.26  Corrected incorrect use of \method plus error in attribute example.
 Version 1.20
 

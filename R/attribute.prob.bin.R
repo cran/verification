@@ -10,6 +10,7 @@ attribute.prob.bin<- function(x, ...){
 # retreives data from a verify object.
 
 assign("obar.i", x$obar.i)
+assign("thres", x$thres)
 assign("prob.y", x$prob.y)
 assign("obar", x$obar)
 assign("class", "prob.bin")
@@ -17,6 +18,6 @@ assign("obs", x$obs)
 assign("pred", x$pred)
 assign("x", x$y.i)
 
-do.call("attribute.default", list(x, obar.i, prob.y, obar, class, obs=obs, pred = pred, ...) )
+do.call("attribute.default", list(x, obar.i, prob.y, obar, class, obs=obs, pred = pred, thres = thres, ...) )
 
 }
