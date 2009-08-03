@@ -21,8 +21,8 @@
        \usage{
     \method{roc.plot}{default}(x, pred, thresholds = NULL, binormal =
 FALSE,   legend = FALSE, leg.text = NULL,  plot = "emp", CI = FALSE,
-n.boot = 1000, alpha = 0.05, tck = 0.01, plot.thres = seq(0,
-1, 0.1), show.thres = TRUE, main = "ROC Curve", xlab = "False Alarm Rate", ylab = "Hit Rate", extra = FALSE,  \dots)
+n.boot = 1000, alpha = 0.05, tck = 0.01, plot.thres = seq(0.1,
+0.9, 0.1), show.thres = TRUE, main = "ROC Curve", xlab = "False Alarm Rate", ylab = "Hit Rate", extra = FALSE,  \dots)
 \method{roc.plot}{prob.bin}(x, \dots) }
 \arguments{
         \item{x}{A binary observation (coded \{0, 1 \} ) or a verification

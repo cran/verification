@@ -1,3 +1,13 @@
+Version 1.30 
+- Added reduced centered random variable and crpsDecomposition scores contributed by Ronald Frenette.
+- Added performance diagram based on article by Paul Roebber
+- Documented previously internal table.stats function
+- Added function for resampling directly from a contingency table - table.stats.boot.  This is used to create confidence intervals for performance diagram
+- Added fractional skill score function.
+- Clarified documentation of multi.cont function.
+- Changed default plot thresholds so that it would not print incorrect values.  This would be caused when if very small forecasts were made which were close to the 0 and 1 values.  0 would use the plotting positions for the small values.
+
+******
 Version 1.29 -  Correct summary function of for multiple contingency tables.  Error reported by Ian Jollife.
 	     permit multi.cont function to accept table as input and to accept vector for forecast probabilities.
 	-  Change method for calculating area under curve.

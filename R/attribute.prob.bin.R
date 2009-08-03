@@ -16,8 +16,9 @@ assign("obar", x$obar)
 assign("class", "prob.bin")
 assign("obs", x$obs)
 assign("pred", x$pred)
+assign("bins", x$bins)
 assign("x", x$y.i)
 
-do.call("attribute.default", list(x, obar.i, prob.y, obar, class, obs=obs, pred = pred, thres = thres, ...) )
+do.call("attribute.default", list(x, obar.i, prob.y, obar, class, obs=obs, pred = pred, thres = thres, bins = bins,...) )
 
 }

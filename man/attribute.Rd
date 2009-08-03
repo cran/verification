@@ -22,7 +22,7 @@
        relative frequency for each forecast value is displayed in parenthesis. }
       \usage{
 \method{attribute}{default}(x, obar.i,  prob.y = NULL, obar = NULL, class =
-"none", main = NULL, CI = FALSE, n.boot = 100, alpha = 0.05, tck = 0.01, freq = TRUE, pred = NULL, obs = NULL, thres = thres, \dots)
+"none", main = NULL, CI = FALSE, n.boot = 100, alpha = 0.05, tck = 0.01, freq = TRUE, pred = NULL, obs = NULL, thres = thres, bins = FALSE, \dots)
 \method{attribute}{prob.bin}(x, \dots)
        }
 \arguments{
@@ -46,6 +46,7 @@
     \item{pred}{Required to create confidence intervals}
     \item{obs}{Required to create confidence intervals} 
     \item{thres}{thresholds used to create bins for plotting confidence intervals.}   
+    \item{bins}{Should probabilities be binned or treated as unique predictions?}
      \item{\dots}{Graphical parameters} 
        }
       \note{Points and bins are plotted at the mid-point of bins.  This can create distorted graphs if forecasts are created at irregular intervals.

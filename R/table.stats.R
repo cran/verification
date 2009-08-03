@@ -6,17 +6,27 @@
 # ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
 # ** 2004/1/7 11:29:42 
 # *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
-table.stats<- function(obs, pred = NULL){
+table.stats<- function(obs, pred = NULL, silent = FALSE){
 ## internal function used in verify
 ## used with a binary forecast and a binary outcome.
 if(is.null(pred) & length(obs) ==4 ){
-  print(" Assume data entered as c(n11, n01, n10, n00) Obs*Forecast")
+  if(!silent){ print(" Assume data entered as c(n11, n01, n10, n00) Obs*Forecast") }
 a <- obs[1]
 b <- obs[2]
 c <- obs[3]
 d <- obs[4]
 tab.out <- matrix(c(a,c,b,d), nrow = 2)
-} else{
+} 
+if(is.null(pred) & is.matrix(obs) & prod(dim(obs)) ==4 ){
+if(!silent){print(" Assume contingency table has observed values in columns, forecasts in rows")}
+obs <- as.numeric(obs)
+a <- obs[1]
+b <- obs[3]
+c <- obs[2]
+d <- obs[4]
+tab.out <- matrix(c(a,c,b,d), nrow = 2)
+} 
+if(!is.null(pred)& !is.null(obs)){
 
   tab.out <- table(obs, pred)
   

@@ -50,9 +50,30 @@ N.pred <- aggregate(pred, by = list(pred), length) ## number of
 N.obs <- aggregate(obs, by = list(pred), sum) ## number of
                                         # times each prediction used.
 
-if(bins){XX<- data.frame(Group.1 = new.mids)  ## make certain all bins are represented.
+
+if(bins){
+	XX<- data.frame(Group.1 = new.mids, zz = rep(0,length(thresholds)-1 ))  ## make certain all bins are represented.
+	
+## convert to factor to avoid problems with matching numerics	
+XX$Group.1 <- as.factor(XX$Group.1)
+N.pred$Group.1 <- as.factor(N.pred$Group.1)
+N.obs$Group.1 <- as.factor(N.obs$Group.1)
+
+
+
 N.pred <- merge(XX, N.pred, all.x = TRUE)
-N.obs <- merge(XX, N.obs, all.x = TRUE)} ## close bins
+N.obs <- merge(XX, N.obs, all.x = TRUE)
+    }else{
+    		XX<- data.frame(Group.1 = thresholds, zz = rep(0,length(thresholds)))  ## make certain all bins are represented.
+## convert to factor to avoid problems with matching numerics	
+XX$Group.1 <- as.factor(XX$Group.1)
+N.pred$Group.1 <- as.factor(N.pred$Group.1)
+N.obs$Group.1 <- as.factor(N.obs$Group.1)
+
+N.pred <- merge(XX, N.pred, all.x = TRUE)
+N.obs <- merge(XX, N.obs, all.x = TRUE)
+
+    	} ## close bins
 
 
 obar.i <- N.obs$x/N.pred$x  # change int to numerics
@@ -68,9 +89,10 @@ bs <- mean( (pred - obs)^2)
     bs.uncert <- obar * (1 - obar)
     check <- bs.rel - bs.res + bs.uncert
     prob.y <- N.pred$x/n
+    
 
  return(list(baseline.tf = baseline.tf, bs = bs, bs.baseline = bs.baseline, 
         ss = ss, bs.reliability = bs.rel, bs.resol = bs.res, 
         bs.uncert = bs.uncert, y.i = y.i, obar.i = obar.i, prob.y = prob.y, 
-        obar = obar, thres = thresholds, check = check))
+        obar = obar, thres = thresholds, check = check, bins = bins))
 }

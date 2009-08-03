@@ -24,11 +24,7 @@
        \note{ This will soon be replaced the a lines command constructed using S4 class properites. }
 
        \seealso{\code{\link{verify}}  }
-       \examples{ 
        
-       }
-
-
 
 \author{Matt Pocernich <pocernic@rap.ucar.edu>}
 

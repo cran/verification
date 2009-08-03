@@ -7,7 +7,6 @@
 % ** 2004/1/7 11:31:8 
 % *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
 \name{verify-internal}
-\alias{table.stats}
 \alias{summary.prob.bin}
 \alias{summary.bin.bin}
 \alias{summary.cont.cont}
@@ -26,6 +25,7 @@
 \alias{ES.VM.comp2.array}
 \alias{roc.int}
 \alias{pop.convert}
+\alias{matrix.func}
 \title{
   Verification internal and secondary functions
 }
@@ -34,7 +34,6 @@
  }
  \usage{
 pop.convert()
- table.stats(obs, pred = NULL)
  \method{summary}{prob.bin}(object, \dots)
  \method{summary}{bin.bin}(object, \dots)
  \method{summary}{cont.cont}(object, \dots)
@@ -50,7 +49,7 @@ calc.ES.VM.comp1(kappa, mc.size)
 % build.lookup(kappa.array, mc.size, save.progress=FALSE, graph.lookup=TRUE)
 ES.VM.comp1(kappa)
 ES.VM.comp1.array(kappa)
-
+matrix.func(DAT, w = 0, FUN = mean, \dots ) 
 %%
 approx.comp2(x, mu, kappa)
 dvm2(theta, mu, kappa)

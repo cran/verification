@@ -1,7 +1,7 @@
 `roc.plot.default` <-
 function (x, pred, thresholds = NULL, binormal = FALSE, legend = FALSE, 
     leg.text = NULL, plot = "emp", CI = FALSE, n.boot = 1000, 
-    alpha = 0.05, tck = 0.01, plot.thres = seq(0, 1, 0.1), show.thres = TRUE, 
+    alpha = 0.05, tck = 0.01, plot.thres = seq(0.1, 0.9, 0.1), show.thres = TRUE, 
     main = "ROC Curve", xlab = "False Alarm Rate", ylab = "Hit Rate", 
     extra = FALSE, ...) 
 {     
@@ -132,6 +132,7 @@ function (x, pred, thresholds = NULL, binormal = FALSE, legend = FALSE,
 
     if (plot == "emp" | plot == "both") {
         for (i in 1:n.forc) {
+        	
             points(DAT[, 3, i], DAT[, 2, i], col = i, lty = i, 
                 type = "l", lwd = 2)
             if (!is.null(plot.thres)) {

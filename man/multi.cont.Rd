@@ -30,7 +30,7 @@
  \item{h}{Hit Rate by category (vector)}
  \item{false.alarm.ratio}{False alarm ratio by category (vector)}
      }
-
+     \seealso{\code{binary.table}}
        \references{
 Gerrity, J.P. Jr (1992).  A  note on Gandin and Murphy's equitable skill 
 score. \emph{Mon. Weather Rev.}, \bold{120}, 2707-2712.
@@ -42,6 +42,8 @@ chapter 4 concerning categorical events, written by R. E. Livezey.
        \note{Some verification statistics for a contingency table assume that the forecasts and observations are ordered, while others do not.  An example of an ordered or ordinal forecast is "low, medium and high".  An example of an unordered or nominal forecast is "snow, rain, hail, and none."  If the forecasts are ordered, it is possible to account for forecasts which are close to the the observed value.  For example, the Gerrity score takes this closeness into account.  The Pierce Skill Score does not.  
        	
        	For ordered forecast, it is assumed that the columns and rows of the input matrix are ordered sequentially. 
+       	
+       	When multiple values are returned, as in the case of pc2, h, f and false.alarm.ratio, these values are conditioned on that category having occurred.  For example, in the example included in Jolliffe, given that a below average temperature was observed, the forecast had a bias of 2.3 and had a 0.47 chance of being detected.
        	}
        
     \examples{
