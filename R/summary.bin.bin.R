@@ -20,5 +20,13 @@ summary.bin.bin <- function(object, ...){
   cat(paste("HSS  = ", formatC(object$HSS, digits = 4), "\n"))
   cat(paste("PC   = ", formatC(object$PC, digits = 4), "\n"))
   cat(paste("BIAS = ", formatC(object$BIAS, digits = 4), "\n"))
+  cat(paste("Odds Ratio = ", formatC(object$theta, digits = 4), "\n"))
+  cat(paste("Log Odds Ratio = ", formatC(object$log.theta, digits = 4), "\n"))
+    cat(paste("Odds Ratio Skill Score = ", formatC(object$orss, digits = 4), "\n"))
+    
+  cat(paste("Extreme Dependency Score = ", formatC(object$eds, digits = 4), "\n"))
+  cat(paste("Symmetric Extreme Dependency Score = ", formatC(object$seds, digits = 4), "\n"))
+    
+  
   }
 

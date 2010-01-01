@@ -1,6 +1,6 @@
 Package: verification
-Version: 1.30
-Date: 2009-08-03
+Version: 1.31
+Date: 2010-01-01
 Title: Forecast verification utilities.
 Author: NCAR - Research Application Program
 Maintainer: Matt Pocernich <pocernic@ucar.edu>
@@ -11,6 +11,6 @@ Description: This package contains utilities for verification of
 License: GPL (>= 2)
 LazyLoad: yes
 LazyData: yes
-Packaged: 2009-08-04 03:38:50 UTC; joan_schunck
+Packaged: 2010-01-11 00:02:25 UTC; joan_schunck
 Repository: CRAN
-Date/Publication: 2009-08-04 14:23:05
+Date/Publication: 2010-01-11 07:42:56

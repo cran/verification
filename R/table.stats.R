@@ -28,7 +28,7 @@ tab.out <- matrix(c(a,c,b,d), nrow = 2)
 } 
 if(!is.null(pred)& !is.null(obs)){
 
-  tab.out <- table(obs, pred)
+  tab.out <- table(as.numeric(obs), as.numeric(pred))
   
   a <-tab.out["1","1"]
   b <-tab.out["0","1"]
@@ -36,12 +36,6 @@ if(!is.null(pred)& !is.null(obs)){
   d <-tab.out["0","0"]
 } ## close else
 
-### data from Thornes
-#a<- 29
-#b<- 6
-#c <- 4
-#d<- 38
-#cl <- c(0.1, 0.125, 0.2, 0.4, 0.6, 0.8, 1)##
 
 ###
 n <- a + b + c + d
@@ -59,12 +53,21 @@ BIAS <- (a+b)/(a+c)
 OR   <- a*d/(b*c) ## odds ratio
 ORSS <- (a*d - b*c)/ (a*b + b*c ) ## odds ratio skill score
 HITSrandom <- 1.0* (a+c)*(a+b)/(a+b+c+d)
+p <- (a+c)/n
+
 ETS <- (a-HITSrandom)/(a+b+c-HITSrandom)
-  
+theta <- (a*d)/(b*c)
+log.theta <- log(a) + log(d) - log(b) - log(c) 
+n.h <- 1/( 1/a + 1/b + 1/c + 1/d)
+yules.q <- (theta - 1)/(theta + 1)  
+eds <- 2*log((a+c)/n)/log(a/n) - 1
+seds <- (log((a+b)/n)+log((a+c)/n)) /log(a/n) - 1
+seds.se <- sqrt(H*(1-H)/(n*p)) *(-log(BIAS*p^2)/(H*log(H*p)^2))
+
 return(list(tab = tab.out, TS = TS,
             POD = POD, M = M,  F = F,  FAR = FAR , HSS = HSS,
             PSS = PSS, KSS = KSS,
-            PC = PC, BIAS = BIAS, ETS = ETS))
+            PC = PC, BIAS = BIAS, ETS = ETS, theta = theta, log.theta = log.theta, n.h = n.h, orss = yules.q, eds = eds, seds = seds, seds.se = seds.se))
 }
 
 

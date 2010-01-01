@@ -83,7 +83,9 @@ n.boot = 1000, alpha = 0.05, tck = 0.01, plot.thres = seq(0.1,
        binormal is selected.}
        \item{A.boot}{If confidence intervals are calculated, the area under the ROC curve are returned. }
        }
-       \note{There is not a minimum size required to create confidence
+       \note{  Other packages in R provide functions to create ROC diagrams and different diagnostics.  The \bold{ROCR} package provides excellent functions to generate ROC diagrams with lines coded by threshold.  Large datasets are handled by a sampling routine and the user may plot a number of threshold dependent, contingency table scores.  Arguably, this is a superior package with respect to ROC plotting.
+       	
+       	There is not a minimum size required to create confidence
      limits or show thresholds.  When there are few data points, it
      is possilbe to make some pretty unattractive graphs. 
      

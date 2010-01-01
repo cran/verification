@@ -1,7 +1,9 @@
 `roc.area` <-
 function (obs, pred) 
 {
-   
+   id <- is.finite(obs)&is.finite(pred)
+   obs<- obs[id]
+   pred <- pred[id]
         n1 <- sum(obs)
         n<- length(obs)
    A.tilda <-        (mean(rank(pred)[obs == 1]) - (n1 + 1)/2)/(n - n1)

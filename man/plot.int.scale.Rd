@@ -26,7 +26,7 @@
       }
       
        \seealso{\code{\link{int.scale.verify}},
-	 \code{\link[base]{image}}, 
+	 \code{\link[graphics]{image}}, 
 	 \code{\link[fields]{image.plot} } } 
        \examples{
 data(analysis.dat)

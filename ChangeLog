@@ -1,3 +1,8 @@
+Version 1.31
+- Corrected brier.R function for use when each unique forecast is to be used as a specific bin.
+- Added text to describe appropriate use of baseline in verify command.
+- Corrected table.stats function to accept either values of 0,1 or FALSE, TRUE for binary values.
+- Added odds ratio to contingency table statistics.  
 Version 1.30 
 - Added reduced centered random variable and crpsDecomposition scores contributed by Ronald Frenette.
 - Added performance diagram based on article by Paul Roebber

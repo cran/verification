@@ -35,7 +35,7 @@ seq(0,1,0.1), show = TRUE, bins = TRUE, \dots )
        no-skill forecast.  In other fields this field would
        differ.  This field is used to calculate certain skill
        scores.  If left NULL, these statistics are calculated using
-       sample climatology.}
+       sample climatology.  If this is not NULL, the mean of these values is used as the baseline forecast.  This interpretation is not appropriate for all applications.  For example, if a baseline forecast is different for each forecast this will not work appropriately.  }
 %    \item{sample.baseline}{Logical indicating whether the data
 %      provided is a representative sample of the baseline climatology or not.}
      \item{frcst.type}{Forecast type.  Either "prob", "binary",
@@ -52,7 +52,10 @@ seq(0,1,0.1), show = TRUE, bins = TRUE, \dots )
        and assigned the midpoint value.}
      \item{\dots}{Additional options.}
        }
-       \note{ For the categorical forecast and verification, the Gerrity
+       \note{ 
+       	There are other packages in R and Bioconductor which are usefull for verification tasks.  This includes the \bold{ROCR}, \bold{ROC}, package and the "limma" package (in the Bioconductor repository.)  Written by people in different fields, each provides tools for verification from  different perspectives.
+       	
+       	For the categorical forecast and verification, the Gerrity
      score only makes sense for forecast that have order, or are
      basically ordinal. It is assumed that the forecasts are listed
      in order.  For example, if the rows of a contigency table were summarized as "medium, low, high", the Gerrity score will be incorrectly summarized.}  
@@ -82,9 +85,16 @@ seq(0,1,0.1), show = TRUE, bins = TRUE, \dots )
       \item{ME}{Mean error (CC) }
       \item{MSE}{Mean-squared error (CC)}
       \item{MAE}{Mean absolute error (CC)}
+      \item{theta}{Odds Ratio (BB)}
+     \item{log.theta}{Log Odds Ratio}
+     \item{n.h}{Degrees of freedom for log.theta (BB)}
+     \item{orss}{Odds ratio skill score, aka Yules's Q (BB)}
+     \item{eds}{Extreme Dependency Score (BB)}
+     \item{seds}{Symmetric Extreme Dependency Score (BB)}
+     \item{seds.se}{Standard Error for Symmetric Extreme Dependency Score (BB)}
      
     }
-      
+      \seealso{\code{table.stats} }
       \references{
     
   Wilks, D. S. (1995) \emph{Statistical Methods in the Atmospheric Sciences }
@@ -130,6 +140,6 @@ A<- verify(obs, pred, baseline = baseline,  frcst.type = "cont", obs.type = "con
 summary(A)
 }
 
-\author{Matt Pocernich <pocernic@rap.ucar.edu>}
+\author{Matt Pocernich <pocernic@ucar.edu>}
 
        \keyword{file}
