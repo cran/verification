@@ -1,39 +1,59 @@
-predcomp.test <- function(x, xhat1, xhat2, alternative=c("two.sided", "less", "greater"), lossfun="losserr", lossfun.args=NULL, fitmodel=NULL, fitmodel.args=NULL, ...) {
+predcomp.test <- function(x, xhat1, xhat2, alternative=c("two.sided", "less", "greater"),
+    lossfun="losserr", lossfun.args=NULL, fitmodel=NULL, fitmodel.args=NULL, ...) {
+
    out <- list()
    out$call <- match.call()
+
    e1 <- do.call(lossfun, c(list(x=x, xhat=xhat1), lossfun.args))
    e2 <- do.call(lossfun, c(list(x=x, xhat=xhat2), lossfun.args))
    d <- e1 - e2
    d.cov.obj <- acf(d, type="covariance", plot=FALSE, na.action = na.pass, ...)
    d.cov <- d.cov.obj$acf[,,1]
+
    if(is.null(fitmodel)) {
+
 	out$method <- "Diebold-Mariano Test"
 	out$fitmodel <- "none"
-	d.var <- sum(c(d.cov[1], 2*d.cov[-1]))/length(d)
+
+	n <- length(d)
+	d.var <- sum(c(d.cov[ 1 ], 2 * d.cov[-1])) / n
+
    } else {
+
 	out$method <- "Hering-Genton Test"
 	out$fitmodel <- fitmodel
 	out$fitmodel.args <- fitmodel.args
+
 	fit <- do.call(fitmodel, c(list(x=d.cov.obj$lag, y=d.cov), fitmodel.args))
-	n <- length(d.cov)/2
-	d.var <- (coef(fit)[1] + 2*sum(predict(fit)[1:n]))/n
+
+	n <- length(d.cov)
+
+	d.var <- (coef(fit)[1] + 2 * sum(predict(fit)[ 2:n ])) / n
+
    }
+
    STATISTIC <- mean(d, na.rm=TRUE)/sqrt(d.var)
    alternative <- match.arg(alternative)
+
    if (alternative == "two.sided") PVAL <- 2 * pnorm(-abs(STATISTIC))
    else if (alternative == "less") PVAL <- pnorm(STATISTIC)
    else if (alternative == "greater") PVAL <- pnorm(STATISTIC, lower.tail = FALSE)
+
    out$loss.function <- lossfun
    out$loss.function.args <- lossfun.args
    out$statistic <- STATISTIC
    out$alternative <- alternative
    out$p.value <- PVAL
    out$data.name <- c(deparse(substitute(x)), deparse(substitute(xhat1)), deparse(substitute(xhat2)))
+
    class(out) <- c("predcomp.test", "htest")
    return(out)
+
 } # end of 'predcomp.test' function.
 
-losserr <- function(x, xhat, method=c("abserr","sqerr","simple","power","corrskill","dtw"), scale=1, p=1, dtw.interr=c("abserr","sqerr","simple","power"), ...) {
+losserr <- function(x, xhat, method=c("abserr","sqerr","simple","power","corrskill","dtw"),
+    scale=1, p=1, dtw.interr=c("abserr","sqerr","simple","power"), ...) {
+
    method <- match.arg(method)
    if(method=="abserr") return(abs((xhat - x)/scale))
    else if(method=="sqerr") return(((xhat - x)/scale)^2)
@@ -41,6 +61,7 @@ losserr <- function(x, xhat, method=c("abserr","sqerr","simple","power","corrski
    else if(method=="power") return(((xhat - x)/scale)^p)
    else if(method=="corrskill") return(scale*(x - mean(x,na.rm=TRUE))*(xhat - mean(xhat, na.rm=TRUE)))
    else if(method=="dtw") {
+
 	dtw.interr <- match.arg(dtw.interr)
 	a <- dtw(xhat, x, step.pattern=asymmetric, ...)
 	w <- numeric(max(a$index1, a$index2)) + NA
@@ -51,26 +72,39 @@ losserr <- function(x, xhat, method=c("abserr","sqerr","simple","power","corrski
 	else if(dtw.interr=="simple") d2 <- (w - x)/scale
 	else if(dtw.interr=="power") d2 <- ((w - x)/scale)^p
 	else stop("losserr: dtw.interr must be one of abserr, sqerr, simple, or power")
+
 	return(d1 + d2)
+
    } else stop("losserr: method must be one of abserr, sqerr, simple, power, corrskill, or dtw")
+
 } # end of 'losserr' function.
 
 exponentialACV <- function(x, y, ...) {
+
    args <- list(...)
    if(!is.null(args$start)) res <- nls(y~sigma^2*exp(-3*x/theta), data=data.frame(x=x, y=y), ...)
    else {
+
 	if(any(y<0.05)) theta.start <- min(x[y<0.5],na.rm=TRUE)
 	else theta.start <- length(x)
 	res <- nls(y~sigma^2*exp(-3*x/theta), data=data.frame(x=x, y=y), start=list(sigma=sqrt(y[1]), theta=theta.start), ...)
+
    }
+
    return(res)
+
 } # end of 'acvparametric' function.
 
 summary.predcomp.test <- function(object, ...) {
+
    a <- object
+
    print(a$call)
+
    cat("\n", "Loss function used is: ", a$loss.function, "\n")
+
    if(!is.null(a$loss.function.args)) if(!is.null(a$loss.function.args$method)) {
+
 	m <- a$loss.function.args$method
 	if(m == "abserr") msg <- "Absolute Error Loss"
 	else if(m == "sqerr") msg <- "Square Error Loss"
@@ -79,8 +113,10 @@ summary.predcomp.test <- function(object, ...) {
 	   if(is.null(a$loss.function.args$p)) p <- 1
 	   else p <- a$loss.function.args$p
 	   msg <- paste("Power Error loss with p = ", p, sep="")
+
 	} else if(m == "corrskill") msg <- "Correlation Skill"
 	else if(m == "dtw") {
+
 	   if(is.null(a$loss.function.args$dtw.interr)) interr <- "Absolute Error Loss"
 	   else if(a$loss.function.args$dtw.interr == "abserr") interr <- "Absolute Error Loss"
 	   else if(a$loss.function.args$dtw.interr == "sqerr") interr <- "Square Error Loss"
@@ -89,13 +125,22 @@ summary.predcomp.test <- function(object, ...) {
 		if(is.null(a$loss.function.args$p)) p <- 1
            	else p <- a$loss.function.args$p
            	msg <- paste("Power Error loss with p = ", p, sep="")
+
 	   }
+
 	   msg <- paste("Discrete Time Warping Loss with Intensity Error = ", interr, sep="")
+
 	}
+
 	cat(paste("Method used: ", msg, sep=""), "\n")
 	a$loss.message <- msg
+
    }
+
    if(is.null(a$loss.function.args)) if(a$loss.function == "losserr") cat("Absolute Error Loss\n")
+
    print(a)
+
    invisible(a)
+
 } # end of 'summary.predcomp.test' function.

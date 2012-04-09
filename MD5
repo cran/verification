@@ -1,5 +1,5 @@
 393a5ca445f6965873eca0259a17f833 *COPYING
-9b7b02a7e44529b997ed9f1805b1416a *DESCRIPTION
+0aaced3f2bfa8727ca762ea9226d615f *DESCRIPTION
 c76a2beba25a0c2c3692aa28e9e8298f *NAMESPACE
 8740425de83e083f818e4eda33f35591 *R/attribute.R
 37f146be3241c4c40c3a5258411bd8d1 *R/attribute.default.R
@@ -19,7 +19,7 @@ c9ae39bc2cb17835a7004f4eaf4412b6 *R/discrimination.plot.R
 c209ffe2087dbb42e90153c4d6d80c93 *R/performance.diagram.R
 6f960333927a94ac21403cbaf02424d4 *R/plot.cont.cont.R
 48156eaf8f5973fc2addeb054f29008b *R/plot.prob.bin.R
-5c0de36f5398118bd70db0dd58a5bb04 *R/predcomptests.R
+18183b13683d54a42e68e5ed4c46ec98 *R/predcomptests.R
 70fba040364822dbea838cce60b8ca46 *R/probcont2disc.R
 7d8a009610971f42b29bef6f02ea9b2d *R/qrel.plot.R
 3b4462439b0d20c82a799c77f144ccc1 *R/qrelPlotDefault.R
