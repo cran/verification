@@ -6,7 +6,7 @@ pop.convert<- function(){
 ###       cat1 = 0.2 < rain <= 4.4 mm
 ###       cat2 = 4.4 mm < rain
 ### Make observations into logical variables
-d <- pop
+d <- verification::pop
 d$obs_norain <- d$obs <= 0.2 
 d$obs_light  <- d$obs > 0.2 & d$obs <= 4.4    # light rain only 
 d$obs_heavy  <- d$obs > 4.4   # heavy rain only

@@ -13,10 +13,10 @@ table.stats<- function(obs, pred = NULL, fudge = 0.01, silent = FALSE) {
     if(is.null(pred) & length(obs) ==4 ) {
 
         if(!silent){ print(" Assume data entered as c(n11, n01, n10, n00) Obs*Forecast") }
-        a <- obs[1] 
-        b <- obs[2] 
-        c <- obs[3] 
-        d <- obs[4] 
+        a <- as.numeric( obs[1] )
+        b <- as.numeric( obs[2] )
+        c <- as.numeric( obs[3] )
+        d <- as.numeric( obs[4] )
         tab.out <- matrix(c(a,c,b,d), nrow = 2)
 
     } 
@@ -26,9 +26,9 @@ table.stats<- function(obs, pred = NULL, fudge = 0.01, silent = FALSE) {
         if(!silent) print(" Assume contingency table has observed values in columns, forecasts in rows")
         obs <- as.numeric(obs)
         a <- obs[1] 
-        b <- obs[3] 
+        b <- obs[3]
         c <- obs[2]
-        d <- obs[4] 
+        d <- obs[4]
         tab.out <- matrix(c(a,c,b,d), nrow = 2)
 
     }
