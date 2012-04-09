@@ -54,13 +54,13 @@ mn.2 <- ylim[1]
 if(marginal){
 par(oma = c(0,0,2,0))
 
-layout(matrix(1:2, nrow = 2), height = c(1,4) )
+layout(matrix(1:2, nrow = 2), heights = c(1,4) )
 if(legend){par(mar = c(0,4,1,9) )} else
  {par(mar = c(0,4,1,1) ) }
 
 boxplot(value~group.id, data = dat, horizontal = TRUE,  axes = FALSE,
         col = cols , ylim = c(mn.1, mx.1 ), ... )
-axis(side = 2, at = 1:n.group, label = leg.txt, las = 2 )
+axis(side = 2, at = 1:n.group, labels = leg.txt, las = 2 )
 
 if(legend){par( mar = c(4,4,0,9))} else
 {par(mar = c(4,4,0,1) )}

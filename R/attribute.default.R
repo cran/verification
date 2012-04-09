@@ -54,7 +54,7 @@ OBAR <- matrix(NA, nrow = length(obar.i), ncol = n.boot)
 
 for(i in 1:n.boot){
   ind      <- sample(1:n, replace = TRUE)
-  YY       <- verify(obs[ind], pred[ind], show = FALSE, thres = thres, bins = bins)$obar.i    
+  YY       <- verify(obs[ind], pred[ind], show = FALSE, thresholds = thres, bins = bins)$obar.i    
   OBAR[,i] <- YY
   
 } ## close 1:nboot

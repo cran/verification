@@ -225,9 +225,6 @@ distinct histograms (Figure \ref{disc1}) .
 \begin {center}
 \begin{figure}[H]
 <<fig =TRUE , echo = TRUE >>=
-# source("~/cvs/libs/R/verification/data/disc.dat.R") ## temp fix
-# source("~/cvs/libs/R/verification/R/discrimination.plot.R") ## temp fix
-# data(disc.dat)
 discrimination.plot(disc.dat$group.id, disc.dat$frcst, main = 
 "Sample Plot")
 @
@@ -258,8 +255,7 @@ c("Model A") )
 
 
 \nocite{*}
-\bibliographystyle{ametsoc_fussy_tmp}
-%\bibliographystyle{plain}
+\bibliographystyle{plain}
 \bibliography{guide}
 
 \end{document}

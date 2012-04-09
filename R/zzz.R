@@ -26,6 +26,6 @@ d$p48_heavy  <- d$p48_cat2
 
 d$p24_rain <- d$p24_light + d$p24_heavy 
 d$p48_rain <- d$p48_light + d$p48_heavy 
-assign("d",d, env = .GlobalEnv)
+assign("d",d, envir = .GlobalEnv)
 return(invisible(d) )
 }
