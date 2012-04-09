@@ -1,5 +1,5 @@
 Package: verification
-Version: 1.37
+Version: 1.38
 Date: 2012-4-09
 Title: Weather Forecast Verification Utilities.
 Author: NCAR - Research Applications Laboratory
@@ -10,7 +10,7 @@ Description: This package contains utilities for verification of
         expressed as parametric distributions.
 License: GPL (>= 2)
 LazyData: yes
-Packaged: 2014-04-02 13:28:09 UTC; ericg
+Packaged: 2014-04-24 15:01:50 UTC; ericg
 Repository: CRAN
-Date/Publication: 2014-04-02 16:21:52
+Date/Publication: 2014-04-24 18:25:07
 NeedsCompilation: no

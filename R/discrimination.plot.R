@@ -8,7 +8,7 @@
 # *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
 "discrimination.plot" <- function(group.id, value, breaks = 11, main =
 "Discrimination Plot", xlim = NULL, ylim = NULL, legend = FALSE,
-leg.txt = paste("Model", unique(group.id) ),  marginal =
+leg.txt = paste("Model", sort(unique(group.id)) ),  marginal =
 TRUE, cols = seq(2, length(unique(group.id)) + 1 ), xlab = "Forecast", ... ){
 dat <- data.frame(group.id = group.id, value = value)
   groups <- sort(unique(group.id))  

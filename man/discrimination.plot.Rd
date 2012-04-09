@@ -17,7 +17,7 @@
      marginal plots.  These may be surpressed. }
        \usage{discrimination.plot(group.id, value, breaks = 11, main =
 "Discrimination Plot", xlim = NULL, ylim = NULL,  legend =
-FALSE, leg.txt = paste("Model", unique(group.id) ),   marginal = TRUE, cols =
+FALSE, leg.txt = paste("Model", sort(unique(group.id)) ),   marginal = TRUE, cols =
 seq(2, length(unique(group.id)) + 1), xlab = "Forecast",  \dots )}
 
 \arguments{

@@ -1,5 +1,5 @@
 393a5ca445f6965873eca0259a17f833 *COPYING
-f4f3334d3b895a978a6fa9a74b70e702 *DESCRIPTION
+9145b25bf7f0d9d0d2d47c8fb8c953ef *DESCRIPTION
 c76a2beba25a0c2c3692aa28e9e8298f *NAMESPACE
 8740425de83e083f818e4eda33f35591 *R/attribute.R
 37f146be3241c4c40c3a5258411bd8d1 *R/attribute.default.R
@@ -9,7 +9,7 @@ c76a2beba25a0c2c3692aa28e9e8298f *NAMESPACE
 b817906d3a565ab1ef3ea426cc0eee76 *R/crps.r
 6258f10898433e0ede005e8cc96036f1 *R/crpsDecomposition.r
 7bc66a0e0c874ee52b9f37df2780e80d *R/crpsFromAlphaBeta.R
-2761443fabc6c9714204c3675faa27c6 *R/discrimination.plot.R
+c9ae39bc2cb17835a7004f4eaf4412b6 *R/discrimination.plot.R
 590c49a3bb9604aa2fd2bc5e8f82be7d *R/fss.R
 084604f51a27739e8ad9980f92a39de2 *R/leps.r
 8457fb0f444aa26809968b010d2cfc51 *R/linesADD.R
@@ -57,7 +57,7 @@ a083ffe06afcdc5c773746f5f115a2bd *man/conditional.quantile.Rd
 eddd80e3d9482bb03170756d9159853c *man/crps.Rd
 00e4c7a5402978dff2f4819114952884 *man/crpsDecompostion.Rd
 a2353eacafb5c3f06ba43bc6d6a5917f *man/disc.dat.Rd
-e1e0b58022d46fc2c3b07b23eba6bbe0 *man/discrimination.plot.Rd
+903c8c208d15918c8cbaccf5208b6bc5 *man/discrimination.plot.Rd
 fac4e86a46b4d824c0b1aecba35d9a2b *man/fss.Rd
 660c8a75243097357528e4b63cff98a7 *man/leps.Rd
 b3596d342c3f07b5c17d538fe57198b0 *man/lines.verify.Rd
