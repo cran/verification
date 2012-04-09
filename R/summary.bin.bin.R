@@ -24,9 +24,13 @@ summary.bin.bin <- function(object, ...){
   cat(paste("Log Odds Ratio = ", formatC(object$log.theta, digits = 4), "\n"))
     cat(paste("Odds Ratio Skill Score = ", formatC(object$orss, digits = 4), "\n"))
     
-  cat(paste("Extreme Dependency Score = ", formatC(object$eds, digits = 4), "\n"))
-  cat(paste("Symmetric Extreme Dependency Score = ", formatC(object$seds, digits = 4), "\n"))
-    
-  
+  cat(paste("Extreme Dependency Score (EDS) = ", formatC(object$eds, digits = 4), "\n"))
+  cat(paste("Std. Err. for EDS = ", formatC(object$eds.se, digits=4), "\n"))
+  cat(paste("Symmetric Extreme Dependency Score (SEDS) = ", formatC(object$seds, digits = 4), "\n"))
+  cat(paste("Std. Err. for SEDS = ", formatC(object$seds.se, digits=4), "\n"))
+  cat(paste("Extremal Dependence Index (EDI) = ", formatC(object$EDI, digits=4), "\n"))
+  cat(paste("Std. Err. for EDI = ", formatC(object$EDI.se, digits=4), "\n"))
+  cat(paste("Symmetric Extremal Dependence Index (SEDI) = ", formatC(object$SEDI, digits=4), "\n"))
+  cat(paste("Std. Err. for SEDI = ", formatC(object$SEDI.se, digits=4), "\n"))
   }
 

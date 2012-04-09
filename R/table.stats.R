@@ -61,13 +61,19 @@ log.theta <- log(a) + log(d) - log(b) - log(c)
 n.h <- 1/( 1/a + 1/b + 1/c + 1/d)
 yules.q <- (theta - 1)/(theta + 1)  
 eds <- 2*log((a+c)/n)/log(a/n) - 1
+eds.se <- 2*abs(log(p))/(H*(log(p) + log(H))^2)*sqrt(H*(1-H)/(p*n))
 seds <- (log((a+b)/n)+log((a+c)/n)) /log(a/n) - 1
 seds.se <- sqrt(H*(1-H)/(n*p)) *(-log(BIAS*p^2)/(H*log(H*p)^2))
+EDI <- (log(F) - log(H))/(log(F) + log(H))
+EDI.se <- 2*abs(log(F) + H/(1-H)*log(H))/(H*(log(F) + log(H))^2)*sqrt(H*(1-H)/(p*n))
+SEDI <- (log(F) - log(H) - log(1-F) + log(1-H))/(log(F) + log(H) + log(1-F) + log(1-H))
+SEDI.se <- 2*abs(((1-H)*(1-F)+H*F)/((1-H)*1-F)*log(F*(1-H)) + 2*H/(1-H)*log(H*(1-F)))/(H*(log(F*(1-H)) + log(H*(1-F)))^2)*sqrt(H*(1-H)/(p*n))
 
 return(list(tab = tab.out, TS = TS,
             POD = POD, M = M,  F = F,  FAR = FAR , HSS = HSS,
             PSS = PSS, KSS = KSS,
-            PC = PC, BIAS = BIAS, ETS = ETS, theta = theta, log.theta = log.theta, n.h = n.h, orss = yules.q, eds = eds, seds = seds, seds.se = seds.se))
+            PC = PC, BIAS = BIAS, ETS = ETS, theta = theta, log.theta = log.theta, n.h = n.h, orss = yules.q, eds = eds, eds.se=eds.se, seds = seds, seds.se = seds.se,
+	    EDI = EDI, EDI.se = EDI.se, SEDI = SEDI, SEDI.se = SEDI.se))
 }
 
 

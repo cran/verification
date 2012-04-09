@@ -52,6 +52,7 @@ seq(0,1,0.1), show = TRUE, bins = TRUE, \dots )
        and assigned the midpoint value.}
      \item{\dots}{Additional options.}
        }
+	\details{ See Wilks (2006) and the WMO Joint WWRP/WGNE Working Group web site on verification for more details about these verification statistics.  See Stephenson et al. (2008) and Ferro and Stephenson (2011) for more on the extreme dependence scores and indices.  For information on confidence intervals for these scores, see Gilleland (2010).}
        \note{ 
        	There are other packages in R and Bioconductor which are usefull for verification tasks.  This includes the \bold{ROCR}, \bold{ROC}, package and the "limma" package (in the Bioconductor repository.)  Written by people in different fields, each provides tools for verification from  different perspectives.
        	
@@ -90,19 +91,27 @@ seq(0,1,0.1), show = TRUE, bins = TRUE, \dots )
      \item{n.h}{Degrees of freedom for log.theta (BB)}
      \item{orss}{Odds ratio skill score, aka Yules's Q (BB)}
      \item{eds}{Extreme Dependency Score (BB)}
+     \item{eds.se}{Standard Error for Extreme Dependence Score (BB)}
      \item{seds}{Symmetric Extreme Dependency Score (BB)}
      \item{seds.se}{Standard Error for Symmetric Extreme Dependency Score (BB)}
-     
+     \item{EDI}{Extremal Dependence Index (BB)}
+     \item{EDI.se}{Standard Error for Extremal Dependence Index (BB)}
+     \item{SEDI}{Symmetric Extremal Dependence Index (BB)}
+     \item{SEDI.se}{Standard Error for Symmetric Extremal Dependence Index (BB)}
     }
       \seealso{\code{table.stats} }
       \references{
-    
-  Wilks, D. S. (1995) \emph{Statistical Methods in the Atmospheric Sciences }
-  Chapter 7, San Diego: Academic Press.
+  Ferro, C. A. T. and D. B. Stephenson, 2011.  Extremal dependence indices: Improved verification measures for deterministic forecasts of rare binary events.  \emph{Wea. Forecasting}, \bold{26}, 699 - 713.
+
+  Gilleland, E., 2010. Confidence intervals for forecast verification. NCAR Technical Note NCAR/TN-479+STR, 71pp.  Available at: http://nldr.library.ucar.edu/collections/technotes/asset-000-000-000-846.pdf
+ 
+  Stephenson, D. B., B. Casati, C. A. T. Ferro, and C. A. Wilson, 2008.  The extreme dependency score: A non-vanishing measure for forecasts of rare events.  \emph{Meteor. Appl.}, \bold{15}, 41 - 50.
+ 
+  Wilks, D. S., 2006. \emph{Statistical Methods in the Atmospheric Sciences }, San Diego: Academic Press., 627 pp. (2nd Editiion).
 
   WMO Joint WWRP/WGNE Working Group on Verification Website
   
-  \url{http://www.bom.gov.au/bmrc/wefor/staff/eee/verif/verif_web_page.html}
+  \url{http://www.cawcr.gov.au/projects/verification/}
 }
      \examples{
 # binary/binary example

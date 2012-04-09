@@ -24,7 +24,7 @@ either missing forecasts or observations have been removed.
 
 This data has been kindly provided by Dr. Pertti Nurmi of the Finnish
 Meteorological Institute. 
-\url{http://www.bom.gov.au/bmrc/wefor/staff/eee/verif/POP3/POP3.html}
+\url{http://www.cawcr.gov.au/projects/verification/POP3/POP3.html}
 }
 \keyword{datasets}
 % docclass is data

@@ -56,7 +56,7 @@ rps( obs = c(1), pred = matrix(c(0.2, 0.5, 0.3), nrow = 1))
 \references{
 
 WWRP/WGNE Joint Working Group on Verification - Forecast Verification - Issues, Methods and FAQ
-\url{http://www.bom.gov.au/bmrc/wefor/staff/eee/verif/verif_web_page.html#RPS}
+\url{http://www.cawcr.gov.au/projects/verification/verif_web_page.html#RPS}
 
  Wilks, D. S. (2005) \emph{Statistical Methods in the Atmospheric Sciences }
  Chapter 7, San Diego: Academic Press.
