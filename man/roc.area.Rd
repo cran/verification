@@ -37,10 +37,10 @@ curve is 0.5 i.e. the forecast has no skill.
    to calculate areas.}
  \seealso{\code{\link{roc.plot}}, \code{\link{verify}},
    \code{\link{wilcox.test} } }
- \references{Mason, S.J. and N.E. Graham. (2002) ``Areas beneath the
+ \references{Mason, S. J. and Graham, N. E. (2002) Areas beneath the
    relative operating characteristics (ROC) and relative operating
-   levels (ROL) curves: Statistical significance and interpretation, ''
-   \emph{Q. J. R. Meteorol. Soc.} \bold{30} (1982) 291-303.}
+   levels (ROL) curves: Statistical significance and interpretation,
+   \emph{Q. J. R. Meteorol. Soc.} \bold{128}, 2145--2166.}
  
 	   \examples{# Data used from Mason and Graham (2002).
 a<- c(1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990,

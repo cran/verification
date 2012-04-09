@@ -11,8 +11,15 @@
        \title{Forecast Value Function}
        \description{Calculates the economic value of a forecast based on
        a cost/loss ratio.}
-     \usage{value(obs, pred= NULL, baseline = NULL, cl = seq(0.05, 0.95, 0.05), plot = TRUE,
-	all = FALSE, thresholds = seq(0.05, 0.95, 0.05), ylim = c(-0.05, 1), xlim = c(0,1), ...)}  
+
+\usage{
+
+value(obs, pred= NULL, baseline = NULL, cl = seq(0.05, 0.95, 0.05),
+    plot = TRUE, all = FALSE, thresholds = seq(0.05, 0.95, 0.05),
+    ylim = c(-0.05, 1), xlim = c(0,1), ...)
+
+}
+ 
 \arguments{
          \item{obs}{A vector of binary observations or a contingency
        table summary of values in the form c(n11, n01, n10, n00)
@@ -38,7 +45,7 @@
      \item{V}{Vector of values for each cl value}
      \item{F}{Conditional false alarm rate.}
      \item{H}{Conditional hit rate}
-     \item{cl}{Vector of cost lost ratios.}
+     \item{cl}{Vector of cost loss ratios.}
      \item{s}{Base rate}
          }
 
@@ -64,7 +71,7 @@ value(obs, pred, main = "Sample Plot",
              thresholds = seq(0.02, 0.98, 0.02) ) 
 ##########
 data(pop)
-pop.convert()
+d <- pop.convert()
 
 value(obs = d$obs_rain, pred = d$p24_rain, all = TRUE)
 

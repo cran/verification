@@ -21,13 +21,15 @@
        1:1 line.  The
        relative frequency for each forecast value is displayed in parenthesis. }
       \usage{
-\method{attribute}{default}(x, obar.i,  prob.y = NULL, obar = NULL, class =
-"none", main = NULL, CI = FALSE, n.boot = 100, alpha = 0.05, tck = 0.01, freq = TRUE,
-pred = NULL, obs = NULL, thres = thres, bins = FALSE, \dots)
+\method{attribute}{default}(x, obar.i,  prob.y = NULL, obar = NULL,
+    class = "none", main = NULL, CI = FALSE, n.boot = 100, alpha = 0.05,
+    tck = 0.01, freq = TRUE, pred = NULL, obs = NULL, thres = thres,
+    bins = FALSE, \dots)
+
 \method{attribute}{prob.bin}(x, \dots)
        }
 \arguments{
-     \item{x}{A vector of forecast probabilities or a ``prob.bin''
+     \item{x}{A vector of forecast probabilities or a \dQuote{prob.bin}
        class object produced by the \code{verify} function. }
      \item{obar.i}{A vector of observed relative frequency of forecast bins.} 
          \item{prob.y}{Relative frequency of forecasts of forecast bins. }
@@ -84,24 +86,28 @@ TRUE)
 
 #### add lines to plot
 data(pop)
-pop.convert() ## internal function used to make binary observations for the pop figure.
-### note the use of bins = FALSE
- mod24 <- verify(d$obs_rain, d$p24_rain, bins = FALSE)
+d <- pop.convert()
+## internal function used to
+## make binary observations for
+## the pop figure.
 
- mod48 <- verify(d$obs_rain, d$p48_rain, bins = FALSE)
+### note the use of bins = FALSE
+mod24 <- verify(d$obs_rain, d$p24_rain,
+    bins = FALSE)
+
+mod48 <- verify(d$obs_rain, d$p48_rain,
+    bins = FALSE)
 plot(mod24, freq = FALSE)
 
-lines.attrib(mod48, col = "green", lwd = 2, type = "b")
+lines.attrib(mod48, col = "green",
+    lwd = 2, type = "b")
 
 }
 
 \references{
-  Hsu, W. R., and A.H. Murphy, 1986: The attributes diagram: A
-  geometrical framework for assessing the quality of probability
-  forecasts.  \emph{Int. J. Forecasting} \bold{2}, 285-293.
+  Hsu, W. R., and A. H. Murphy, 1986: The attributes diagram: A geometrical framework for assessing the quality of probability forecasts.  \emph{Int. J. Forecasting} \bold{2}, 285--293.
   
-  Wilks, D. S. (2005) \emph{Statistical Methods in the Atmospheric Sciences }
-  Chapter 7, San Diego: Academic Press.
+  Wilks, D. S. (2005) \emph{Statistical Methods in the Atmospheric Sciences } Chapter 7, San Diego: Academic Press.
 }
 \author{Matt Pocernich}
 

@@ -4,7 +4,8 @@ function (x, pred, thresholds = NULL, binormal = FALSE, legend = FALSE,
     alpha = 0.05, tck = 0.01, plot.thres = seq(0.1, 0.9, 0.1), show.thres = TRUE, 
     main = "ROC Curve", xlab = "False Alarm Rate", ylab = "Hit Rate", 
     extra = FALSE, ...) 
-{     
+{    
+    
 	pred <- as.matrix(pred)
 	
 	f <- function(x){prod(is.finite(x))}
@@ -17,7 +18,7 @@ function (x, pred, thresholds = NULL, binormal = FALSE, legend = FALSE,
     if(min(diff(thresholds))<0){stop("Thresholds must be listed in ascending order")}
     }
     #####
-    if ((plot == "binorm" | plot == "both") & binormal == FALSE) {
+    if (!is.null(plot) && (plot == "binorm" | plot == "both") & binormal == FALSE) {
         stop("binormal must be TRUE in order to create a binormal plot")
     }
     
@@ -130,7 +131,7 @@ function (x, pred, thresholds = NULL, binormal = FALSE, legend = FALSE,
         }
     }
 
-    if (plot == "emp" | plot == "both") {
+    if(!is.null(plot) && plot == "emp" | plot == "both") {
         for (i in 1:n.forc) {
         	
             points(DAT[, 3, i], DAT[, 2, i], col = i, lty = i, 
@@ -154,14 +155,14 @@ function (x, pred, thresholds = NULL, binormal = FALSE, legend = FALSE,
             }
         }
     }
-    if (plot == "binorm" | plot == "both") {
+    if (!is.null(plot) && plot == "binorm" || plot == "both") {
         for (i in 1:n.forc) {
             dat <- binormal.pltpts[[i]]
             points(dat$x, dat$y, col = 2, lty = i, type = "l", 
                 lwd = 2)
         }
     }
-    if (extra) {
+    if (!is.null(plot) && extra) {
         if (plot == "both") {
             text(0.6, 0.1, "Black lines are the empirical ROC")
             text(0.6, 0.07, "Red lines and symbols are the bi-normal ROC")
@@ -174,7 +175,7 @@ function (x, pred, thresholds = NULL, binormal = FALSE, legend = FALSE,
             text(0.6, 0.1, "Red lines  are the bi-normal ROC")
         }
     }
-    if (CI) {
+    if (!is.null(plot) && CI) {
         for (i in 1:nrow(box.corners)) {
             lines(box.corners[i, c(1, 3)], rep(orig$H[i + 1], 
                 2), lwd = 1)
@@ -190,7 +191,7 @@ function (x, pred, thresholds = NULL, binormal = FALSE, legend = FALSE,
                 rep(box.corners[i, 4], 2), lwd = 1)
         }
     }
-    if (legend) {
+    if (!is.null(plot) && legend) {
         if (is.null(leg.text)) {
             leg.text <- paste("Model ", LETTERS[seq(1, n.forc)])
         }

@@ -108,7 +108,8 @@ axis(4,at=ycoord,labels=barlabels,las=TRUE)
     axis(2,at = seq(1,9),labels=5*2^seq(0,8,1))
     rect(xleft=-6.5, ybottom=0.5, xright=6.5, ytop=9.5)
 
-colorbar(xlimbar=c(7.5,8.5),ylimbar=c(0.5,9.5),colors=c(4,4,4,4,5,5,5,5,7,7),barlabels=seq(-4,1,0.5))
+colorbar(xlimbar = c(7.5,8.5), ylimbar = c(0.5,9.5),
+    colors = c(4,4,4,4,5,5,5,5,7,7), barlabels = seq(-4,1,0.5))
 }
 
 

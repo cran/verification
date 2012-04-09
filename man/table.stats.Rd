@@ -7,16 +7,20 @@
 % ** 2004/1/7 11:31:8 
 % *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
 \name{table.stats}
-       \alias{table.stats}
-       \title{Verification statistics for a 2 by 2  Contingency Table }
-       \description{Provides a variety of statistics for a data
+\alias{table.stats}
+
+\title{Verification statistics for a 2 by 2  Contingency Table }
+
+\description{Provides a variety of statistics for a data
      summarized in a 2 by 2 contingency table. }
-       \usage{
-       	table.stats(obs, pred,silent = FALSE)
-       	}
+
+\usage{
+       	table.stats(obs, pred, fudge = 0.01, silent = FALSE)
+}
 \arguments{
 	    \item{obs}{ Either a vector of contingency table counts, a vector of binary observations, or a 2 by 2 matrix in the form of a contingency table. (See note below.)}
     \item{pred}{Either null or a vector of binary forecasts. }
+    \item{fudge}{A numeric fudge factor to be added to each cell of the contingency table in order to avoid division by zero.}
     \item{silent}{Should warning statements be surpressed.}
 }
 \value{

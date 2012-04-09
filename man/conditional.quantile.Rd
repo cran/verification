@@ -14,12 +14,12 @@
        \usage{
     conditional.quantile(pred, obs, bins = NULL, thrs = c(10, 20), main, ... ) }
        \arguments{
-\item{pred}{Forecasted value. \emph{([n,1] vector, n = \# of forecasts)}}
-\item{obs}{Observed value.\emph{([n,1] vector, n = \# of observations)}}
+\item{pred}{Forecasted value. \emph{([n,1] vector, n = No. of forecasts)}}
+\item{obs}{Observed value.\emph{([n,1] vector, n = No. of observations)}}
 \item{bins}{Bins for forecast and observed values.  A minimum number of
 values are required to calculate meaningful statistics.  So for
 variables that are continuous, such as temperature, it is frequently
-convenient to bin these values. \emph{([m,1] vector, m = \# of bins)}}
+convenient to bin these values. \emph{([m,1] vector, m = No. of bins)}}
 \item{thrs}{The minimum number of values in a bin required to calculate
 the 25th and 75th quantiles and the 10th and 90th percentiles
 respectively.  The median values will always be displayed. \emph{( [2,1]
@@ -28,7 +28,7 @@ respectively.  The median values will always be displayed. \emph{( [2,1]
 \item{\dots}{ Plotting options. }
 }
         \value{This function produces a conditional.quantile plot.
-The $y$ axis represents the observed values, while the $x$ axis
+The \code{y} axis represents the observed values, while the \code{x} axis
 represents the forecasted values.  The histogram along the bottom axis
 illustrates the frequency of each forecast.}
 \note{In the example below, the median line extends beyond the range of
@@ -56,9 +56,7 @@ A<- verify(obs, pred, baseline = baseline,  frcst.type = "cont", obs.type = "con
 }
 
 \references{
-  Murphy, A. H., B.G. Brown and Y. Chen. (1989) ``Diagnostic
-  Verification of Temperature Forecasts,'' \emph{Weather and
-    Forecasting}; December, 1989.
+  Murphy, A. H., B. G. Brown and Y. Chen. (1989) Diagnostic Verification of Temperature Forecasts. \emph{Weather and Forecasting}, \bold{4}, 485--501.
 }
 \author{Matt Pocernich}
 

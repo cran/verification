@@ -146,7 +146,7 @@ alpha = 0.1)
 
 ###   example from forecast verification website. 
 data(pop)
-pop.convert() ## internal function used to make binary observations for the pop figure.
+d <- pop.convert() ## internal function used to make binary observations for the pop figure.
 ### note the use of bins = FALSE !!
  mod24 <- verify(d$obs_norain, d$p24_norain, bins = FALSE)
 

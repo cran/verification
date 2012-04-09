@@ -1,6 +1,6 @@
 pop.convert<- function(){
 # data(pop)
-### script written by Beth ebert to convert data into binary obs.
+### script written by Beth Ebert to convert data into binary obs.
 ### to convert the pop text into binary observations ###
 ### Note: cat0 = rain <= 0.2 mm 
 ###       cat1 = 0.2 < rain <= 4.4 mm
@@ -26,6 +26,6 @@ d$p48_heavy  <- d$p48_cat2
 
 d$p24_rain <- d$p24_light + d$p24_heavy 
 d$p48_rain <- d$p48_light + d$p48_heavy 
-assign("d",d, envir = .GlobalEnv)
+# assign("d",d, envir = .GlobalEnv)
 return(invisible(d) )
 }

@@ -7,16 +7,22 @@
 % ** 2004/1/7 11:31:8 
 % *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
 \name{verify}
-       \alias{verify}
-       \title{Verification function}
-       \description{Based on the type of inputs, this function
+\alias{verify}
+
+\title{Verification function}
+
+\description{Based on the type of inputs, this function
      calculates a range of verification statistics and skill scores.
        Additionally, it creates a verify  class object that can be
        used in further analysis or with other methods such as plot and summary.}
-       \usage{
-    verify(obs, pred, baseline = NULL, % sample.baseline = FALSE,
-           frcst.type = "prob", obs.type = "binary",  thresholds =
-seq(0,1,0.1), show = TRUE, bins = TRUE, \dots )
+
+\usage{
+
+verify(obs, pred, p = NULL, baseline = NULL, % sample.baseline = FALSE,
+    frcst.type = "prob", obs.type = "binary",
+    thresholds = seq(0,1,0.1), show = TRUE, bins = TRUE,
+    fudge = 0.01, ...)
+
        }
        \arguments{
      \item{obs}{The values with which the verifications are
@@ -30,6 +36,7 @@ seq(0,1,0.1), show = TRUE, bins = TRUE, \dots )
        form of the a point prediction or the probability of a
        forecast.  Let pred = NULL if obs is a contingency
        table. }
+     \item{p}{the probability level of the quantile forecast, any value between 0 and 1.}
      \item{baseline}{In meteorology, climatology is the baseline
        that represents the
        no-skill forecast.  In other fields this field would
@@ -38,8 +45,8 @@ seq(0,1,0.1), show = TRUE, bins = TRUE, \dots )
        sample climatology.  If this is not NULL, the mean of these values is used as the baseline forecast.  This interpretation is not appropriate for all applications.  For example, if a baseline forecast is different for each forecast this will not work appropriately.  }
 %    \item{sample.baseline}{Logical indicating whether the data
 %      provided is a representative sample of the baseline climatology or not.}
-     \item{frcst.type}{Forecast type.  Either "prob", "binary",
-       "norm.dist", "cat" or "cont".  Defaults to "prob".
+     \item{frcst.type}{Forecast type.  One of "prob", "binary",
+       "norm.dist", "cat" or "cont", or "quantile".  Defaults to "prob".
        "norm.dist" is used when the forecast is in the form of a
        normal distribution.  See crps for more details. }
      \item{obs.type}{Observation type.  Either  "binary", "cat" or
@@ -50,6 +57,7 @@ seq(0,1,0.1), show = TRUE, bins = TRUE, \dots )
      \item{bins}{Binary; if TRUE (default), the probabilistic forecasts
        are placed in bins defined by the sequence defined in threshold
        and assigned the midpoint value.}
+    \item{fudge}{A numeric fudge factor to be added to each cell of the contingency table in order to avoid division by zero.}
      \item{\dots}{Additional options.}
        }
 	\details{ See Wilks (2006) and the WMO Joint WWRP/WGNE Working Group web site on verification for more details about these verification statistics.  See Stephenson et al. (2008) and Ferro and Stephenson (2011) for more on the extreme dependence scores and indices.  For information on confidence intervals for these scores, see Gilleland (2010).}
