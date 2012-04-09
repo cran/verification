@@ -15,8 +15,8 @@
 These datasets are used to illustrate several functions including
 \code{\link{value}} and \code{\link{roc.plot}}.
 
-This forecasts are summaries of 24-hour  probability of precipitation
-forecasts  were made by the Finnish Meteorological Institute (FMI) during 2003, for daily
+These forecasts are summaries of 24-hour  probability of precipitation
+forecasts that were made by the Finnish Meteorological Institute (FMI) during 2003, for daily
 precipitation in the city of Tampere in south central Finland.  Light
 precipitation is considered rainfall greater than .2 mm.  Rainfall
 accumulation is considered values greater than 4.4 mm.  Rows of data

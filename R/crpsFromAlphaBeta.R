@@ -44,7 +44,12 @@ crpsFromAlphaBeta<-function(alpha,beta,heaviside0,heavisideN)
     {
       meanbeta<-mean(beta[,index])
       meanalpha<-mean(alpha[,index])
-      meanoi<-meanbeta/(meanalpha+meanbeta)
+      if ((meanalpha + meanbeta) != 0) {
+
+         meanoi <- meanbeta/(meanalpha + meanbeta)
+
+       }
+      # meanoi<-meanbeta/(meanalpha+meanbeta)
       meangi<-meanalpha+meanbeta
     }
 

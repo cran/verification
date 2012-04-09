@@ -7,9 +7,9 @@ exportPattern(".")
 # Import all packages listed as Imports or Depends
 import(
   methods,
-  waveslim,
   fields,
   boot,
   CircStats,
-  MASS
+  MASS,
+  dtw
 )

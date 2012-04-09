@@ -60,14 +60,18 @@ verify(obs, pred, p = NULL, baseline = NULL, % sample.baseline = FALSE,
     \item{fudge}{A numeric fudge factor to be added to each cell of the contingency table in order to avoid division by zero.}
      \item{\dots}{Additional options.}
        }
-	\details{ See Wilks (2006) and the WMO Joint WWRP/WGNE Working Group web site on verification for more details about these verification statistics.  See Stephenson et al. (2008) and Ferro and Stephenson (2011) for more on the extreme dependence scores and indices.  For information on confidence intervals for these scores, see Gilleland (2010).}
+	\details{ See Wilks (2006) and the WMO Joint WWRP/WGNE Working Group web site on verification for more details about these verification statistics.  See Stephenson et al. (2008) and Ferro and Stephenson (2011) for more on the extreme dependence scores and indices.  For information on confidence intervals for these scores, see Gilleland (2010).
+}
        \note{ 
-       	There are other packages in R and Bioconductor which are usefull for verification tasks.  This includes the \bold{ROCR}, \bold{ROC}, package and the "limma" package (in the Bioconductor repository.)  Written by people in different fields, each provides tools for verification from  different perspectives.
+       	There are other packages in R and Bioconductor which are usefull for verification tasks.  This includes the \pkg{ROCR}, \pkg{ROC}, package and the \pkg{limma} package (in the Bioconductor repository.)  Written by people in different fields, each provides tools for verification from  different perspectives.
        	
        	For the categorical forecast and verification, the Gerrity
      score only makes sense for forecast that have order, or are
      basically ordinal. It is assumed that the forecasts are listed
-     in order.  For example, if the rows of a contigency table were summarized as "medium, low, high", the Gerrity score will be incorrectly summarized.}  
+     in order.  For example, if the rows of a contigency table were summarized as "medium, low, high", the Gerrity score will be incorrectly summarized.
+
+    As of version 1.37, the intensity scale (IS) verification funcitons have been removed from this package.  Please use \pkg{SpatialVx} for this functionality.
+}  
        \value{
      An object of the verify class.  Depending on the type of
       data used, the following information may be returned.  The
