@@ -84,7 +84,7 @@ table.stats<- function(obs, pred = NULL, fudge = 0.01, silent = FALSE) {
     else OR <- a * d / (b * c)
 
     if(a * b + b * c == 0) ORSS <- (a*d - b*c)/ fudge
-    else ORSS <- (a*d - b*c)/ (a*b + b*c ) ## odds ratio skill score
+    else ORSS <- (a*d - b*c)/ (a*d + b*c ) ## odds ratio skill score
 
     HITSrandom <- 1.0* (a+c)*(a+b)/n
     p <- (a+c)/n
@@ -146,7 +146,7 @@ table.stats<- function(obs, pred = NULL, fudge = 0.01, silent = FALSE) {
 
     EDI.se <- 2*abs(log(F) + H/(1-H)*log(H))/(H*(log(F) + log(H))^2)*sqrt(H*(1-H)/(p*n))
     SEDI <- (log(F) - log(H) - log(1-F) + log(1-H))/(log(F) + log(H) + log(1-F) + log(1-H))
-    SEDI.se <- 2*abs(((1-H)*(1-F)+H*F)/((1-H)*1-F)*log(F*(1-H)) + 2*H/(1-H)*log(H*(1-F)))/(H*(log(F*(1-H)) + log(H*(1-F)))^2)*sqrt(H*(1-H)/(p*n))
+    SEDI.se <- 2*abs(((1-H)*(1-F)+H*F)/((1-H)*(1-F))*log(F*(1-H)) + 2*H/(1-H)*log(H*(1-F)))/(H*(log(F*(1-H)) + log(H*(1-F)))^2)*sqrt(H*(1-H)/(p*n))
     
     return(list(tab = tab.out, TS = TS, TS.se = TS.se,
                 POD = POD, POD.se = POD.se, M = M,  F = F,  F.se = F.se, FAR = FAR , FAR.se = FAR.se, HSS = HSS, HSS.se = HSS.se,

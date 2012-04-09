@@ -1,5 +1,5 @@
 393a5ca445f6965873eca0259a17f833 *COPYING
-9145b25bf7f0d9d0d2d47c8fb8c953ef *DESCRIPTION
+9b7b02a7e44529b997ed9f1805b1416a *DESCRIPTION
 c76a2beba25a0c2c3692aa28e9e8298f *NAMESPACE
 8740425de83e083f818e4eda33f35591 *R/attribute.R
 37f146be3241c4c40c3a5258411bd8d1 *R/attribute.default.R
@@ -40,7 +40,7 @@ ef6cf765b8cad1e41ff03a820a7c2280 *R/summary.cat.cat.R
 65984f57f592b1fe853ebec70fa6d326 *R/summary.cont.cont.R
 1021ff0f0c5d455797aaa5770b8eace6 *R/summary.norm.dist.cont.R
 fbee05c75b990b9f0c90a3b7faff78a8 *R/summary.prob.bin.R
-11fdd29bf5623c7e4c1f9ca93c74c90d *R/table.stats.R
+ee563e697fe8796cbf9d9396cacaf81a *R/table.stats.R
 1334a0b9797f1ede875f2eba4d26b8f3 *R/table.stats.boot.R
 b18c7aa68e62d89ea2c00abc55bbf411 *R/value.r
 95f4f62d75310d13335cfc1882e21d2e *R/verify.R
