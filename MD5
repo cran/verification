@@ -1,6 +1,6 @@
 393a5ca445f6965873eca0259a17f833 *COPYING
 ddfe2db9e7fc66d20791f2e0de0b6a91 *ChangeLog
-50b01e45a9aca4fad69b720b092e73ae *DESCRIPTION
+962316ea8c06b7ec5095f9f144e07890 *DESCRIPTION
 15c824b25c05a324bf7677ec2c6ac90c *NAMESPACE
 ab291bfacb62d5b81e67002f8f61271c *R/ES.VM.comp1.r
 5733999309b168901ac2f02e90add5f6 *R/ES.VM.comp2.r
@@ -38,12 +38,12 @@ c5b300f30ee009dad5312f84545c2692 *R/roc.int.R
 8fcbab5d1a63c39dd3d6ca13cac200a5 *R/roc.plot.default.r
 66f8ac0ea2ef4829818e561e2a3a3574 *R/roc.plot.prob.bin.R
 2a35353f4be4b8adec0a9deddaa5931d *R/rps.r
-3ca1ddc8fbe58e001dd09579e5d3495b *R/summary.bin.bin.R
+30f6ed0b4264549a866e60669d3c7151 *R/summary.bin.bin.R
 ef6cf765b8cad1e41ff03a820a7c2280 *R/summary.cat.cat.R
 65984f57f592b1fe853ebec70fa6d326 *R/summary.cont.cont.R
 1021ff0f0c5d455797aaa5770b8eace6 *R/summary.norm.dist.cont.R
 fbee05c75b990b9f0c90a3b7faff78a8 *R/summary.prob.bin.R
-39f9ab5422243db2cadf331ee0fb2393 *R/table.stats.R
+0f17b4ea6dac23ec7a0961a94a92599a *R/table.stats.R
 7fde98a92494e1a6982c1d555a10633c *R/table.stats.boot.R
 5f5c27764ae211684f947d6edb1c39a4 *R/value.r
 5d890fce1d067a9b5219c228cb22c238 *R/verify.r
@@ -58,7 +58,7 @@ e1e3bc730f826b147000e90af637f1fb *data/precip.ensemble.rda
 3edaaf56d533c262613bda159475a9ca *data/prob.frcs.dat.rda
 095fe4ec6b525555ffc448ceb7665501 *inst/doc/guide.bib
 6d4a22ad32c0b5cb22abc138a3abba1e *inst/doc/verification.Rnw
-5fd4a2383308a1c4a7a1a19de4e86ba0 *inst/doc/verification.pdf
+0e0e1deaafea489e6f887b36162837cd *inst/doc/verification.pdf
 7ba4f8191540f3e9a3c3b45192f58520 *man/IS.Rd
 2276864cd0d1d27ec6fdb074ed4e58c5 *man/analysis.dat.Rd
 616a1a46c50ad5cd2f687c256189024b *man/attribute.Rd
@@ -89,7 +89,7 @@ f63a38b9b79fe4e786efe771a7ee5749 *man/precip.ensemble.Rd
 d4adb4c8c518b9169ab8ab4e790331f5 *man/roc.area.Rd
 8ef992f0ab15345599077228ff46362b *man/roc.plot.Rd
 2114ab5764ab6e11f687fea2592aebda *man/rps.Rd
-08c42d43518102576edeca99593521ff *man/table.stats.Rd
+47b49f9d5e10e1ed05b4595c4ab1f773 *man/table.stats.Rd
 f4b2b990489cef4ff12505e83b1bc075 *man/table.stats.boot.Rd
 190fa8c8f2ad69cf9c8669795de0748f *man/value.Rd
 8939a9d5921371546df350d44120babc *man/verify-internal.Rd

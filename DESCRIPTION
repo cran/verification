@@ -1,5 +1,5 @@
 Package: verification
-Version: 1.33
+Version: 1.34
 Date: 2012-4-09
 Title: Forecast verification utilities.
 Author: NCAR - Research Application Program
@@ -11,6 +11,6 @@ Description: This package contains utilities for verification of
 License: GPL (>= 2)
 LazyLoad: yes
 LazyData: yes
-Packaged: 2012-06-22 16:03:41 UTC; ericg
+Packaged: 2012-07-11 16:13:07 UTC; ericg
 Repository: CRAN
-Date/Publication: 2012-06-22 17:47:11
+Date/Publication: 2012-07-11 17:53:40

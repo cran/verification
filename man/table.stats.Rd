@@ -22,23 +22,38 @@
 \value{
 	\item{tab.out}{ Contingency table}
 	\item{TS}{Threat score a.k.a. Critical success index (CSI) }
+	\item{TS.se}{Standard Error for TS}
 	\item{POD}{Hit Rate aka probability of detection}
+	\item{POD.se}{Standard Error for POD}
 	\item{M}{Miss rate}
 	\item{F}{False Alarm RATE}
+	\item{F.se}{Standard Error for F}
 	\item{FAR}{False Alarm RATIO}
+	\item{FAR.se}{Standard Error for FAR}
     \item{HSS}{Heidke Skill Score}
+   \item{HSS.se}{Standard Error for HSS}
    \item{PSS}{Peirce Skill Score}
+   \item{PSS.se}{Standard Error for PSS}
    \item{KSS}{Kuiper's Skill Score }  
    \item{PC}{Percent correct - events along the diagonal.}
+   \item{PC.se}{Standard Error for PC}
    \item{BIAS}{Bias}
    \item{ETS}{Equitable Threat Score}
+   \item{ETS.se}{Standard Error for ETS}
    \item{theta}{Odds Ratio}
    \item{log.theta}{Log Odds Ratio}
+   \item{LOR.se}{Standard Error for Log Odds Ratio}
    \item{n.h}{Degrees of freedom for log.theta}
    \item{orss}{Odds ratio skill score, aka Yules's Q}
+   \item{ORSS.se}{Standard Error for Odds ratio skill score}
    \item{eds}{Extreme Dependency Score}
+   \item{esd.se}{Standard Error for EDS}
    \item{seds}{Symmetric Extreme Dependency Score}
    \item{seds.se}{Standard Error for Symmetric Extreme Dependency Score}
+   \item{EDI}{Extreme Dependency Index}
+   \item{EDI.se}{Standard Error for EDI}
+   \item{SEDI}{Symmetric EDI}
+   \item{SEDI.se}{Standard Error for SEDI}
        }
      \seealso{\code{verify} and \code{multi.cont}}
 \references{
