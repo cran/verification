@@ -12,8 +12,7 @@
        \description{This function creates a conditional quantile plot as shown in
 	 Murphy, et al (1989) and Wilks (1995).}
        \usage{
-    conditional.quantile(pred, obs, bins = NULL, thrs = c(10, 20), main,
-... ) }
+    conditional.quantile(pred, obs, bins = NULL, thrs = c(10, 20), main, ... ) }
        \arguments{
 \item{pred}{Forecasted value. \emph{([n,1] vector, n = \# of forecasts)}}
 \item{obs}{Observed value.\emph{([n,1] vector, n = \# of observations)}}
@@ -61,6 +60,6 @@ A<- verify(obs, pred, baseline = baseline,  frcst.type = "cont", obs.type = "con
   Verification of Temperature Forecasts,'' \emph{Weather and
     Forecasting}; December, 1989.
 }
-\author{Matt Pocernich <pocernic@rap.ucar.edu>}
+\author{Matt Pocernich}
 
        \keyword{file}

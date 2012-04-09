@@ -22,7 +22,8 @@
        relative frequency for each forecast value is displayed in parenthesis. }
       \usage{
 \method{attribute}{default}(x, obar.i,  prob.y = NULL, obar = NULL, class =
-"none", main = NULL, CI = FALSE, n.boot = 100, alpha = 0.05, tck = 0.01, freq = TRUE, pred = NULL, obs = NULL, thres = thres, bins = FALSE, \dots)
+"none", main = NULL, CI = FALSE, n.boot = 100, alpha = 0.05, tck = 0.01, freq = TRUE,
+pred = NULL, obs = NULL, thres = thres, bins = FALSE, \dots)
 \method{attribute}{prob.bin}(x, \dots)
        }
 \arguments{
@@ -50,7 +51,7 @@
      \item{\dots}{Graphical parameters} 
        }
       \note{Points and bins are plotted at the mid-point of bins.  This can create distorted graphs if forecasts are created at irregular intervals.
-      	} 
+      	}
      \examples{
 ## Data from Wilks, table 7.3 page 246.
  y.i   <- c(0,0.05, seq(0.1, 1, 0.1))
@@ -102,7 +103,7 @@ lines.attrib(mod48, col = "green", lwd = 2, type = "b")
   Wilks, D. S. (2005) \emph{Statistical Methods in the Atmospheric Sciences }
   Chapter 7, San Diego: Academic Press.
 }
-\author{Matt Pocernich <pocernic@rap.ucar.edu>}
+\author{Matt Pocernich}
 
 \seealso{\code{\link{verify}}  \code{\link{reliability.plot}}}
 

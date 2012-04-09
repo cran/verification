@@ -22,7 +22,8 @@
     \method{roc.plot}{default}(x, pred, thresholds = NULL, binormal =
 FALSE,   legend = FALSE, leg.text = NULL,  plot = "emp", CI = FALSE,
 n.boot = 1000, alpha = 0.05, tck = 0.01, plot.thres = seq(0.1,
-0.9, 0.1), show.thres = TRUE, main = "ROC Curve", xlab = "False Alarm Rate", ylab = "Hit Rate", extra = FALSE,  \dots)
+0.9, 0.1), show.thres = TRUE, main = "ROC Curve", xlab = "False Alarm Rate",
+ylab = "Hit Rate", extra = FALSE,  \dots)
 \method{roc.plot}{prob.bin}(x, \dots) }
 \arguments{
         \item{x}{A binary observation (coded \{0, 1 \} ) or a verification
@@ -123,7 +124,7 @@ roc.plot(A$event, A$p2)
 ### show binormal curve fit.
 
 roc.plot(A$event, A$p2, binormal = TRUE)
-
+\dontrun{
 # icing forecast
 
 data(prob.frcs.dat)
@@ -155,9 +156,9 @@ roc.plot(mod24, plot.thres = NULL)
 lines.roc(mod48, col = 2, lwd = 2)
 leg.txt <- c("24 hour forecast", "48 hour forecast")
 legend( 0.6, 0.4, leg.txt, col = c(1,2), lwd = 2)
-
+}
 }
 \seealso{\code{\link{pop} }  and \code{\link{lines.roc} }}
-\author{Matt Pocernich <pocernic@rap.ucar.edu>}
+\author{Matt Pocernich}
 
        \keyword{file}

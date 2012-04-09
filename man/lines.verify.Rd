@@ -26,6 +26,6 @@
        \seealso{\code{\link{verify}}  }
        
 
-\author{Matt Pocernich <pocernic@rap.ucar.edu>}
+\author{Matt Pocernich}
 
        \keyword{file}

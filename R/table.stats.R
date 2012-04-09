@@ -29,11 +29,15 @@ tab.out <- matrix(c(a,c,b,d), nrow = 2)
 if(!is.null(pred)& !is.null(obs)){
 
   tab.out <- table(as.numeric(obs), as.numeric(pred))
-  
-  a <-tab.out["1","1"]
-  b <-tab.out["0","1"]
-  c <-tab.out["1","0"]
-  d <-tab.out["0","0"]
+ 
+  a <- tryCatch(tab.out["1", "1"], error=function(e) 0)
+  b <- tryCatch(tab.out["0", "1"], error=function(e) 0)
+  c <- tryCatch(tab.out["1", "0"], error=function(e) 0)
+  d <- tryCatch(tab.out["0", "0"], error=function(e) 0) 
+  # a <-tab.out["1","1"]
+  # b <-tab.out["0","1"]
+  # c <-tab.out["1","0"]
+  # d <-tab.out["0","0"]
 } ## close else
 
 
@@ -89,7 +93,7 @@ SEDI.se <- 2*abs(((1-H)*(1-F)+H*F)/((1-H)*1-F)*log(F*(1-H)) + 2*H/(1-H)*log(H*(1
 return(list(tab = tab.out, TS = TS, TS.se = TS.se,
             POD = POD, POD.se = POD.se, M = M,  F = F,  F.se = F.se, FAR = FAR , FAR.se = FAR.se, HSS = HSS, HSS.se = HSS.se,
             PSS = PSS, PSS.se = PSS.se, KSS = KSS,
-            PC = PC, PC.se = PC.se,  BIAS = BIAS, ETS = ETS, theta = theta, log.theta = log.theta, LOR.se = LOR.se, n.h = n.h, orss = yules.q, orss.se = ORSS.se,
+            PC = PC, PC.se = PC.se,  BIAS = BIAS, ETS = ETS, ETS.se = ETS.se, theta = theta, log.theta = log.theta, LOR.se = LOR.se, n.h = n.h, orss = yules.q, orss.se = ORSS.se,
 	    eds = eds, eds.se=eds.se, seds = seds, seds.se = seds.se,
 	    EDI = EDI, EDI.se = EDI.se, SEDI = SEDI, SEDI.se = SEDI.se))
 }

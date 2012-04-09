@@ -149,6 +149,6 @@ A<- verify(obs, pred, baseline = baseline,  frcst.type = "cont", obs.type = "con
 summary(A)
 }
 
-\author{Matt Pocernich <pocernic@ucar.edu>}
+\author{Matt Pocernich}
 
        \keyword{file}

@@ -31,12 +31,13 @@
        }
  \examples{
 data(precip.ensemble)
+x <- precip.ensemble[seq(5,5170,5),]
 
 #Observations are in the column
-obs<-precip.ensemble[,3]
+obs<-x[,3]
 
 #Forecast values of ensemble are in the column 4 to 54
-eps<-precip.ensemble[,4:54]
+eps<-x[,4:54]
 
 #CRPS calculation 
 c<-crpsDecomposition(obs,eps)

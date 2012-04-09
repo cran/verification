@@ -11,7 +11,8 @@
        \title{Forecast Value Function}
        \description{Calculates the economic value of a forecast based on
        a cost/loss ratio.}
-     \usage{value(obs, pred= NULL, baseline = NULL, cl = seq(0.05, 0.95, 0.05), plot = TRUE, all = FALSE, thresholds = seq(0.05, 0.95, 0.05), ylim = c(-0.05, 1), xlim = c(0,1), ...)}  
+     \usage{value(obs, pred= NULL, baseline = NULL, cl = seq(0.05, 0.95, 0.05), plot = TRUE,
+	all = FALSE, thresholds = seq(0.05, 0.95, 0.05), ylim = c(-0.05, 1), xlim = c(0,1), ...)}  
 \arguments{
          \item{obs}{A vector of binary observations or a contingency
        table summary of values in the form c(n11, n01, n10, n00)
@@ -68,6 +69,6 @@ pop.convert()
 value(obs = d$obs_rain, pred = d$p24_rain, all = TRUE)
 
  }
-\author{Matt Pocernich <pocernic@rap.ucar.edu>}
+\author{Matt Pocernich}
 
        \keyword{file}

@@ -56,11 +56,8 @@
    \item{SEDI.se}{Standard Error for SEDI}
        }
      \seealso{\code{verify} and \code{multi.cont}}
-\references{
-     
-     Jolliffe, I.T. and D.B. Stephenson (2003). Forecast verification: a 
-practitioner's guide in atmospheric science. John Wiley and Sons.  See
-chapter 3 concerning categorical events. 
+\references{ 
+     Jolliffe, I.T. and D.B. Stephenson (2003). Forecast verification: a practitioner's guide in atmospheric science. John Wiley and Sons.  See chapter 3 concerning categorical events. 
 
 Stephenson, D.B. (2000).  "Use of `Odds Ratio for Diagnosing Forecast Skill." \emph{Weather and Forecasting} \bold{15} 221-232.  
 
@@ -73,12 +70,9 @@ Hogan, R.J., O'Connor E.J. and Illingworth, 2009.  "Verification of cloud-fracti
        \note{Initially, table.stats was an internal function used by verify for binary events and multi.cont for categorical events. But occassionally, it is nice to use it directly.}
        
     \examples{
-
 DAT<- matrix(c(28, 23, 72, 2680 ), ncol = 2) ## Finley
 table.stats(DAT)
-
-
- }
- \author{Matt Pocernich <pocernic@rap.ucar.edu>}
+}
+ \author{Matt Pocernich}
 
        \keyword{file}

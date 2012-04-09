@@ -38,6 +38,6 @@ probcont2disc(x, bins = seq(0,1,0.25) )
 ## probcont2disc(4, bins = seq(0,1,0.3)) ## gets error
 
 }
-\author{Matt Pocernich <pocernic@rap.ucar.edu>}
+\author{Matt Pocernich}
 
        \keyword{file}

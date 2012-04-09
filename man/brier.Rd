@@ -63,6 +63,6 @@ brier(obs, pred)
   Wilks, D. S. (1995) \emph{Statistical Methods in the Atmospheric Sciences }
   Chapter 7, San Diego: Academic Press.
 }
-\author{Matt Pocernich <pocernic@rap.ucar.edu>}
+\author{Matt Pocernich}
 
        \keyword{file}

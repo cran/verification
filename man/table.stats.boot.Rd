@@ -24,4 +24,4 @@ table.stats.boot(RB1, R = 1000   )
 
 }
 
-\author{Matt  Pocernich <pocernic@ucar.edu>}
+\author{Matt  Pocernich}

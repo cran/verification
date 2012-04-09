@@ -60,6 +60,6 @@ roc.area(A$event, A$p2)
 
 
 }
-\author{Matt Pocernich <pocernic@rap.ucar.edu>}
+\author{Matt Pocernich}
 
        \keyword{file}

@@ -25,7 +25,18 @@
        \note{This function contain several loops and consequently is not particularly fast.}
       
 	 \examples{
+grid<- list( x= seq( 0,5,,100), y= seq(0,5,,100)) 
+obj<-Exp.image.cov( grid=grid, theta=.5, setup=TRUE)
+look<- sim.rf( obj)
+look[look < 0] <- 0
 
+look2 <- sim.rf( obj)
+look2[look2<0] <- 0
+
+fss(look, look2, w=5)
+
+
+\dontrun{
 #  The following example replicates Figure 4 in Roberts and Lean (2008).
 ####      examples
 
@@ -66,13 +77,13 @@ grid()
 
 legend("bottomright", legend = LAG, col = 1:4, pch = as.character(1:4), 
  title = "Spatial Lag", inset = 0.02, lwd = 2 )
-
+}
 
 }
 
 
 \references{Roberts, N.M and H.W. Lean: 2008: Scale-Selective Verification of Rainfall Accumulations from High-Resolution Forecasts of Convective Events.  \emph{Monthly Weather Review} \bold{136}, 78-97.}
   
-  \author{Matt Pocernich <pocernic@rap.ucar.edu>}
+  \author{Matt Pocernich}
 
        \keyword{file}

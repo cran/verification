@@ -39,6 +39,6 @@ plot(A, main = "Test case")
 }
 
 
-\author{Matt Pocernich <pocernic@rap.ucar.edu>}
+\author{Matt Pocernich}
 
        \keyword{file}

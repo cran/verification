@@ -51,6 +51,6 @@ crps(x, frcs)
     Statistics and Minimum CRPS Estimation.} Technical Report no. 449,
   Department of Statistics, University of Washington. [ Available online
   at \url{http://www.stat.washington.edu/www/research/reports/} ]}
-\author{Matt Pocernich <pocernic@rap.ucar.edu>}
+\author{Matt Pocernich}
 
        \keyword{file}

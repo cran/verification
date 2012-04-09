@@ -41,6 +41,6 @@ observation.error(obs, gold)
 observation.error(c(43,10,17,4) )
 }
  \seealso{\code{\link{measurement.error}}}
-\author{Matt Pocernich <pocernic@rap.ucar.edu>}
+\author{Matt Pocernich}
 
        \keyword{file}

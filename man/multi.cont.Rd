@@ -67,6 +67,6 @@ multi.cont(DAT)
  summary(mod)
  
  }
- \author{Matt Pocernich <pocernic@rap.ucar.edu>}
+ \author{Matt Pocernich}
 
        \keyword{file}

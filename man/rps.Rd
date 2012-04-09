@@ -63,6 +63,6 @@ WWRP/WGNE Joint Working Group on Verification - Forecast Verification - Issues, 
  
 }
 
-\author{Matt Pocernich <pocernic@rap.ucar.edu>}
+\author{Matt Pocernich}
 
        \keyword{file}

@@ -74,7 +74,7 @@ J.P. Finley, 1884. Tornado forecasts. \emph{ Amer. Meteor. J.}
 }
 
 
-\author{Matt Pocernich <pocernic@rap.ucar.edu> (R - code)
+\author{Matt Pocernich (R - code)
 
   W.M Briggs <wib2004(at)med.cornell.edu> (Method questions) }
 
