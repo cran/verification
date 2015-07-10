@@ -5,6 +5,16 @@
 exportPattern(".")
 
 # Import all packages listed as Imports or Depends
+
+importFrom("graphics", "abline", "axis", "barplot", "box", "boxplot",
+    "contour", "hist", "layout", "legend", "lines", "matplot", "mtext",
+    "par", "plot", "points", "polygon", "segments", "text", "title")
+
+importFrom("stats", "acf", "aggregate", "coef", "dnorm", "ecdf", "lm",
+    "median", "na.pass", "nls", "pchisq", "pnorm", "predict", "qnorm",
+    "quantile", "uniroot", "var", "wilcox.test", "na.omit", "nlminb",
+    "pacf", "pt")
+
 import(
   methods,
   fields,
@@ -13,3 +23,20 @@ import(
   MASS,
   dtw
 )
+
+S3method(attribute, default)
+S3method(attribute, prob.bin)
+S3method(lines, attrib)
+S3method(lines, roc)
+S3method(plot, cont.cont)
+S3method(plot, prob.bin)
+S3method(reliability.plot, default)
+S3method(reliability.plot, verify)
+S3method(roc.plot, default)
+S3method(roc.plot, prob.bin)
+S3method(summary, bin.bin)
+S3method(summary, cat.cat)
+S3method(summary, cont.cont)
+S3method(summary, norm.dist.cont)
+S3method(summary, predcomp.test)
+S3method(summary, prob.bin)

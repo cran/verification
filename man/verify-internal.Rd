@@ -27,7 +27,10 @@
 \alias{pop.convert}
 \alias{matrix.func}
 \alias{qrelPlotDefault}
-
+\alias{ORSS.exp}
+\alias{WRSS.exp}
+\alias{exponential}
+\alias{hg.test}
 \title{
 
   Verification internal and secondary functions

@@ -11,8 +11,7 @@ Forecast prediction comparison test for two competing forecasts against an obser
 }
 \usage{
 predcomp.test(x, xhat1, xhat2, alternative = c("two.sided", "less", "greater"),
-    lossfun = "losserr", lossfun.args = NULL,
-    fitmodel = NULL, fitmodel.args = NULL, ...)
+    lossfun = "losserr", lossfun.args = NULL, test = c("DM", "HG"), ...)
 
 losserr(x, xhat, method = c("abserr", "sqerr", "simple", "power", 
     "corrskill", "dtw"), scale = 1, p = 1, dtw.interr = c("abserr", 
@@ -31,17 +30,8 @@ exponentialACV(x, y, ...)
   \item{alternative}{character string stating which type of hypothesis test to conduct.}
   \item{lossfun}{character string naming the loss function to call.  The default, \code{losserr}, calls one of several methods depending on its \code{method} argument.  Any function that takes \code{x} and \code{xhat} numeric vectors as arguments and returns a numeric vector of the same length can be used.}
   \item{lossfun.args}{List providing additional arguments to \code{lossfun}.}
-  \item{fitmodel}{character string naming a function such as \code{exponentialACV}.
+  \item{test}{character string stating whether to run the Diebold-Mariano type of test or the Hering-Genton modification of it (i.e., use a parametric autocovariance function).}
 
-Should only be used if the method of Hering and Genton (2011) is to be employed.
-
-This is a function for fitting a parameteric covariance to the empirical autocovariances.  For example, \code{exponentialACV} can be used to fit the exponential model used in Hering and Genton (2011).
-
-If NULL, then the Diebold-Mariano test is employed instead (though, the user may want to use \code{dm.test} from \pkg{forecast} for this purpose instead).
-
-This function must take \code{x} and \code{y} as arguments where \code{x} are the separation distances (lags) and \code{y} are the associated autocovariances as well as \code{\dots}, but other arguments are also allowed.  It should return an object with a class for \code{coef} whose first coefficient is C(0), and must have a method for \code{predict}; for example, an \code{nls} object.
-}
-  \item{fitmodel.args}{list object giving any additional arguments required by the function given by \code{fitmodel}.}
   \item{method,dtw.interr}{character string stating which type of loss (or skill) function to use.  In the case of \code{dtw.interr}, this is the loss function for the intensity part of the error only.}
    \item{scale}{numeric giving a value by which to scale the loss function.  In the case of \dQuote{\code{dtw}}, this is only applied to the intensity part of the loss function, and can be used to scale the influence of the intensity vs. temporal lag errors.  See Details section for more.}
    \item{p}{numeric only used by the \dQuote{power} loss function.}
@@ -54,7 +44,7 @@ For \code{exponentialACV} these are any optional arguments to \code{nls} except 
 For the \code{summary} method function, these are not used.}
 }
 \details{
-This function performs the analyses described in Gilleland and Roux (2014).  Namely, the Diebold Mariano test for competing forecast performance, the Hering and Genton (2011) modification of this test, as well as the dynamic time warping extension.
+This function performs the analyses described in Gilleland and Roux (2014); although note that while working on another manuscript (Gilleland and Hering, in preparation), a better optimization routine has replaced the one used in said paper, which has been thoroughly tested to yield good size and power under a variety of temporal dependence structures, as well as having far fewer situations where a fit cannot be found.  Namely, the Diebold Mariano test for competing forecast performance, the Hering and Genton (2011) modification of this test, as well as the dynamic time warping extension.
 
 The Diebold-Mariano test was proposed in Diebold and Mariano (1995) for obtaining hypothesis tests to compare the forecast accuracy of two competing forecasts against a common verification series.  The null hypothesis is that they have the same accuracy.  The test statistic is of the form
 
@@ -66,7 +56,7 @@ V = sum(gamma(tau)),
 
 where the summation is over tau = -(k - 1) to (k - 1) for temporal lags k, and gamma are the empirical autocovariances.  
 
-Hering and Genton (2011) propose a modification that employs fitting a parameteric covariance model in determining the standard error for the test statistic (they also propose a spatial extension, see, e.g., \code{spatMLD} from \pkg{SpatialVx}).  If \code{fitmodel} is not NULL, then this is the method applied, and the resulting standard error is calculating by summing up the values of this function up to half the maximum lag.
+Hering and Genton (2011) propose a modification that employs fitting a parameteric covariance model in determining the standard error for the test statistic (they also propose a spatial extension, see, e.g., \code{spatMLD} from \pkg{SpatialVx}).
 
 In either case, asymptotic results suggest that S ~ N(0,1), and the hypothesis test is conducted subsequently.
 
@@ -86,11 +76,10 @@ The loss functions supplied by \code{losserr} include:
 
 \code{dtw}: Discrete time warp loss defined by: d1 + d2, where d1 is the absolute distance (ignoring direction) of warp movement, and d2 is one of the above loss functions (except for \code{corrskill}) applied to the resulting intensity errors after warping the series.
 
-The \code{exponentialACV} function takes numeric vector arguments \code{x} and \code{y} and estimates the parameters, \code{c(sigma, theta)}, that optimize
+The \code{exponential} function takes numeric vector arguments \code{x} and \code{y} and estimates the parameters, \code{c(sigma, theta)}, that optimize
 
     y = sigma^2*exp(-3*x/theta)
 
-using \code{nls}.  If \code{fitmodel} = \dQuote{\code{exponentialACV}}, then this exponential function is fit to the data set where \code{x} are lags and \code{y} are empirical autocovariances (found by a call to \code{acf}).
 }
 \value{
 \code{predcomp.test} returns a list object of class c(\dQuote{predcomp.test}, \dQuote{htest}) with components:
@@ -113,7 +102,7 @@ Diebold, F. X. and Mariano, R. S. (1995) Comparing predictive accuracy. \emph{Jo
 
 Gilleland, E. (2013) Testing competing precipitation forecasts accurately and efficiently: The spatial prediction comparison test. \emph{Mon. Wea. Rev.}, \bold{141} (1), 340--355, \url{http://dx.doi.org/10.1175/MWR-D-12-00155.1}.
 
-Gilleland, E. and Roux, G. (2014) A New Approach to Testing Forecast Predictive Accuracy. Submitted to \emph{Meteorol. Appl.} Temporarily available at: \url{http://www.ral.ucar.edu/~ericg/GillelandRoux_metapps.pdf}
+Gilleland, E. and Roux, G. (2014) A New Approach to Testing Forecast Predictive Accuracy. Accepted to \emph{Meteorol. Appl.} Available at: \url{http://onlinelibrary.wiley.com/doi/10.1002/met.1485/abstract}
 
 Hering, A. S. and Genton, M. G. (2011) Comparing spatial predictions.  \emph{Technometrics}, \bold{53}, (4), 414--425, doi:10.1198/TECH.2011.10136.
 }
@@ -133,30 +122,32 @@ z2 <- arima.sim(list(order=c(3,0,1), ar=c(0.7,0,-0.1), ma=0.1), n=1000) +
 test <- predcomp.test(z0, z1, z2)
 summary(test)
 
-\dontrun{
-test2 <- predcomp.test(z0, z1, z2, fitmodel="exponentialACV")
+test2 <- predcomp.test(z0, z1, z2, test = "HG" )
 summary(test2)
 
-test2.2 <- predcomp.test(z0, z1, z2, alternative="less", fitmodel="exponentialACV")
+\dontrun{
+test2 <- predcomp.test(z0, z1, z2, test = "HG" )
+summary(test2)
+
+test2.2 <- predcomp.test(z0, z1, z2, alternative="less")
 summary(test2.2)
 
-test3 <- predcomp.test(z0, z1, z2, lossfun.args=list(method="dtw"), fitmodel="exponentialACV")
+test3 <- predcomp.test(z0, z1, z2, lossfun.args=list(method="dtw") )
 summary(test3)
 
-test3.2 <- predcomp.test(z0, z1, z2, alternative="less", lossfun.args=list(method="dtw"),
-    fitmodel="exponentialACV")
+test3.2 <- predcomp.test(z0, z1, z2, alternative="less",
+    lossfun.args=list(method="dtw"), test = "HG" )
 summary(test3.2)
 
-test4 <- predcomp.test(z0, z1, z2, lossfun.args=list(method="corrskill"),
-    fitmodel="exponentialACV")
+test4 <- predcomp.test(z0, z1, z2, lossfun.args = list(method="corrskill"), test = "HG" )
 summary(test4)
 
-test5 <- predcomp.test(z0, z1, z2, lossfun.args=list(method="dtw", dtw.interr="sqerr"),
-    fitmodel="exponentialACV")
+test5 <- predcomp.test(z0, z1, z2, lossfun.args = list(method="dtw", dtw.interr="sqerr"),
+    test = "HG" )
 summary(test5)
 
 test5.2 <- predcomp.test(z0, z1, z2, alternative="less",
-    lossfun.args=list(method="dtw", dtw.interr="sqerr"), fitmodel="exponentialACV")
+    lossfun.args=list(method="dtw", dtw.interr="sqerr"), test = "HG" )
 summary(test5.2) 
 }
 

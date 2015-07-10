@@ -18,7 +18,7 @@ function (x, pred, thresholds = NULL, binormal = FALSE, legend = FALSE,
     if(min(diff(thresholds))<0){stop("Thresholds must be listed in ascending order")}
     }
     #####
-    if (!is.null(plot) && (plot == "binorm" | plot == "both") & binormal == FALSE) {
+    if(!is.null(plot) && (plot == "binorm" | plot == "both") & binormal == FALSE) {
         stop("binormal must be TRUE in order to create a binormal plot")
     }
     
@@ -131,7 +131,7 @@ function (x, pred, thresholds = NULL, binormal = FALSE, legend = FALSE,
         }
     }
 
-    if(!is.null(plot) && plot == "emp" | plot == "both") {
+    if(!is.null(plot) && (plot == "emp" | plot == "both")) {
         for (i in 1:n.forc) {
         	
             points(DAT[, 3, i], DAT[, 2, i], col = i, lty = i, 
@@ -155,7 +155,7 @@ function (x, pred, thresholds = NULL, binormal = FALSE, legend = FALSE,
             }
         }
     }
-    if (!is.null(plot) && plot == "binorm" || plot == "both") {
+    if (!is.null(plot) && (plot == "binorm" || plot == "both")) {
         for (i in 1:n.forc) {
             dat <- binormal.pltpts[[i]]
             points(dat$x, dat$y, col = 2, lty = i, type = "l", 

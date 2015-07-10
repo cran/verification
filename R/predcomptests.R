@@ -1,16 +1,22 @@
-predcomp.test <- function(x, xhat1, xhat2, alternative=c("two.sided", "less", "greater"),
-    lossfun="losserr", lossfun.args=NULL, fitmodel=NULL, fitmodel.args=NULL, ...) {
+predcomp.test <- function(x, xhat1, xhat2, alternative = c("two.sided", "less", "greater"),
+    lossfun = "losserr", lossfun.args = NULL, test = c("DM", "HG"), ...) {
+
+    test <- match.arg( test )
+
+    alternative <- tolower( alternative )
+    alternative <- match.arg( alternative )
 
    out <- list()
    out$call <- match.call()
 
    e1 <- do.call(lossfun, c(list(x=x, xhat=xhat1), lossfun.args))
    e2 <- do.call(lossfun, c(list(x=x, xhat=xhat2), lossfun.args))
-   d <- e1 - e2
-   d.cov.obj <- acf(d, type="covariance", plot=FALSE, na.action = na.pass, ...)
-   d.cov <- d.cov.obj$acf[,,1]
 
-   if(is.null(fitmodel)) {
+   if( test == "DM" ) {
+
+	d <- e1 - e2
+        d.cov.obj <- acf(d, type="covariance", plot=FALSE, na.action = na.pass, ...)
+        d.cov <- d.cov.obj$acf[,,1]
 
 	out$method <- "Diebold-Mariano Test"
 	out$fitmodel <- "none"
@@ -18,26 +24,25 @@ predcomp.test <- function(x, xhat1, xhat2, alternative=c("two.sided", "less", "g
 	n <- length(d)
 	d.var <- sum(c(d.cov[ 1 ], 2 * d.cov[-1])) / n
 
+	STATISTIC <- mean(d, na.rm=TRUE)/sqrt(d.var)
+
+	if (alternative == "two.sided") PVAL <- 2 * pnorm(-abs(STATISTIC))
+   	else if (alternative == "less") PVAL <- pnorm(STATISTIC)
+   	else if (alternative == "greater") PVAL <- pnorm(STATISTIC, lower.tail = FALSE)
+
    } else {
 
+	fit <- hg.test( e1, e2, type = "OLS" )
+
+	STATISTIC <- fit[ 1 ]
+	PVAL <- fit[ 2 ]
+
 	out$method <- "Hering-Genton Test"
-	out$fitmodel <- fitmodel
-	out$fitmodel.args <- fitmodel.args
-
-	fit <- do.call(fitmodel, c(list(x=d.cov.obj$lag, y=d.cov), fitmodel.args))
-
-	n <- length(d.cov)
-
-	d.var <- (coef(fit)[1] + 2 * sum(predict(fit)[ 2:n ])) / n
+	out$fitmodel <- "exponential"
 
    }
 
-   STATISTIC <- mean(d, na.rm=TRUE)/sqrt(d.var)
    alternative <- match.arg(alternative)
-
-   if (alternative == "two.sided") PVAL <- 2 * pnorm(-abs(STATISTIC))
-   else if (alternative == "less") PVAL <- pnorm(STATISTIC)
-   else if (alternative == "greater") PVAL <- pnorm(STATISTIC, lower.tail = FALSE)
 
    out$loss.function <- lossfun
    out$loss.function.args <- lossfun.args
