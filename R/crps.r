@@ -1,11 +1,3 @@
-# *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
-# ** Copyright UCAR (c) 1992 - 2004 
-# ** University Corporation for Atmospheric Research(UCAR) 
-# ** National Center for Atmospheric Research(NCAR) 
-# ** Research Applications Program(RAP) 
-# ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
-# ** 2004/9/1 14:13:55 
-# *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
 crps <- function(obs, pred, ...)
   ## Tilmann Gneiting's crps code, assumes pred is either a vector of length
   ## 2 (mu, sig) or a matrix of mu and sig if each forcast is different

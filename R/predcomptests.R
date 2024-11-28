@@ -34,8 +34,8 @@ predcomp.test <- function(x, xhat1, xhat2, alternative = c("two.sided", "less", 
 
 	fit <- hg.test( e1, e2, type = "OLS" )
 
-	STATISTIC <- fit[ 1 ]
-	PVAL <- fit[ 2 ]
+	STATISTIC <- fit$statistic
+	PVAL <- fit$p.value
 
 	out$method <- "Hering-Genton Test"
 	out$fitmodel <- "exponential"

@@ -1,11 +1,3 @@
-# *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
-# ** Copyright UCAR (c) 1992 - 2004 
-# ** University Corporation for Atmospheric Research(UCAR) 
-# ** National Center for Atmospheric Research(NCAR) 
-# ** Research Applications Program(RAP) 
-# ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
-# ** 2004/1/7 11:29:42 
-# *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
  attribute.default<- function(x, obar.i,  prob.y=NULL, obar = NULL, class = "none", main = NULL,  CI = FALSE,  n.boot = 100, alpha = 0.05,  tck = 0.01, freq = TRUE, pred = NULL, obs = NULL, thres = thres, bins = FALSE, ...){
 ## attribute plot as displayed in Wilks, p 264.
 ## If the first object is a prob.bin class, information derived from that.

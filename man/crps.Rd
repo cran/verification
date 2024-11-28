@@ -1,11 +1,3 @@
-% *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
-% ** Copyright UCAR (c) 1992 - 2004 
-% ** University Corporation for Atmospheric Research(UCAR) 
-% ** National Center for Atmospheric Research(NCAR) 
-% ** Research Applications Program(RAP) 
-% ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
-% ** 2004/1/7 11:31:8 
-% *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
 \name{crps}
        \alias{crps}
        \title{Continuous Ranked Probability Score}
@@ -46,11 +38,11 @@ crps(x, frcs)
 }
 
 
-\references{Gneiting, T., Westveld, A., Raferty, A. and Goldman, T, 2004:
-  \emph{Calibrated Probabilistic Forecasting Using Ensemble Model Output
-    Statistics and Minimum CRPS Estimation.} Technical Report no. 449,
-  Department of Statistics, University of Washington. [ Available online
-  at \url{http://www.stat.washington.edu/www/research/reports/} ]}
+\references{
+Gneiting, T., Raferty, A., Westveld, A., and Goldman, T, 2005:
+  Calibrated Probabilistic Forecasting Using Ensemble Model Output
+    Statistics and Minimum CRPS Estimation. \emph{Monthly Weather Review}, \bold{133} (5), 1098--1118, doi: 10.1175/MWR2904.1.
+    }
 \author{Matt Pocernich}
 
        \keyword{file}

@@ -48,9 +48,9 @@ This function performs the analyses described in Gilleland and Roux (2014); alth
 
 The Diebold-Mariano test was proposed in Diebold and Mariano (1995) for obtaining hypothesis tests to compare the forecast accuracy of two competing forecasts against a common verification series.  The null hypothesis is that they have the same accuracy.  The test statistic is of the form
 
-S = dbar/sqrt(2*pi*se_{d}(0)/N),
+S = dbar/sqrt(2*pi*se(d)_0/N),
 
-where d is the loss differential, d = e1 - e2 (e1 = loss(x, xhat1) and e2 = loss(x, xhat2)), dbar is its sample mean, and se_{d}(0) is the standard error for d, which must be estimated, and N is the length of the series investigated.  Let V = 2*pi*se_{d}(0), then V is estimated by
+where d is the loss differential, d = e1 - e2 (e1 = loss(x, xhat1) and e2 = loss(x, xhat2)), dbar is its sample mean, and se(d)_0 is the standard error for d, which must be estimated, and N is the length of the series investigated.  Let V = 2*pi*se(d)_0, then V is estimated by
 
 V = sum(gamma(tau)),
 
@@ -100,9 +100,9 @@ The \code{exponential} function takes numeric vector arguments \code{x} and \cod
 \references{
 Diebold, F. X. and Mariano, R. S. (1995) Comparing predictive accuracy. \emph{Journal of Business and Economic Statistics}, \bold{13}, 253--263.
 
-Gilleland, E. (2013) Testing competing precipitation forecasts accurately and efficiently: The spatial prediction comparison test. \emph{Mon. Wea. Rev.}, \bold{141} (1), 340--355, \url{http://dx.doi.org/10.1175/MWR-D-12-00155.1}.
+Gilleland, E. (2013) Testing competing precipitation forecasts accurately and efficiently: The spatial prediction comparison test. \emph{Mon. Wea. Rev.}, \bold{141} (1), 340--355, doi:10.1175/MWR-D-12-00155.1.
 
-Gilleland, E. and Roux, G. (2014) A New Approach to Testing Forecast Predictive Accuracy. Accepted to \emph{Meteorol. Appl.} Available at: \url{http://onlinelibrary.wiley.com/doi/10.1002/met.1485/abstract}
+Gilleland, E. and Roux, G. (2014) A New Approach to Testing Forecast Predictive Accuracy. Accepted to \emph{Meteorol. Appl.}
 
 Hering, A. S. and Genton, M. G. (2011) Comparing spatial predictions.  \emph{Technometrics}, \bold{53}, (4), 414--425, doi:10.1198/TECH.2011.10136.
 }
@@ -111,7 +111,7 @@ Eric Gilleland
 }
 
 \seealso{
-\code{\link{print.htest}}, \code{\link{nls}}, \code{\link{dtw}}, \code{\link{acf}}
+\code{\link{print.htest}}, \code{\link{nls}}, \code{\link[dtw:dtw]{dtw::dtw}}, \code{\link{acf}}
 }
 \examples{
 z0 <- arima.sim(list(order=c(2,0,0), ar=c(0.8,-0.2)), n=1000)

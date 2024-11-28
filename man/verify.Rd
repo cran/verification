@@ -1,11 +1,3 @@
-% *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
-% ** Copyright UCAR (c) 1992 - 2004 
-% ** University Corporation for Atmospheric Research(UCAR) 
-% ** National Center for Atmospheric Research(NCAR) 
-% ** Research Applications Program(RAP) 
-% ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
-% ** 2004/1/7 11:31:8 
-% *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
 \name{verify}
 \alias{verify}
 
@@ -123,7 +115,7 @@ verify(obs, pred, p = NULL, baseline = NULL, % sample.baseline = FALSE,
 
   WMO Joint WWRP/WGNE Working Group on Verification Website
   
-  \url{http://www.cawcr.gov.au/projects/verification/}
+  \url{https://www.cawcr.gov.au/projects/verification/}
 }
      \examples{
 # binary/binary example

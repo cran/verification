@@ -1,11 +1,3 @@
-% *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
-% ** Copyright UCAR (c) 1992 - 2004 
-% ** University Corporation for Atmospheric Research(UCAR) 
-% ** National Center for Atmospheric Research(NCAR) 
-% ** Research Applications Program(RAP) 
-% ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
-% ** 2004/9/1 14:13:29 
-% *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
 \name{pop}
 \docType{data}
 \alias{pop}
@@ -24,7 +16,7 @@ either missing forecasts or observations have been removed.
 
 This data has been kindly provided by Dr. Pertti Nurmi of the Finnish
 Meteorological Institute. 
-\url{http://www.cawcr.gov.au/projects/verification/POP3/POP3.html}
+\url{https://www.cawcr.gov.au/projects/verification/POP3/POP3.html}
 }
 \keyword{datasets}
 % docclass is data

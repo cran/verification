@@ -1,11 +1,3 @@
-% *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
-% ** Copyright UCAR (c) 1992 - 2004 
-% ** University Corporation for Atmospheric Research(UCAR) 
-% ** National Center for Atmospheric Research(NCAR) 
-% ** Research Applications Program(RAP) 
-% ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
-% ** 2004/1/7 11:31:8 
-% *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
 \name{value}
        \alias{value}
        \title{Forecast Value Function}
@@ -29,7 +21,7 @@ value(obs, pred= NULL, baseline = NULL, cl = seq(0.05, 0.95, 0.05),
      \item{cl}{Cost loss ratio.  The relative value of being
        unprepared and taking a loss to that of un-necessarily
        preparing.  For example,  cl = 0.1 indicates it
-       would cost \$ 1 to prevent a \$10 loss.  This defaults to the
+       would cost USD 1 to prevent a USD 10 loss.  This defaults to the
        sequence 0.05 to 0.95  by 0.05.  }
      \item{plot}{ Should a plot be created? Default is TRUE}
      \item{all}{In the case of probabilistic forecasts, should value
@@ -37,7 +29,7 @@ value(obs, pred= NULL, baseline = NULL, cl = seq(0.05, 0.95, 0.05),
      \item{thresholds}{Thresholds considered for a probabilistic
        forecast.}
      \item{ylim, xlim}{ Plotting options.}
-     \item{\dots}{Options to be passed into the plotting function.}
+     \item{...}{Options to be passed into the plotting function.}
        }
        \value{
      If assigned to an object, the following values are reported.

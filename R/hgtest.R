@@ -24,7 +24,12 @@ ORSS.exp <- function( params, N, dcov, dat ) {
 
 } # end of 'ORSS.exp' function.
 
-hg.test <- function( loss1, loss2, plot = FALSE , type) {
+hg.test <- function( loss1, loss2, alternative = c("two.sided", "less", "greater"),
+       mu = 0, alpha = 0.05, plot = FALSE , type = "OLS" ) {
+
+       out <- list()
+       data.name <- c( deparse( substitute( loss1 ) ), c( deparse( substitute( loss2 ) ) ) )
+       alternative <- match.arg( alternative )
 
     # Arguments (input):
     #
@@ -73,7 +78,7 @@ hg.test <- function( loss1, loss2, plot = FALSE , type) {
 	}
 
     # If it worked, find the statistics and p-values.  Otherwise, return NA's.
-    if( class( f ) != "try-error" ) {
+    if( !is( f, "try-error" ) ) {
 
 	xseq <- seq(0, 100, len = 1000)
         co <- f$par
@@ -137,11 +142,31 @@ hg.test <- function( loss1, loss2, plot = FALSE , type) {
 
 	} else S2 <- pval2 <- NA
 
-	out <- c( S1, pval1, S2, pval2 )
+	# out <- c( S1, pval1, S2, pval2 )
+	out$statistic <- c( "t" = S1 )
+	out$p.value <- pval1
+	if( N < 30 ) {
+	
+	    out$conf.int <- c( "lower" = m - qt( 1 - alpha / 2, df = N-1 ) * sqrt( var1 ),
+			   "upper" = m + qt( 1 - alpha / 2, df = N-1 ) * sqrt( var1 ) )
 
-    } else out <- rep( NA, 4 )
+	} else {
 
-    names( out ) <- c( "S 1", "pval 1", "S 2", "pval 2" )
+	    out$conf.int <- c( "lower" = m - qnorm( 1 - alpha / 2 ) * sqrt( var1 ),
+	                       "upper" = m + qnorm( 1 - alpha / 2 ) * sqrt( var1 ) )
+
+	} # end of if else N < 30 stmt.
+
+	attr( out$conf.int, "conf.level" ) <- 1 - alpha 
+	out$estimate <- c( "mean loss differential" = m )
+	out$null.value <- c( "hypothesized mean loss differential" = mu )
+	out$stderr <- sqrt( var1 )
+	out$alternative <- out$method <- alternative
+	out$data.name <- data.name
+
+	class( out ) <- "htest"
+
+    } else out <- f
 
     return( out )
 

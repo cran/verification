@@ -121,10 +121,10 @@ for(i in 1:ncol(PRED)){
     d    <- try(A[1,1], silent = TRUE)
     
     
-    if(class(a) == "try-error") a<- NA
-    if(class(b) == "try-error") b<- NA
-    if(class(c) == "try-error") c<- NA
-    if(class(d) == "try-error") d<- NA
+    if(is(a, "try-error") ) a<- NA
+    if(is(b, "try-error") ) b<- NA
+    if(is(c, "try-error") ) c<- NA
+    if(is(d, "try-error") ) d<- NA
     
     F[i] <- b/(b+d) ## FALSE ALARM RATE
     H[i] <- a/(a+c) ## HIT RATE

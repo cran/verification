@@ -1,11 +1,3 @@
-% *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
-% ** Copyright UCAR (c) 1992 - 2004 
-% ** University Corporation for Atmospheric Research(UCAR) 
-% ** National Center for Atmospheric Research(NCAR) 
-% ** Research Applications Program(RAP) 
-% ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
-% ** 2004/1/7 11:31:8 
-% *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
 \name{rps}
        \alias{rps}
        \title{Ranked Probability Score}
@@ -56,7 +48,7 @@ rps( obs = c(1), pred = matrix(c(0.2, 0.5, 0.3), nrow = 1))
 \references{
 
 WWRP/WGNE Joint Working Group on Verification - Forecast Verification - Issues, Methods and FAQ
-\url{http://www.cawcr.gov.au/projects/verification/verif_web_page.html#RPS}
+\url{https://www.cawcr.gov.au/projects/verification/verif_web_page.html#RPS}
 
  Wilks, D. S. (2005) \emph{Statistical Methods in the Atmospheric Sciences }
  Chapter 7, San Diego: Academic Press.

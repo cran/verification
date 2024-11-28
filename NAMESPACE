@@ -13,7 +13,7 @@ importFrom("graphics", "abline", "axis", "barplot", "box", "boxplot",
 importFrom("stats", "acf", "aggregate", "coef", "dnorm", "ecdf", "lm",
     "median", "na.pass", "nls", "pchisq", "pnorm", "predict", "qnorm",
     "quantile", "uniroot", "var", "wilcox.test", "na.omit", "nlminb",
-    "pacf", "pt")
+    "pacf", "pt", "qt" )
 
 import(
   methods,

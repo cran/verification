@@ -1,11 +1,3 @@
-# *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
-# ** Copyright UCAR (c) 1992 - 2004 
-# ** University Corporation for Atmospheric Research(UCAR) 
-# ** National Center for Atmospheric Research(NCAR) 
-# ** Research Applications Program(RAP) 
-# ** P.O.Box 3000, Boulder, Colorado, 80307-3000, USA 
-# ** 2004/1/7 11:29:42 
-# *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=* 
 "discrimination.plot" <- function(group.id, value, breaks = 11, main =
 "Discrimination Plot", xlim = NULL, ylim = NULL, legend = FALSE,
 leg.txt = paste("Model", sort(unique(group.id)) ),  marginal =
